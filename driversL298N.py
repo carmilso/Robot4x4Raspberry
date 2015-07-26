@@ -48,18 +48,26 @@ class Robot:
 		if self.DEBUG: print 'Motor backwarding'
 
 	def stopRobot(self):
-		stopMotor(self.MOTORS)
+		self.stopMotor(self.MOTORS)
 
-	def fordwardRobot(self):
-		fordwardMotor(self.MOTORS)
+	def fordwardRobot(self, seconds):
+		self.fordwardMotor(self.MOTORS)
+		time.sleep(seconds)
+		self.stopRobot()
 
-	def backwardRobot(self):
-		backwardMotor(self.MOTORS)
+	def backwardRobot(self, seconds):
+		self.backwardMotor(self.MOTORS)
+		time.sleep(seconds)
+		self.stopRobot()
 
-	def rightRobot(self):
-		backwardMotor(self.MOTOR_R)
-		fordwardMotor(self.MOTOR_L)
+	def rightRobot(self, seconds):
+		self.backwardMotor(self.MOTOR_R)
+		self.fordwardMotor(self.MOTOR_L)
+		time.sleep(seconds)
+		self.stopRobot()
 
-	def leftRobot(self):
-		backwardMotor(self.MOTOR_L)
-		fordwardMotor(self.MOTOR_R)
+	def leftRobot(self, seconds):
+		self.backwardMotor(self.MOTOR_L)
+		self.fordwardMotor(self.MOTOR_R)
+		time.sleep(seconds)
+		self.stopRobot()
