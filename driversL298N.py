@@ -19,7 +19,7 @@ class Robot:
 
 	def __del__(self):
 		GPIO.cleanup()
-		if self.DEBUG: print 'Robot finished.'
+		if self.DEBUG: print '\nRobot finished.'
 
 	def __str__(self):
 		rob = '''
@@ -33,40 +33,42 @@ class Robot:
 	def stopMotor(self, motor):
 		for input in motor:
 			GPIO.output(input, False)
-		if self.DEBUG: print "Motor stopped"
 
 	def fordwardMotor(self, motor):
 		for i in range(len(motor)):
 			mov = False if i % 2 == 0 else True
 			GPIO.output(motor[i], mov)
-		if self.DEBUG: print 'Motor fordwarding'
 
 	def backwardMotor(self, motor):
 		for i in range(len(motor)):
 			mov = True if i % 2 == 0 else False
 			GPIO.output(motor[i], mov)
-		if self.DEBUG: print 'Motor backwarding'
 
 	def stopRobot(self):
+		if self.DEBUG: print 'Robot stopped'
 		self.stopMotor(self.MOTORS)
 
 	def fordwardRobot(self, seconds):
+		if self.DEBUG: print 'Robot fordwarding (%ss)' % seconds
 		self.fordwardMotor(self.MOTORS)
 		time.sleep(seconds)
 		self.stopRobot()
 
 	def backwardRobot(self, seconds):
+		if self.DEBUG: print 'Robot backwarding (%ss)' % seconds
 		self.backwardMotor(self.MOTORS)
 		time.sleep(seconds)
 		self.stopRobot()
 
 	def rightRobot(self, seconds):
+		if self.DEBUG: print 'Robot turning right (%ss)' % seconds
 		self.backwardMotor(self.MOTOR_R)
 		self.fordwardMotor(self.MOTOR_L)
 		time.sleep(seconds)
 		self.stopRobot()
 
 	def leftRobot(self, seconds):
+		if self.DEBUG: print 'Robot turning left (%ss)' % seconds
 		self.backwardMotor(self.MOTOR_L)
 		self.fordwardMotor(self.MOTOR_R)
 		time.sleep(seconds)
