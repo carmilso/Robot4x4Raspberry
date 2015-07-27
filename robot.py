@@ -5,6 +5,7 @@ import driversL298N as drivers
 
 
 def main():
+    print 'Testing Robot...\n'
     robot = drivers.Robot(17, 27, 10, 9, 1)
 
     robot.fordwardRobot(7)
