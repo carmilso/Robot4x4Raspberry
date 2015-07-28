@@ -37,14 +37,13 @@ class Robot:
 
 	def initDB(self, address, username, password, db):
 		try:
-			self.DB	= MySQLdb.connect
-						(
-							address,
-							username,
-							base64.b64decode(password),
-							db,
-							connect_timeout=3
-						).cursor()
+			self.DB	= MySQLdb.connect (\
+					address, \
+					username, \
+					base64.b64decode(password), \
+					db, \
+					connect_timeout=3\
+			).cursor()
 		except MySQLdb.Error as e:
 			print 'Not possible to connect to the DataBase'
 
