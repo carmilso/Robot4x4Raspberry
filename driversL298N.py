@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import RPi.GPIO as GPIO
+
 import time
+import base64
+import MySQLdb
+import RPi.GPIO as GPIO
 
 
 class Robot:
@@ -11,6 +14,7 @@ class Robot:
 		self.MOTOR_L = (in3, in4)
 		self.MOTORS = (in1, in2, in3, in4)
 		self.DEBUG = debug
+		self.DB = None
 
 		GPIO.setmode(GPIO.BCM)
 
@@ -19,6 +23,7 @@ class Robot:
 
 	def __del__(self):
 		GPIO.cleanup()
+		if self.DB is not None: self.DB.close()
 		if self.DEBUG: print '\nRobot finished.'
 
 	def __str__(self):
@@ -29,6 +34,19 @@ class Robot:
 				IN4 -> %s
 			''' % self.MOTORS
 		return rob
+
+	def initDB(self, address, username, password, db):
+		try:
+			self.DB	= MySQLdb.connect
+						(
+							address,
+							username,
+							base64.b64decode(password),
+							db,
+							connect_timeout=3
+						).cursor()
+		except MySQLdb.Error as e:
+			print 'Not possible to connect to the DataBase'
 
 	def stopMotor(self, motor):
 		for input in motor:
