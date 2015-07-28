@@ -45,7 +45,7 @@ class Robot:
 					connect_timeout=3\
 			).cursor()
 		except MySQLdb.Error as e:
-			print 'Not possible to connect to the DataBase'
+			print 'Not possible to connect to the DataBase', e
 
 	def stopMotor(self, motor):
 		for input in motor:
