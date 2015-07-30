@@ -25,18 +25,17 @@ app.get('/register', function(req, res) {
 	res.sendFile(path.join(__dirname+'/login/register.html'));
 });
 
-app.post('/verify', function(req, res) {
+app.post('/verify', function(req, res, next) {
 	console.log('User: ' + req.body.userR);
 	console.log('Password: ' + req.body.passwordR);
 
 	var code = Math.random().toString(36).substring(2, 9);
 	console.log('Verification code: ' + code);
 
-	res.sendFile(path.join(__dirname+'/login/verify.html'), function(req, res) {
-		console.log(req.query['codeAdmin']);
-	});
-
-
+	res.sendFile(path.join(__dirname+'/login/verify.html'));
+	return next();
+}), function(req, res) {
+	console.log('------->' + req.query.codeAdmin);
 });
 
 app.get('/validate', function(req, res) {
