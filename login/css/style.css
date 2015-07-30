@@ -48,7 +48,7 @@ input {
   padding: 3rem 0;
 }
 
-.form input[type="password"], .form input[type="text"], .form input[type="submit"] {
+.form input[type="password"], .form input[type="text"], .form input[type="submit"], .form input[type="button"] {
   width: 100%;
 }
 .form--login {
