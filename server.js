@@ -36,6 +36,9 @@ app.post('/verify', function(req, res) {
 	console.log('User: ' + req.body.userR);
 	console.log('Password: ' + req.body.passwordR);
 
+	var code = Math.random().toString(36).substring(2, 9);
+	console.log('Verification code: ' + code);
+
 	res.sendFile(path.join(__dirname+'/login/verify.html'));
 });
 
