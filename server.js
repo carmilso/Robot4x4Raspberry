@@ -7,10 +7,16 @@ app.set('view engine', 'ejs');
 
 app.get('/', function(req, res) {
 	console.log('Connected: ' + req.connection.remoteAddress);
+	
 	res.render(path.join(__dirname+'/index'), {
-		title: 'Prueba',
+		title: 'Testing ExpressJS',
 		text: 'Hi! This is a prove to view the new html form.'
-	});
+	});	
+});
+
+app.get('/request', function(req, res) {
+	var val = req.query['value'];
+	res.send('Value introduced: ' + val);
 });
 
 var server = app.listen(3000, function() {
