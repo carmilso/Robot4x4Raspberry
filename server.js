@@ -36,7 +36,7 @@ app.post('/verify', function(req, res, next) {
 	return next();
 }), function(req, res) {
 	console.log('------->' + req.query.codeAdmin);
-});
+}
 
 app.get('/validate', function(req, res) {
 
