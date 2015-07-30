@@ -3,8 +3,9 @@
 
     <script>
         function sendUser() {
-            alert('New User!');
-            document.getElementById("codeAdmin").type="text";
+            document.getElementById("codeAdminT").type="text";
+            document.getElementById("codeAdminS").type="submit";
+            document.getElementById('formRegister').submit();
         }
     </script>
 
@@ -24,7 +25,7 @@
 
     <div class="grid__container">
 
-      <form action="" method="post" class="form form--login">
+      <form id="formRegister" action="registerUser" method="post" class="form form--login">
         <p><label> New User </label></p>
         <div class="form__field">
           <label class="fontawesome-user" for="login__username"><span class="hidden">Username</span></label>
@@ -45,8 +46,8 @@
       <br><br>
 
       <form method="post" action="/validate" class="form form--login">
-          <input type="hidden" name="codeAdmin" id="codeAdmin" placeholder="Code verification" required>
-          <input type="submit" value="Verify!">
+          <input type="hidden" name="codeAdmin" id="codeAdminT" placeholder="Code verification" required>
+          <input type="hidden" value="Verify!" id="codeAdminS">
       </form>
 
     </div>
