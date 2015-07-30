@@ -1,17 +1,26 @@
-var express = require('express');
-var path    = require('path');
-var app     = express();
+var path			= require('path');
+var express			= require('express');
+var passport		= require('passport');
+var LocalStrategy	= require('passport-local').Strategy;
+
+var app = express();
 
 
 app.set('view engine', 'ejs');
 
-app.get('/', function(req, res) {
+/*app.get('/', function(req, res) {
 	console.log('Connected: ' + req.connection.remoteAddress);
-	
+
 	res.render(path.join(__dirname+'/index'), {
 		title: 'Testing ExpressJS',
 		text: 'Hi! This is a prove to view the new html form.'
-	});	
+	});
+});*/
+
+app.get('/', function(req, res) {
+	console.log('Connected: ' + req.connection.remoteAddress);
+
+	res.sendFile(path.join(__dirname+'/login/login.html'));
 });
 
 app.get('/request', function(req, res) {
