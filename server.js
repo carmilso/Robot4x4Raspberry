@@ -24,6 +24,10 @@ app.get('/', function(req, res) {
 	res.sendFile(path.join(__dirname+'/login/login.html'));
 });
 
+app.get('/register', function(req, res) {
+	res.sendFile(path.join(__dirname+'/login/register.html'));
+});
+
 app.get('/request', function(req, res) {
 	var val = req.query['value'];
 	res.send('Value introduced: ' + val);
