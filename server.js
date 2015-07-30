@@ -6,6 +6,7 @@ var app     = express();
 app.set('view engine', 'ejs');
 
 app.get('/', function(req, res) {
+	console.log('Connected: ' + req.connection.remoteAddress);
 	res.render(path.join(__dirname+'/index'), {
 		title: 'Prueba',
 		text: 'Hi! This is a prove to view the new html form.'
