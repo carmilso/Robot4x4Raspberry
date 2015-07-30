@@ -39,7 +39,11 @@ app.post('/verify', function(req, res) {
 	var code = Math.random().toString(36).substring(2, 9);
 	console.log('Verification code: ' + code);
 
-	res.sendFile(path.join(__dirname+'/login/verify.html'));
+	res.sendFile(path.join(__dirname+'/login/verify.html'), code);
+});
+
+app.get('/validate', function(req, res, code) {
+	console.log('Code: ' + code);
 });
 
 app.get('/request', function(req, res) {
