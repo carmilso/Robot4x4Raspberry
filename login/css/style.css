@@ -52,7 +52,7 @@ input {
   width: 100%;
 }
 .form--login {
-  color: #606468;
+  color: #000000;
 }
 .form--login label,
 .form--login input[type="text"],
