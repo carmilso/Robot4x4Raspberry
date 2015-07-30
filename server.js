@@ -7,6 +7,7 @@ var app = express();
 
 
 app.set('view engine', 'ejs');
+app.use('/login/css', express.static(path.join(__dirname, 'login/css')));
 
 /*app.get('/', function(req, res) {
 	console.log('Connected: ' + req.connection.remoteAddress);
