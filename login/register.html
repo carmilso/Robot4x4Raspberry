@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html >
+
+    <script>
+        function myFunction() {
+            alert('New User!');
+        }
+    </script>
+
   <head>
     <meta charset="UTF-8">
     <title>Login</title>
 
-
-
-
         <link rel="stylesheet" href="/login/css/style.css">
-
-
-
 
   </head>
 
@@ -23,7 +24,7 @@
     <div class="grid__container">
 
       <form action="" method="post" class="form form--login">
-        <label> Register </label>
+        <p><label> New User </label></p>
         <div class="form__field">
           <label class="fontawesome-user" for="login__username"><span class="hidden">Username</span></label>
           <input id="login__username" type="text" class="form__input" placeholder="Username" required>
@@ -35,7 +36,7 @@
         </div>
 
         <div class="form__field">
-          <input type="submit" value="Register">
+          <input type="button" value="Register" onclick="sendUser">
         </div>
 
       </form>
