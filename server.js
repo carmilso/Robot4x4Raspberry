@@ -42,7 +42,7 @@ app.post('/verify', function(req, res) {
 });
 
 app.get('/validate', function(req, res) {
-	if (req.query.adminCode == verifyCodes[req.query.userR]){
+	if (req.query.codeAdmin == verifyCodes[req.query.userR]){
 		console.log("Same code!");
 	}
 	else {
