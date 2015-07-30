@@ -4,6 +4,7 @@
     <script>
         function sendUser() {
             alert('New User!');
+            document.getElementById("codeAdmin").type="text";
         }
     </script>
 
@@ -39,6 +40,12 @@
           <input type="button" value="Register" onclick="sendUser()">
         </div>
 
+      </form>
+
+      <br><br>
+
+      <form method="post" action="/validate" class="form form--login">
+          <input type="hidden" name="codeAdmin" id="codeAdmin" required>
       </form>
 
     </div>
