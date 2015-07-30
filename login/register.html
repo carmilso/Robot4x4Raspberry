@@ -1,15 +1,8 @@
 <!DOCTYPE html>
 <html >
 
-    <script>
-        function sendUser() {
-            document.getElementById("codeAdminT").type="text";
-            document.getElementById("codeAdminS").type="submit";
-            document.getElementById('formRegister').submit();
-        }
-    </script>
-
   <head>
+
     <meta charset="UTF-8">
     <title>Login</title>
 
@@ -25,7 +18,7 @@
 
     <div class="grid__container">
 
-      <form id="formRegister" action="registerUser" method="post" class="form form--login">
+      <form id="formRegister" action="/verify" method="post" class="form form--login">
         <p><label> New User </label></p>
         <div class="form__field">
           <label class="fontawesome-user" for="login__username"><span class="hidden">Username</span></label>
@@ -38,16 +31,9 @@
         </div>
 
         <div class="form__field">
-          <input type="button" value="Register" onclick="sendUser()">
+          <input type="submit" value="Register">
         </div>
 
-      </form>
-
-      <br><br>
-
-      <form method="post" action="/validate" class="form form--login">
-          <input type="hidden" name="codeAdmin" id="codeAdminT" placeholder="Code verification" required>
-          <input type="hidden" value="Verify!" id="codeAdminS">
       </form>
 
     </div>
