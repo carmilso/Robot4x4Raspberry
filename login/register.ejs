@@ -18,6 +18,15 @@
 
     <div class="grid__container">
 
+	<% if (warn == '1') { %>
+        
+		<div class="alert alert-danger">
+  			<strong>Error!</strong> <%= message %>
+		</div>
+  	<% } %>
+
+	<br>
+
       <form id="formRegister" action="/verify" method="post" class="form form--login">
         <p><label> New User </label></p>
         <div class="form__field">
