@@ -81,7 +81,10 @@ app.get('/validate', function(req, res) {
 		signUp(user, pass, ip, function(err, data) {
 			if (err){
 				console.log('Error on database: ' + err);
-                res.redirect('/register?warn=1&msg=Try+with+other+User')
+				var info = err.search("ER_DUP_ENTRY") != -1
+					? "The+user+already+exists" : "Error in DataBase."
+
+                res.redirect('/register?warn=1&msg='+info);
 			}
 			else{
 				console.log('User signed up correctly!');
