@@ -24,22 +24,22 @@ var db = mysql.createConnection({
 	database: dataBaseInfo.database
 });
 
-var signUp = function(username, password, ip, callback) {
-        return db.query(
-                'INSERT INTO users (Username, Password, IP) VALUES (?, ?, ?)',
-                [username, password, ip],
-                function(err, result) {
-                        if (err) callback(err, null);
+function signUp(username, password, ip, callback) {
+	db.query(
+        'INSERT INTO users (Username, Password, IP) VALUES (?, ?, ?)',
+        [username, password, ip],
+        function(err, result) {
+            if (err) callback(err, null);
 			else callback(null, result);
-                }
-        );
+        }
+    );
 }
 
 
 /***********************************************************************/
 app.get('/', function(req, res) {
 	console.log('Connected: ' + req.connection.remoteAddress);
-	
+
 	res.sendFile(path.join(__dirname+'/login/login.html'));
 });
 
@@ -73,27 +73,25 @@ app.post('/verify', function(req, res) {
 app.get('/validate', function(req, res) {
 	if (req.query.codeAdmin == verifyCodes[req.query.userR][0]){
 		console.log("\nSigning up...");
-		
+
 		user = req.query.userR;
 		pass = verifyCodes[user][1];
 		ip = req.connection.remoteAddress;
 
 		signUp(user, pass, ip, function(err, data) {
 			if (err){
-				console.log('Error on database');
-                        	res.redirect('/register?warn=1&msg=Try+with+other+User')
+				console.log('Error on database: ' + err);
+                res.redirect('/register?warn=1&msg=Try+with+other+User')
 			}
 			else{
 				console.log('User signed up correctly!');
-                        	res.redirect('/');
+                res.redirect('/');
 			}
 		});
-		
-		
 	}
 	else {
 		console.log("Not same code...");
-		res.redirect('/register?warn=1&msg=Verification+code+do+not+match!');
+		res.redirect('/register?warn=1&msg=Verification+code+does+not+match!');
 	}
 });
 /***********************************************************************/
