@@ -1,10 +1,10 @@
-var path			= require('path');
-var mysql			= require('mysql');
-var express			= require('express');
-var passport		= require('passport');
-var bodyParser		= require('body-parser');
-var dataBaseInfo	= require('./private/database');
-var LocalStrategy	= require('passport-local').Strategy;
+var path            = require('path');
+var mysql           = require('mysql');
+var express	        = require('express');
+var passport        = require('passport');
+var bodyParser      = require('body-parser');
+var dataBaseInfo    = require('./private/database');
+var LocalStrategy   = require('passport-local').Strategy;
 
 
 var app = express();
@@ -88,7 +88,7 @@ app.get('/validate', function(req, res) {
 			}
 			else{
 				console.log('User signed up correctly!');
-                res.redirect('/');
+				res.redirect('/');
 			}
 		});
 	}
