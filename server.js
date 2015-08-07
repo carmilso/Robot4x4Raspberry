@@ -1,6 +1,6 @@
-var path		= require('path');
-var mysql		= require('mysql');
-var express		= require('express');
+var path			= require('path');
+var mysql			= require('mysql');
+var express			= require('express');
 var passport		= require('passport');
 var bodyParser		= require('body-parser');
 var dataBaseInfo	= require('./private/database');
@@ -29,7 +29,7 @@ function signUp(username, password, ip, callback) {
         'INSERT INTO users (Username, Password, IP) VALUES (?, ?, ?)',
         [username, password, ip],
         function(err, result) {
-            if (err) callback(err, null);
+			if (err) callback(err, null);
 			else callback(null, result);
         }
     );
@@ -82,9 +82,9 @@ app.get('/validate', function(req, res) {
 			if (err){
 				console.log('Error on database: ' + err);
 				var info = err.toString().search("ER_DUP_ENTRY") != -1
-					? "The+user+already+exists" : "Error in DataBase."
+					? "The+user+already+exists.+Try with other!" : "Error in DataBase."
 
-                res.redirect('/register?warn=1&msg='+info);
+				res.redirect('/register?warn=1&msg='+info);
 			}
 			else{
 				console.log('User signed up correctly!');
