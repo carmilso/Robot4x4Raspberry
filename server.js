@@ -109,13 +109,16 @@ app.post('/verify', function(req, res) {
 	console.log('User: ' + req.body.userR);
 	console.log('Password: ' + req.body.passwordR);
 
-	var code = Math.random().toString(36).substring(2, 9);
-	console.log('Verification code: ' + code);
+	if (verifyCodes[req.body.userR] == null) {
+		var code = Math.random().toString(36).substring(2, 9);
+		console.log('Verification code: ' + code);
 
-	verifyCodes[req.body.userR] = [code, req.body.passwordR];
+		verifyCodes[req.body.userR] = [code, req.body.passwordR];
+	}
 
 	res.render(path.join(__dirname+'/login/verify.ejs'), {
-		userR: req.body.userR
+		userR: req.body.userR,
+		errorMessage: req.flash('errorMessage');
 	});
 });
 
@@ -146,7 +149,7 @@ app.get('/validate', function(req, res) {
 	else {
 		console.log("Not same code...");
 		req.flash('errorMessage', 'The verification code does not match with the server.');
-		res.redirect('/register');
+		res.redirect('/verify');
 	}
 });
 
