@@ -29,7 +29,11 @@ passport.use(new LocalStrategy ({
 	passwordField: 'login__password'
 },
 function(username, password, done) {
-	console.log(done);
+	findUser(username, password, function(err, result) {
+		if (err) return done(err);
+		if (!result) return done(null, false, { message: 'Incorrect username or password' });
+		if (result) return done(null, result);
+	});
 }
 ));
 
@@ -59,11 +63,7 @@ function signUp(username, password, ip, callback) {
 /***********************************************************************/
 app.get('/', function(req, res) {
 	console.log('Connected: ' + req.connection.remoteAddress);
-	console.log("Searching user...");
-	findUser('jose', '12345', function(err, res) {
-		if (err) console.log(err);
-		else console.log(res, res.length);
-	})
+
 	res.sendFile(path.join(__dirname+'/login/login.html'));
 });
 
@@ -122,8 +122,10 @@ app.get('/validate', function(req, res) {
 	}
 });
 
-app.get('/index', function(req, res) {
-	console.log("User logged successfully!");
+app.post('/login', function(req, res) {
+	passport.authenticate('local', { successRedirect: '/',
+									 failureRedirect: '/register'
+	})
 });
 /***********************************************************************/
 
