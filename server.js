@@ -42,6 +42,7 @@ function findUser(username, password, callback) {
 		'SELECT * FROM users WHERE Username LIKE ? AND Password LIKE ?',
 		[username, password],
 		function(err, result) {
+			console.log(result);
 			if (err) callback(err, null);
 			else callback(null, result);
 		}
@@ -127,7 +128,7 @@ app.post('/login', function(req, res) {
 	passport.authenticate('local', { successRedirect: '/',
 									 failureRedirect: '/register',
 									 failureFlash: true
-	})
+	});
 });
 /***********************************************************************/
 
