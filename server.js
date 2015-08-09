@@ -94,7 +94,7 @@ function signUp(username, password, ip, callback) {
 app.get('/', function(req, res) {
 	console.log('Connected: ' + req.connection.remoteAddress);
 
-	res.render(path.join(__dirname+'/login/login.html'), {
+	res.render(path.join(__dirname+'/login/login'), {
 		message: req.flash('loginMessage')
 	});
 });
