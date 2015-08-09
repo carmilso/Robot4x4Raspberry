@@ -131,21 +131,22 @@ app.get('/validate', function(req, res) {
 			if (err){
 				console.log('Error on database: ' + err);
 				var info = err.toString().search("ER_DUP_ENTRY") != -1
-					? "The user already exists. Try with another one!" : "Error in DataBase."
+					? "The user already exists. Try with another one!" : "Error in DataBase.";
 
 				req.flash('errorMessage', info);
 				res.redirect('/register');
 			}
 			else{
 				console.log('User signed up correctly!');
-				req.flash('verifiedMessage', 'You have successfully signed up! You can now log in...')
+				req.flash('verifiedMessage', 'You have successfully signed up! You can now log in...');
 				res.redirect('/');
 			}
 		});
 	}
 	else {
 		console.log("Not same code...");
-		res.redirect('/register?warn=1&msg=Verification+code+does+not+match!');
+		req.flash('errorMessage', 'The verification code does not match with the server.');
+		res.redirect('/register');
 	}
 });
 
