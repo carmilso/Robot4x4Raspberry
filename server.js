@@ -33,13 +33,13 @@ function(username, password, done) {
 	findUser(username, password, function(err, user) {
 		if (err) return done(err);
 		if (!user) return done(null, false, { message: 'Incorrect username or password' });
-		if (user)	return done(null, user);
+		if (user) return done(null, user);
 	});
 }
 ));
 
 app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.session());
 
 function findUser(username, password, callback) {
 	db.query(
