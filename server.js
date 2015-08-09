@@ -149,7 +149,7 @@ app.get('/validate', function(req, res) {
 	else {
 		console.log("Not same code...");
 		req.flash('errorMessage', 'The verification code does not match with the server.');
-		res.redirect('/verify');
+		//res.redirect('/verify');
 	}
 });
 
