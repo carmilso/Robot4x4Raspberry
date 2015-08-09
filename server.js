@@ -157,7 +157,7 @@ app.get('/validate', function(req, res) {
 
 app.post('/login',
 	passport.authenticate('local', { successRedirect: '/',
-									 failureRedirect: '/register',
+									 failureRedirect: '/',
 									 failureFlash: true
 	})
 );
