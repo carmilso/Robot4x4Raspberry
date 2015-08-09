@@ -17,7 +17,7 @@
     <div class="grid__container">
 
         <% if (message.length > 0) { %>
-        <div class="bg-warning"><%= message %></div>
+        <p class="alert alert-danger"><%= message %></p>
         <% } %>
 
       <form action="/login" method="post" class="form form--login">
