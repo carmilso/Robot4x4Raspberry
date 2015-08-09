@@ -34,7 +34,7 @@ function(username, password, done) {
 		if (err) return done(err);
 		if (!result) return done(null, false, { message: 'Incorrect username or password' });
 		if (result){
-			console.log('Result -> ' + result);
+			console.log('Result -> ' + result.Username);
 			return done(null, result[0]);
 		}
 	});
