@@ -38,6 +38,8 @@ function(username, password, done) {
 }
 ));
 
+app.use(passport.initialize());
+
 function findUser(username, password, callback) {
 	db.query(
 		'SELECT * FROM users WHERE Username LIKE ? AND Password LIKE ?',
