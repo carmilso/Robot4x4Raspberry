@@ -25,7 +25,7 @@ var db = mysql.createConnection({
 });
 
 passport.use(new LocalStrategy ({
-	usernameField: 'login__username'
+	usernameField: 'login__username',
 	passwordField: 'login__password'
 },
 function(username, password, done) {
