@@ -141,8 +141,8 @@ input {
 		color:#555;
 		border-radius:10px;
 		font-family:Tahoma,Geneva,Arial,sans-serif;font-size:13px;
-		padding:10px 36px;
-		margin:5px;
+		padding:10px 16px;
+		margin:10px;
 }
 .alert-box span {
 	font-weight:bold;
