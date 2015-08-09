@@ -41,18 +41,8 @@ function(username, password, done) {
 }
 ));
 
-/*app.use(passport.initialize());
-app.use(passport.session());*/
-
-app.configure(function() {
-  app.use(express.static('public'));
-  app.use(express.cookieParser());
-  app.use(express.bodyParser());
-  app.use(express.session({ secret: 'keyboard cat' }));
-  app.use(passport.initialize());
-  app.use(passport.session());
-  app.use(app.router);
-});
+app.use(passport.initialize());
+//app.use(passport.session());
 
 function findUser(username, password, callback) {
 	db.query(
