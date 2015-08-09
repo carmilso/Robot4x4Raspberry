@@ -37,7 +37,7 @@ function(req, username, password, done) {
 		if (!user) return done(null, false, req.flash('loginMessage', 'Incorrect username or password'));
 		if (user){
 			console.log('User received: ' + user);
-			return done(null, user);
+			return done(null, user, req.flash('verifiedMessage', 'You have successfully signed up! You can now log in...'));
 		}
 	});
 }
@@ -96,7 +96,8 @@ app.get('/', function(req, res) {
 	console.log('Connected: ' + req.connection.remoteAddress);
 
 	res.render(path.join(__dirname+'/login/login'), {
-		message: req.flash('loginMessage')
+		errorMessage: req.flash('loginMessage'),
+		verifiedMessage: req.flash('verifiedMessage')
 	});
 });
 
@@ -158,7 +159,8 @@ app.get('/validate', function(req, res) {
 app.post('/login',
 	passport.authenticate('local', { successRedirect: '/',
 									 failureRedirect: '/',
-									 failureFlash: true
+									 failureFlash: true,
+									 successFlash: true
 	})
 );
 /***********************************************************************/

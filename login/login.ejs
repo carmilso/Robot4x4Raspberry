@@ -17,9 +17,15 @@
 
     <div class="grid__container">
 
-        <% if (message.length > 0) { %>
+        <% if (errorMessage.length > 0) { %>
             <div class="alert-box error"><span>error: </span>
-	            <%= message %>
+	            <%= errorMessagemessage %>
+            </div>
+        <% } %>
+
+        <% if (verifiedMessage.length > 0) { %>
+            <div class="alert-box success"><span>error: </span>
+	            <%= verifiedMessage %>
             </div>
         <% } %>
 
