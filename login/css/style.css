@@ -136,3 +136,9 @@ input {
   max-width: 20rem;
   width: 90%;
 }
+
+.alert-error {
+    color: #b94a48;
+    background-color: #f2dede;
+    border-color: #eed3d7;
+}
