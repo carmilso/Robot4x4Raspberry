@@ -39,7 +39,7 @@ function findUser(username, password, callback) {
 		[username, password],
 		function(err, result) {
 			if (err) callback(err, null);
-			else callback(null, [result[0], result[1]]);
+			else callback(null, result);
 		}
 	)
 }
@@ -60,7 +60,7 @@ function signUp(username, password, ip, callback) {
 app.get('/', function(req, res) {
 	console.log('Connected: ' + req.connection.remoteAddress);
 	console.log("Searching user...");
-	findUser('jose', '1234', function(err, res) {
+	findUser('jose', '12345', function(err, res) {
 		if (err) console.log(err);
 		else console.log(res);
 	})
