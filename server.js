@@ -37,7 +37,7 @@ function(req, username, password, done) {
 		if (!user) return done(null, false, req.flash('loginMessage', 'Incorrect username or password'));
 		if (user){
 			console.log('User received: ' + user);
-			return done(null, user, req.flash('verifiedMessage', 'You have successfully signed up! You can now log in...'));
+			return done(null, user);
 		}
 	});
 }
@@ -146,6 +146,7 @@ app.get('/validate', function(req, res) {
 			}
 			else{
 				console.log('User signed up correctly!');
+				req.flash('verifiedMessage', 'You have successfully signed up! You can now log in...')
 				res.redirect('/');
 			}
 		});
