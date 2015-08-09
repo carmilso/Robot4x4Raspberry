@@ -26,30 +26,7 @@ var db = mysql.createConnection({
 	database: dataBaseInfo.database
 });
 
-passport.use(new LocalStrategy ({
-	usernameField: 'login__username',
-	passwordField: 'login__password',
-	passReqToCallback: true
-},
-function(req, username, password, done) {
-	findUser(username, password, function(err, user) {
-		if (err) return done(err);
-		if (!user) return done(null, false, req.flash('loginMessage', 'Incorrect username or password'));
-		if (user){
-			console.log('User received: ' + user);
-			return done(null, user);
-		}
-	});
-}
-));
-
-passport.serializeUser(function(user, done) {
-	done(null, user);
-});
-
-passport.deserializeUser(function(user, done) {
-	done(null, user);
-});
+require('./config/passport')(passport);
 
 app.use(session({
 	secret: 'cat sleeping',
@@ -79,6 +56,10 @@ function findUser(username, password, callback) {
 	)
 }
 
+function checkUser(username, callback) {
+
+}
+
 function signUp(username, password, ip, callback) {
 	db.query(
         'INSERT INTO users (Username, Password, IP) VALUES (?, ?, ?)',
@@ -106,19 +87,22 @@ app.get('/register', function(req, res) {
 });
 
 app.post('/verify', function(req, res) {
-	console.log('User: ' + req.body.userR);
-	console.log('Password: ' + req.body.passwordR);
+	user = req.body.userR;
+	pass = req.body.passwordR;
 
-	if (verifyCodes[req.body.userR] == null) {
-		var code = Math.random().toString(36).substring(2, 9);
-		console.log('Verification code: ' + code);
+	// Check if user exists in database
 
-		verifyCodes[req.body.userR] = [code, req.body.passwordR];
-	}
+
+	console.log('User: ' + user);
+	console.log('Password: ' + pass);
+
+	var code = Math.random().toString(36).substring(2, 9);
+	console.log('Verification code: ' + code);
+
+	verifyCodes[user] = [code, pass];
 
 	res.render(path.join(__dirname+'/login/verify.ejs'), {
-		userR: req.body.userR,
-		errorMessage: req.flash('errorMessage')
+		userR: user
 	});
 });
 
@@ -149,7 +133,7 @@ app.get('/validate', function(req, res) {
 	else {
 		console.log("Not same code...");
 		req.flash('errorMessage', 'The verification code does not match with the server.');
-		//res.redirect('/verify');
+		res.redirect('/register');
 	}
 });
 
