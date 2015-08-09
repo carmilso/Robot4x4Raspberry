@@ -18,12 +18,6 @@
 
     <div class="grid__container">
 
-        <% if (errorMessage.length > 0) { %>
-            <div class="alert-box error"><span>error: </span>
-                <%= errorMessage %>
-            </div>
-        <% } %>
-
       <form method="get" action="/validate" class="form form--login">
           <p><input type="text" name="codeAdmin" id="codeAdminT" placeholder="Code verification" required></p>
           <p><input type="submit" value="Verify!" id="codeAdminS"></p>
