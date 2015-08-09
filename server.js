@@ -48,7 +48,7 @@ function findUser(username, password, callback) {
 		function(err, result) {
 			if (err) callback(err, null);
 			else{
-				console.log('Result: ' + result);
+				console.log('Result: ' + result[0]);
 				callback(null, result);
 			}
 		}
