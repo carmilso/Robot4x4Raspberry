@@ -93,8 +93,6 @@ function signUp(username, password, ip, callback) {
 
 /***********************************************************************/
 app.get('/', function(req, res) {
-	console.log('Connected: ' + req.connection.remoteAddress);
-
 	res.render(path.join(__dirname+'/login/login'), {
 		errorMessage: req.flash('loginMessage'),
 		verifiedMessage: req.flash('verifiedMessage')
@@ -102,16 +100,9 @@ app.get('/', function(req, res) {
 });
 
 app.get('/register', function(req, res) {
-	if (req.query.warn == true)
-		res.render(path.join(__dirname+'/login/register'), {
-			warn: '1',
-			message: req.query.msg
-		});
-	else
-		res.render(path.join(__dirname+'/login/register'), {
-			warn: '0',
-			message: req.query.msg
-		});
+	res.render(path.join(__dirname+'/login/register'), {
+		errorMessage: req.flash('errorMessage')
+	});
 });
 
 app.post('/verify', function(req, res) {
@@ -140,9 +131,10 @@ app.get('/validate', function(req, res) {
 			if (err){
 				console.log('Error on database: ' + err);
 				var info = err.toString().search("ER_DUP_ENTRY") != -1
-					? "The+user+already+exists.+Try with other!" : "Error in DataBase."
+					? "The user already exists. Try with another one!" : "Error in DataBase."
 
-				res.redirect('/register?warn=1&msg='+info);
+				req.flash('errorMessage', info);
+				res.redirect('/register');
 			}
 			else{
 				console.log('User signed up correctly!');
