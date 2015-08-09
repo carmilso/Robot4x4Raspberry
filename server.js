@@ -127,7 +127,7 @@ app.post('/login',
 	passport.authenticate('local', { successRedirect: '/',
 									 failureRedirect: '/register',
 									 failureFlash: true
-	});
+	})
 );
 /***********************************************************************/
 
