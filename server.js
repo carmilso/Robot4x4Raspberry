@@ -123,6 +123,7 @@ app.get('/validate', function(req, res) {
 });
 
 app.post('/login', function(req, res) {
+	console.log('Trying to authenticate the user...');
 	passport.authenticate('local', { successRedirect: '/',
 									 failureRedirect: '/register'
 	})
