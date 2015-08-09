@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html >
 
-<style .alert-danger,
-.alert-error {
+<style alert-danger, alert-error {
     color: #b94a48;
     background-color: #f2dede;
     border-color: #eed3d7;
@@ -26,9 +25,9 @@
     <div class="grid__container">
 
         <% if (message.length > 0) { %>
-            <section class="alert-danger">
+            <div class="alert-error">
 	            <p><%= message %></p>
-            </section>
+            </div>
         <% } %>
 
       <form action="/login" method="post" class="form form--login">
