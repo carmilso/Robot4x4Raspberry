@@ -27,7 +27,11 @@ var db = mysql.createConnection({
 passport.use(new LocalStrategy ({
 	usernameField: 'login__username'
 	passwordField: 'login__password'
-}));
+},
+function(username, password, done) {
+	console.log(done);
+}
+));
 
 function findUser(username, password, callback) {
 	db.query(
