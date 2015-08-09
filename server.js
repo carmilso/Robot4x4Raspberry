@@ -33,7 +33,7 @@ function(username, password, done) {
 	findUser(username, password, function(err, result) {
 		if (err) return done(err);
 		if (!result) return done(null, false, { message: 'Incorrect username or password' });
-		if (result) return done(null, result);
+		if (result) return done(null, result[0]);
 	});
 }
 ));
