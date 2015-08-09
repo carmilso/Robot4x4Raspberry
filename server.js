@@ -24,6 +24,22 @@ var db = mysql.createConnection({
 	database: dataBaseInfo.database
 });
 
+passport.use(new LocalStrategy (
+	usernameField: 'login__username'
+	passwordField: 'login__password'
+));
+
+function findUser(username, password, callback) {
+	db.query(
+		'SELECT * FROM users WHERE Username LIKE ? AND Password LIKE ?',
+		[username, password],
+		function(err, result) {
+			if (err) callback(err, null);
+			else callback(null, result);
+		}
+	)
+}
+
 function signUp(username, password, ip, callback) {
 	db.query(
         'INSERT INTO users (Username, Password, IP) VALUES (?, ?, ?)',
@@ -39,7 +55,11 @@ function signUp(username, password, ip, callback) {
 /***********************************************************************/
 app.get('/', function(req, res) {
 	console.log('Connected: ' + req.connection.remoteAddress);
-
+	console.log("Searching user...");
+	findUser('jose', '1234', function(err, res) {
+		if (err) console.log(err);
+		else console.log(res);
+	})
 	res.sendFile(path.join(__dirname+'/login/login.html'));
 });
 
@@ -96,6 +116,10 @@ app.get('/validate', function(req, res) {
 		console.log("Not same code...");
 		res.redirect('/register?warn=1&msg=Verification+code+does+not+match!');
 	}
+});
+
+app.get('/index', function(req, res) {
+	console.log("User logged successfully!");
 });
 /***********************************************************************/
 
