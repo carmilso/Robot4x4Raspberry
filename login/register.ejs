@@ -18,13 +18,11 @@
 
     <div class="grid__container">
 
-	<% if (warn == '1') { %>
-
-		<div class="alert alert-danger">
-  			<strong>Error!</strong> <%= message %>
-		</div>
-        
-  	<% } %>
+        <% if (errorMessage.length > 0) { %>
+            <div class="alert-box error"><span>error: </span>
+                <%= errorMessage %>
+            </div>
+        <% } %>
 
 	<br>
 
