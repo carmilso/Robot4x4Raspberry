@@ -28,9 +28,10 @@ var db = mysql.createConnection({
 
 passport.use(new LocalStrategy ({
 	usernameField: 'login__username',
-	passwordField: 'login__password'
+	passwordField: 'login__password',
+	passReqToCallback: true
 },
-function(username, password, done) {
+function(req, username, password, done) {
 	findUser(username, password, function(err, user) {
 		if (err) return done(err);
 		if (!user) return done(null, false, { req.flash('loginMessage', 'Incorrect username or password')});
