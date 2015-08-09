@@ -62,7 +62,7 @@ app.get('/', function(req, res) {
 	console.log("Searching user...");
 	findUser('jose', '12345', function(err, res) {
 		if (err) console.log(err);
-		else console.log(res);
+		else console.log(res, res.length);
 	})
 	res.sendFile(path.join(__dirname+'/login/login.html'));
 });
