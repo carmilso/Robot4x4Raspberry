@@ -33,10 +33,7 @@ function(username, password, done) {
 	findUser(username, password, function(err, result) {
 		if (err) return done(err);
 		if (!result) return done(null, false, { message: 'Incorrect username or password' });
-		if (result){
-			console.log('Result -> ' + result.Username);
-			return done(null, result[0]);
-		}
+		if (result)	return done(null, result);
 	});
 }
 ));
@@ -50,7 +47,10 @@ function findUser(username, password, callback) {
 		[username, password],
 		function(err, result) {
 			if (err) callback(err, null);
-			else callback(null, result);
+			else{
+				console.log('Result: ' + result.Username);
+				callback(null, result);
+			}
 		}
 	)
 }
