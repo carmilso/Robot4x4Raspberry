@@ -39,6 +39,7 @@ function(username, password, done) {
 ));
 
 app.use(passport.initialize());
+app.use(passport.session());
 
 function findUser(username, password, callback) {
 	db.query(
