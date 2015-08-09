@@ -1,4 +1,5 @@
 var path            = require('path');
+var flash			= require('connect-flash');
 var mysql           = require('mysql');
 var express	        = require('express');
 var passport        = require('passport');
@@ -36,8 +37,6 @@ function(username, password, done) {
 	});
 }
 ));
-
-passport.initialize();
 
 function findUser(username, password, callback) {
 	db.query(
