@@ -66,9 +66,8 @@ function findUser(username, password, callback) {
 		'SELECT * FROM users WHERE Username LIKE ? AND Password LIKE ?',
 		[username, password],
 		function(err, result) {
-			if (err) callback(err, null);
+			if (err || result.length == 0) callback(err, null);
 			else{
-				console.log('cds: ' + result.length);
 				res = JSON.stringify(result[0]);
 				console.log('Result stringify: ' + res);
 				user = JSON.parse(res)
