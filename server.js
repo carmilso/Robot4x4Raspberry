@@ -49,7 +49,8 @@ function findUser(username, password, callback) {
 			if (err) callback(err, null);
 			else{
 				res = JSON.stringify(result[0]);
-				console.log('Result string: ' + res);
+				username = JSON.parse(res)
+				console.log('Result username: ' + username);
 				console.log('Result: ' + res.Username);
 				callback(null, result);
 			}
