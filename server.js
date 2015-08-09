@@ -2,8 +2,10 @@ var path            = require('path');
 var flash			= require('connect-flash');
 var mysql           = require('mysql');
 var express	        = require('express');
+var session			= require('express-session');
 var passport        = require('passport');
-//var bodyParser      = require('body-parser');
+var bodyParser      = require('body-parser');
+var cookieParser	= require('cookie-parser');
 var dataBaseInfo    = require('./private/database');
 var LocalStrategy   = require('passport-local').Strategy;
 
@@ -14,7 +16,9 @@ app.set('view engine', 'ejs');
 
 app.use('/login/css', express.static(path.join(__dirname, 'login/css')));
 
-app.use(express.bodyParser.urlencoded({ extended: false }));
+//app.use(cookieParser());
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 var verifyCodes = {};
 
@@ -49,8 +53,12 @@ passport.deserializeUser(function(user, done) {
 	done(null, user);
 });
 
-app.use(express.cookieParser());
-app.use(express.session({ secret: 'cat sleeping'}));
+app.use(session({
+	secret: 'cat sleeping',
+	name: 'cookie_Raspberry',
+	resave: true,
+	saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
