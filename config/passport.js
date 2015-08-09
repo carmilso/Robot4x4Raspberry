@@ -1,3 +1,5 @@
+module.exports = {
+
 passport.use(new LocalStrategy ({
 	usernameField: 'login__username',
 	passwordField: 'login__password',
@@ -22,3 +24,5 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(user, done) {
 	done(null, user);
 });
+
+}
