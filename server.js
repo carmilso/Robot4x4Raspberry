@@ -24,10 +24,10 @@ var db = mysql.createConnection({
 	database: dataBaseInfo.database
 });
 
-passport.use(new LocalStrategy (
+passport.use(new LocalStrategy ({
 	usernameField: 'login__username'
 	passwordField: 'login__password'
-));
+}));
 
 function findUser(username, password, callback) {
 	db.query(
