@@ -34,7 +34,7 @@ passport.use(new LocalStrategy ({
 function(req, username, password, done) {
 	findUser(username, password, function(err, user) {
 		if (err) return done(err);
-		if (!user) return done(null, false, { req.flash('loginMessage', 'Incorrect username or password')});
+		if (!user) return done(null, false, req.flash('loginMessage', 'Incorrect username or password'));
 		if (user){
 			console.log('User received: ' + user);
 			return done(null, user);
