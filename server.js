@@ -15,9 +15,6 @@ var app = express();
 app.set('view engine', 'ejs');
 
 app.use('/login/css', express.static(path.join(__dirname, 'login/css')));
-
-//app.use(cookieParser());
-
 app.use(bodyParser.urlencoded({ extended: false }));
 
 var verifyCodes = {};
@@ -36,7 +33,7 @@ passport.use(new LocalStrategy ({
 function(username, password, done) {
 	findUser(username, password, function(err, user) {
 		if (err) return done(err);
-		if (!user) return done(null, false, { message: 'Incorrect username or password' });
+		if (!user) return done(null, false, { req.flash('loginMessage', 'Incorrect username or password')});
 		if (user){
 			console.log('User received: ' + user);
 			return done(null, user);
@@ -71,6 +68,7 @@ function findUser(username, password, callback) {
 			if (err) callback(err, null);
 			else{
 				res = JSON.stringify(result[0]);
+				console.log('Result stringify: ' + res);
 				user = JSON.parse(res)
 				console.log('Result username: ' + user.Username);
 				callback(null, user.Username);
@@ -95,7 +93,9 @@ function signUp(username, password, ip, callback) {
 app.get('/', function(req, res) {
 	console.log('Connected: ' + req.connection.remoteAddress);
 
-	res.sendFile(path.join(__dirname+'/login/login.html'));
+	res.render(path.join(__dirname+'/login/login.html'), {
+		message: req.flash('loginMessage')
+	});
 });
 
 app.get('/register', function(req, res) {
