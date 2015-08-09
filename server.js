@@ -118,7 +118,7 @@ app.post('/verify', function(req, res) {
 
 	res.render(path.join(__dirname+'/login/verify.ejs'), {
 		userR: req.body.userR,
-		errorMessage: req.flash('errorMessage');
+		errorMessage: req.flash('errorMessage')
 	});
 });
 
