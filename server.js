@@ -30,10 +30,10 @@ passport.use(new LocalStrategy ({
 	passwordField: 'login__password'
 },
 function(username, password, done) {
-	findUser(username, password, function(err, result) {
+	findUser(username, password, function(err, user) {
 		if (err) return done(err);
-		if (!result) return done(null, false, { message: 'Incorrect username or password' });
-		if (result)	return done(null, result);
+		if (!user) return done(null, false, { message: 'Incorrect username or password' });
+		if (user)	return done(null, user);
 	});
 }
 ));
@@ -51,7 +51,7 @@ function findUser(username, password, callback) {
 				res = JSON.stringify(result[0]);
 				user = JSON.parse(res)
 				console.log('Result username: ' + user.Username);
-				callback(null, result);
+				callback(null, user.Username);
 			}
 		}
 	)
