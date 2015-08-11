@@ -16,12 +16,12 @@
 
             var data = {};
             data.code = 'hcdushvsuid';
-
+            
             alert('Working ajax...' + JSON.stringify(data));
 
             $.ajax({
               type: 'POST',
-              data: JSON.stringify(data);,
+              data: JSON.stringify(data),
               contentType: 'application/json',
               url: '/communication',
               success: function(data) {
