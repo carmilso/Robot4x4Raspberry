@@ -33,6 +33,9 @@
                       $("#message").html(data);
                       $("#message").show('slow');
                   }
+              },
+              error: function(error) {
+                  alert('Error: ' + error);
               }
           });
         });
