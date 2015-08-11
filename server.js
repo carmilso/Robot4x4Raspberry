@@ -40,7 +40,8 @@ var app = express();
 app.set('view engine', 'ejs');
 
 app.use('/login/css', express.static(path.join(__dirname, 'login/css')));
-app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(session({
 	secret: 'cat sleeping',
 	name: 'cookie_Raspberry',
