@@ -16,8 +16,9 @@
 
             var data = {};
             data.code = $("#codeAdminT").val();
+            data.user = $("#userR").val();
 
-            alert('Working ajax...' + JSON.stringify(data));
+            //alert('Working ajax...' + JSON.stringify(data));
 
             $.ajax({
               type: 'POST',
@@ -25,9 +26,10 @@
               contentType: 'application/json',
               url: '/validateCode',
               success: function(data) {
-                  //alert('success: ' + data);
-                  $("#message").html(data);
-                  $("#message").show('slow');
+                  if (data != 'pass') {
+                      $("#message").html(data);
+                      $("#message").show('slow');
+                  }
               }
           });
         });
@@ -50,7 +52,7 @@
       <form id="frmValidate" method="get" action="/validate" class="form form--login">
           <p><input type="text" name="codeAdmin" id="codeAdminT" placeholder="Code verification" required></p>
           <p><input type="submit" value="Verify!" id="codeAdminS"></p>
-          <input type="hidden" value="<%= userR %>" name="userR"/>
+          <input type="hidden" value="<%= userR %>" name="userR" id="userR"/>
       </form>
 
     </div>

@@ -100,9 +100,30 @@ function signUp(username, password, ip, callback) {
 /***********************************************************************/
 app.post('/validateCode', function(req, res) {
 	var data = JSON.parse(JSON.stringify(req.body));
-	console.log('Received: ' + data.code);
-	res.redirect('/login');
-	//res.send('<span>error: </span>The verification code does not match with the server.');
+	console.log('Received: ' + data.code + ', ' + data.user);
+	//res.redirect('/login');
+	if (data.code != verifyCodes[data.user][0])
+		res.send('<span>error: </span>The verification code does not match with the server.');
+	else {
+		signUp(user, pass, ip, function(err, data) {
+			if (err){
+				console.log('Error on database: ' + err);
+				var info = err.toString().search("ER_DUP_ENTRY") != -1
+					? "The user already exists. Try with another one!" : "Error in DataBase.";
+
+				res.send('pass');
+				req.flash('errorMessage', info);
+				res.redirect('/register');
+			}
+			else{
+				console.log('User signed up correctly!');
+				res.send('pass');
+				req.flash('verifiedMessage', 'You have successfully signed up! You can now log in...');
+				res.redirect('/');
+			}
+		});
+	}
+
 });
 
 app.get('/', function(req, res) {
