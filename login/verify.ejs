@@ -33,9 +33,9 @@
               e.preventDefault();
 
               var dataForm = {};
-              data.code = $("#codeAdminT").val();
+              dataForm.code = $("#codeAdminT").val();
 
-              alert('Working ajax...' + data.code);
+              alert('Working ajax...' + dataForm.code);
 
               $.ajax({
                   type: 'POST',
