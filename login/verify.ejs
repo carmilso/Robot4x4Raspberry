@@ -27,6 +27,7 @@
               dataType: 'application/json',
               url: '/validateCode',
               success: function(data) {
+                  alert('Alert: ' + data);
                   alert(JSON.stringify(data));
                   if (data != 'pass') {
                       $("#message").html(data);
