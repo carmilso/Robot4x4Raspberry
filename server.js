@@ -9,6 +9,8 @@ var dataBaseInfo    = require('./private/database');
 var LocalStrategy   = require('passport-local').Strategy;
 
 
+console.log('[INFO] Initializing Server...');
+
 /***********************************************************************/
 passport.use(new LocalStrategy ({
 	usernameField: 'login__username',
@@ -20,7 +22,7 @@ function(req, username, password, done) {
 		if (err) return done(err);
 		if (!user) return done(null, false, req.flash('loginMessage', 'Incorrect username or password'));
 		if (user){
-			console.log('User received: ' + user);
+			console.log('[INFO] User received: ' + user);
 			return done(null, user);
 		}
 	});
@@ -63,6 +65,10 @@ var db = mysql.createConnection({
 	database: dataBaseInfo.database
 });
 
+function loadUsers(callback){
+
+}
+
 function findUser(username, password, callback) {
 	db.query(
 		'SELECT * FROM users WHERE Username LIKE ? AND Password LIKE ?',
@@ -71,11 +77,9 @@ function findUser(username, password, callback) {
 			if (err) callback(err, null);
 			else if (result.length == 0) callback(null, 0);
 			else{
-				res = JSON.stringify(result[0]);
-				console.log('Result stringify: ' + res);
-				user = JSON.parse(res)
-				console.log('Result username: ' + user.Username);
-				callback(null, user.Username);
+				res = JSON.parse(JSON.stringify(result[0]));
+				console.log('[INFO] Result username: ' + res.Username);
+				callback(null, res.Username);
 			}
 		}
 	)
@@ -98,41 +102,6 @@ function signUp(username, password, ip, callback) {
 
 
 /***********************************************************************/
-app.post('/validateCode', function(req, res) {
-	var data = JSON.parse(JSON.stringify(req.body));
-
-	var user = data.user;
-	var pass = verifyCodes[user][1];
-	var code = data.code;
-	var ip = req.connection.remoteAddress;
-
-	console.log('Received: ' + code + ', ' + user);
-
-	if (code != verifyCodes[user][0])
-		res.send(JSON.stringify({redirect: false, msg: '<span>error: </span>The verification code does not match with the server.'}));
-	else {
-		signUp(user, pass, ip, function(err, data) {
-			if (err){
-				console.log('Error on database: ' + err);
-				var info = err.toString().search("ER_DUP_ENTRY") != -1
-					? "The user already exists. Try with another one!" : "Error in DataBase.";
-
-
-				req.flash('errorMessage', info);
-				res.send(JSON.stringify({redirect: true, address: '/register'}));
-				//res.redirect('/register');
-			}
-			else{
-				console.log('User signed up correctly!');
-				req.flash('verifiedMessage', 'You have successfully signed up! You can now log in...');
-				res.send(JSON.stringify({redirect: true, address: '/'}));
-				//res.redirect('/');
-			}
-		});
-	}
-
-});
-
 app.get('/', function(req, res) {
 	res.render(path.join(__dirname+'/login/login'), {
 		errorMessage: req.flash('loginMessage'),
@@ -153,11 +122,11 @@ app.post('/verify', function(req, res) {
 	// Check if user exists in database
 
 
-	console.log('User: ' + user);
-	console.log('Password: ' + pass);
+	console.log('[INFO] User: ' + user);
+	console.log('[INFO] Password: ' + pass);
 
 	var code = Math.random().toString(36).substring(2, 9);
-	console.log('Verification code: ' + code);
+	console.log('[INFO] Verification code: ' + code);
 
 	verifyCodes[user] = [code, pass];
 
@@ -166,35 +135,36 @@ app.post('/verify', function(req, res) {
 	});
 });
 
-app.get('/validate', function(req, res) {
-	if (req.query.codeAdmin == verifyCodes[req.query.userR][0]){
-		console.log("\nSigning up...");
+app.post('/validateCode', function(req, res) {
+	var data = JSON.parse(JSON.stringify(req.body));
 
-		user = req.query.userR;
-		pass = verifyCodes[user][1];
-		ip = req.connection.remoteAddress;
+	var user = data.user;
+	var pass = verifyCodes[user][1];
+	var code = data.code;
+	var ip = req.connection.remoteAddress;
 
+	console.log('[INFO] Received: ' + code + ', ' + user);
+
+	if (code != verifyCodes[user][0])
+		res.send(JSON.stringify({redirect: false, msg: '<span>error: </span>The verification code does not match with the server.'}));
+	else {
 		signUp(user, pass, ip, function(err, data) {
 			if (err){
-				console.log('Error on database: ' + err);
+				console.log('[ERROR] Error on database: ' + err);
 				var info = err.toString().search("ER_DUP_ENTRY") != -1
 					? "The user already exists. Try with another one!" : "Error in DataBase.";
 
 				req.flash('errorMessage', info);
-				res.redirect('/register');
+				res.send(JSON.stringify({redirect: true, address: '/register'}));
 			}
 			else{
-				console.log('User signed up correctly!');
+				console.log('[INFO] User signed up correctly!');
 				req.flash('verifiedMessage', 'You have successfully signed up! You can now log in...');
-				res.redirect('/');
+				res.send(JSON.stringify({redirect: true, address: '/'}));
 			}
 		});
 	}
-	else {
-		console.log("Not same code...");
-		req.flash('errorMessage', 'The verification code does not match with the server.');
-		res.redirect('/register');
-	}
+
 });
 
 app.post('/login',
@@ -208,12 +178,12 @@ app.post('/login',
 
 /***********************************************************************/
 var server = app.listen(3000, function() {
-	console.log('Server started');
+	console.log('[INFO] Server started!\n');
 });
 
 process.on('SIGINT', function() {
 	server.close();
 	db.end();
-	console.log('Server disconnected.');
+	console.log('[INFO] Server disconnected.');
 	process.exit(0);
 });
