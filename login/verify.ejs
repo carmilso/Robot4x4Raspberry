@@ -19,11 +19,13 @@
             data.title = "title";
             data.message = "message";
 
-            //alert('Working ajax...' + JSON.stringify(data));
+            var data = JSON.stringify(data);
+
+            alert('Working ajax...' + data);
 
             $.ajax({
               type: 'POST',
-              data: JSON.stringify(data),
+              data: data,
               contentType: 'application/json',
               url: '/communication',
               success: function(data) {
