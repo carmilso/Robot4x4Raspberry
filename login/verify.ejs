@@ -7,6 +7,22 @@
     <title>Login</title>
 
         <link rel="stylesheet" href="/login/css/style.css">
+        <script src="../libraries/jquery-2.1.1.min.js" charset="utf-8"></script>
+
+        <script>
+            $(document).ready(function() {
+                var codeA;
+                $("#codeAdminS").click(function() {
+                    codeA = $("#codeAdminT").val();
+                    $.post("communication", {codeV: codeA}, function(data) {
+                        if (data == 'okay')
+                            alert("Okay!");
+                        else
+                            alert("Ooops...");
+                    });
+                });
+            });
+        </script>
 
   </head>
 

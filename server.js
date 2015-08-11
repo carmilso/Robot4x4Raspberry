@@ -1,31 +1,15 @@
 var path            = require('path');
-var flash			= require('connect-flash');
+var flash           = require('connect-flash');
 var mysql           = require('mysql');
 var express	        = require('express');
-var session			= require('express-session');
+var session         = require('express-session');
 var passport        = require('passport');
 var bodyParser      = require('body-parser');
-var cookieParser	= require('cookie-parser');
 var dataBaseInfo    = require('./private/database');
 var LocalStrategy   = require('passport-local').Strategy;
 
 
-var app = express();
-
-app.set('view engine', 'ejs');
-
-app.use('/login/css', express.static(path.join(__dirname, 'login/css')));
-app.use(bodyParser.urlencoded({ extended: false }));
-
-var verifyCodes = {};
-
-var db = mysql.createConnection({
-	host: dataBaseInfo.host,
-	user: dataBaseInfo.user,
-	password: dataBaseInfo.password,
-	database: dataBaseInfo.database
-});
-
+/***********************************************************************/
 passport.use(new LocalStrategy ({
 	usernameField: 'login__username',
 	passwordField: 'login__password',
@@ -51,6 +35,12 @@ passport.deserializeUser(function(user, done) {
 	done(null, user);
 });
 
+var app = express();
+
+app.set('view engine', 'ejs');
+
+app.use('/login/css', express.static(path.join(__dirname, 'login/css')));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
 	secret: 'cat sleeping',
 	name: 'cookie_Raspberry',
@@ -60,6 +50,17 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+
+/***********************************************************************/
+var verifyCodes = {};
+
+var db = mysql.createConnection({
+	host: dataBaseInfo.host,
+	user: dataBaseInfo.user,
+	password: dataBaseInfo.password,
+	database: dataBaseInfo.database
+});
 
 function findUser(username, password, callback) {
 	db.query(
@@ -96,6 +97,13 @@ function signUp(username, password, ip, callback) {
 
 
 /***********************************************************************/
+app.post('/communication', function(req, res) {
+	var code = req.body.codeV;
+
+	console.log('Code -> ' + code);
+	res.end('okay');
+});
+
 app.get('/', function(req, res) {
 	res.render(path.join(__dirname+'/login/login'), {
 		errorMessage: req.flash('loginMessage'),
@@ -167,9 +175,9 @@ app.post('/login',
 									 successFlash: true
 	})
 );
+
+
 /***********************************************************************/
-
-
 var server = app.listen(3000, function() {
 	console.log('Server started');
 });
@@ -179,4 +187,4 @@ process.on('SIGINT', function() {
 	db.end();
 	console.log('Server disconnected.');
 	process.exit(0);
-})
+});
