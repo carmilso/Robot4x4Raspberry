@@ -32,21 +32,14 @@
           $("#frmValidate").submit(function(e) {
               e.preventDefault();
 
-              var dataForm = {};
-              dataForm.code = $("#codeAdminT").val();
               datos = $("#codeAdminT").val();
 
               alert('Working ajax...' + dataForm.code);
 
-              $.ajax({
-                  type: 'POST',
-                  data: datos,
-                  contentType: 'application/json',
-                  url: 'communication',
-                  success: function(data) {
-                      alert('success: ' + data);
-                  }
-              });
+              $.post("/communication",{code: datos}, function(data){
+                  if(data==='okey')
+                    alert("Success: " + data);
+                });
           });
       });
       </script>
