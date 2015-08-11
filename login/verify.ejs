@@ -7,14 +7,14 @@
     <title>Login</title>
 
         <link rel="stylesheet" href="/login/css/style.css">
-        <script src="http://code.jquery.com/jquery-1.6.2.min.js" charset="utf-8"></script>
+        <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
 
-        <script>
+        <script type="javascript">
             $("#codeAdminS").click(function(e) {
                 e.preventDefault();
                 alert('Working ajax...');
                 var data = {};
-				data.code = $("#codeAdminT").val();;
+				data.code = $("#codeAdminT").val();
 
 				$.ajax({
 					type: 'POST',
