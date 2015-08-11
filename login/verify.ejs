@@ -6,10 +6,25 @@
     <meta charset="UTF-8">
     <title>Login</title>
 
-        <link rel="stylesheet" href="/login/css/style.css">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/login/css/style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#frmValidate").submit(function(e) {
+            e.preventDefault();
 
+            datos = $("#codeAdminT").val();
+
+            alert('Working ajax...' + dataForm.code);
+
+            $.post("/communication", {codeAd: datos}, function(data){
+                if(data==='okey')
+                  alert("Success: " + data);
+              });
+        });
+    });
+    </script>
 
   </head>
 
@@ -26,23 +41,6 @@
           <p><input type="submit" value="Verify!" id="codeAdminS"></p>
           <input type="hidden" value="<%= userR %>" name="userR"/>
       </form>
-
-      <script type="text/javascript">
-        $(document).ready(function() {
-          $("#frmValidate").submit(function(e) {
-              e.preventDefault();
-
-              datos = $("#codeAdminT").val();
-
-              alert('Working ajax...' + dataForm.code);
-
-              $.post("/communication",{code: datos}, function(data){
-                  if(data==='okey')
-                    alert("Success: " + data);
-                });
-          });
-      });
-      </script>
 
     </div>
 
