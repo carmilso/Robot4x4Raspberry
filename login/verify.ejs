@@ -27,7 +27,7 @@
               success: function(data) {
                   var data = JSON.parse(JSON.stringify(data));
 
-                  if (data.redirect == false) {
+                  if (!data.redirect) {
                       $("#message").html(data.msg);
                       $("#message").show('slow');
                   }
