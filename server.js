@@ -22,7 +22,6 @@ function(req, username, password, done) {
 		if (err) return done(err);
 		if (!user) return done(null, false, req.flash('loginMessage', 'Incorrect username or password'));
 		if (user){
-			console.log('[INFO] User received: ' + user);
 			return done(null, user);
 		}
 	});
@@ -78,7 +77,6 @@ function findUser(username, password, callback) {
 			else if (result.length == 0) callback(null, 0);
 			else{
 				res = JSON.parse(JSON.stringify(result[0]));
-				console.log('[INFO] Result username: ' + res.Username);
 				callback(null, res.Username);
 			}
 		}
@@ -126,7 +124,7 @@ app.post('/verify', function(req, res) {
 	console.log('[INFO] Password: ' + pass);
 
 	var code = Math.random().toString(36).substring(2, 9);
-	console.log('[INFO] Verification code: ' + code);
+	console.log('[INFO] Verification code: ' + code + '\n');
 
 	verifyCodes[user] = [code, pass];
 
@@ -143,14 +141,14 @@ app.post('/validateCode', function(req, res) {
 	var code = data.code;
 	var ip = req.connection.remoteAddress;
 
-	console.log('[INFO] Received: ' + code + ', ' + user);
+	console.log('[INFO] Received: ' + code + ', ' + user + '\n');
 
 	if (code != verifyCodes[user][0])
 		res.send(JSON.stringify({redirect: false, msg: '<span>error: </span>The verification code does not match with the server.'}));
 	else {
 		signUp(user, pass, ip, function(err, data) {
 			if (err){
-				console.log('[ERROR] Error on database: ' + err);
+				console.log('[ERROR] Error on database: ' + err + '\n');
 				var info = err.toString().search("ER_DUP_ENTRY") != -1
 					? "The user already exists. Try with another one!" : "Error in DataBase.";
 
@@ -158,7 +156,7 @@ app.post('/validateCode', function(req, res) {
 				res.send(JSON.stringify({redirect: true, address: '/register'}));
 			}
 			else{
-				console.log('[INFO] User signed up correctly!');
+				console.log('[INFO] User signed up correctly!\n');
 				req.flash('verifiedMessage', 'You have successfully signed up! You can now log in...');
 				res.send(JSON.stringify({redirect: true, address: '/'}));
 			}
