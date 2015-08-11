@@ -101,7 +101,7 @@ function signUp(username, password, ip, callback) {
 app.post('/validateCode', function(req, res) {
 	var data = JSON.parse(JSON.stringify(req.body));
 	console.log('Received: ' + data.code);
-	res.send('okay');
+	res.send('The verification code does not match with the server.');
 });
 
 app.get('/', function(req, res) {

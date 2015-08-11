@@ -26,6 +26,7 @@
               url: '/validateCode',
               success: function(data) {
                   //alert('success: ' + data);
+                  $("#message").html(data)
                   $("#message").show('slow');
               }
           });
@@ -43,11 +44,8 @@
 
     <div class="grid__container">
 
-        <p style='display:none' class='alert-box error' id='message'><span>error: </span>
-                PRUEBAAAAAAAAAAAAAA
-        </p>
-
-      <br>
+      <p style='display:none' class='alert-box error' id='message'><span>error: </span>
+      </p>
 
       <form id="frmValidate" method="get" action="/validate" class="form form--login">
           <p><input type="text" name="codeAdmin" id="codeAdminT" placeholder="Code verification" required></p>
