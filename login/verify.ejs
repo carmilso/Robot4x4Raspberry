@@ -28,6 +28,7 @@
       </form>
 
       <script type="text/javascript">
+        $(document).ready(function() {
           $("#frmValidate").submit(function(e) {
               e.preventDefault();
 
@@ -40,12 +41,13 @@
                   type: 'POST',
                   data: JSON.stringify(data),
                   contentType: 'application/json',
-                  url: 'http://localhost:3000/communication',
+                  url: 'communication',
                   success: function(data) {
                       alert('success: ' + data);
                   }
               });
           });
+      });
       </script>
 
     </div>
