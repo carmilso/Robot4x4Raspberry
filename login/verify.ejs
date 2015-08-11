@@ -14,14 +14,21 @@
         $("#frmValidate").submit(function(e) {
             e.preventDefault();
 
-            datos = $("#codeAdminT").val();
+            //datos = $("#codeAdminT").val();
+            datos = {'name': 'Carlos'}
 
-            alert('Working ajax...' + dataForm.code);
+            alert('Working ajax...' + datos);
 
-            $.post("/communication", {codeAd: datos}, function(data){
-                if(data==='okey')
-                  alert("Success: " + data);
-              });
+            $.ajax({
+              type: 'POST',
+              data: JSON.stringify(datos),
+              contentType: 'application/json',
+              url: '/communication',						
+              success: function(data) {
+                  console.log('success: ' + data);
+                  console.log(JSON.stringify(data));
+              }
+          });
         });
     });
     </script>
