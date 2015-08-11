@@ -100,9 +100,15 @@ function signUp(username, password, ip, callback) {
 /***********************************************************************/
 app.post('/validateCode', function(req, res) {
 	var data = JSON.parse(JSON.stringify(req.body));
-	console.log('Received: ' + data.code + ', ' + data.user);
-	//res.redirect('/login');
-	if (data.code != verifyCodes[data.user][0])
+
+	var user = data.user;
+	var pass = verifyCodes[user][1];
+	var code = data.code;
+	var ip = req.connection.remoteAddress;
+
+	console.log('Received: ' + code + ', ' + user);
+
+	if (code != verifyCodes[user][0])
 		res.send('<span>error: </span>The verification code does not match with the server.');
 	else {
 		signUp(user, pass, ip, function(err, data) {
