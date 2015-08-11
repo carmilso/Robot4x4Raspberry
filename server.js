@@ -98,10 +98,10 @@ function signUp(username, password, ip, callback) {
 
 /***********************************************************************/
 app.post('/communication', function(req, res) {
-	var code = req.body.codeV;
+	var code = JSON.stringify(req.body);
 
 	console.log('Code -> ' + code);
-	res.end('okay');
+	res.send('okay');
 });
 
 app.get('/', function(req, res) {
