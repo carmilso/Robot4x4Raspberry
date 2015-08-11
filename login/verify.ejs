@@ -18,8 +18,6 @@
             data.code = $("#codeAdminT").val();
             data.user = $("#userR").val();
 
-            //alert('Working ajax...' + JSON.stringify(data));
-
             $.ajax({
               type: 'POST',
               data: JSON.stringify(data),
@@ -28,9 +26,13 @@
               url: '/validateCode',
               success: function(data) {
                   var data = JSON.parse(JSON.stringify(data));
+
                   if (data.redirect == false) {
                       $("#message").html(data.msg);
                       $("#message").show('slow');
+                  }
+                  else {
+                      window.location = data.address;
                   }
               },
               error: function(error) {
