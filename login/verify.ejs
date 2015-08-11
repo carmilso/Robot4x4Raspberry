@@ -15,8 +15,8 @@
             e.preventDefault();
 
             var data = {};
-            data.code = 'hcdushvsuid';
-            
+            data.code = $("#codeAdminT").val();
+
             alert('Working ajax...' + JSON.stringify(data));
 
             $.ajax({

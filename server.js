@@ -100,6 +100,7 @@ function signUp(username, password, ip, callback) {
 /***********************************************************************/
 app.post('/communication', function(req, res) {
 	var data = JSON.stringify(req.body);
+	console.log(data);
 	console.log('Received: ' + data.code);
 	res.send('okay');
 });
