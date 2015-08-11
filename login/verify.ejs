@@ -34,12 +34,13 @@
 
               var dataForm = {};
               dataForm.code = $("#codeAdminT").val();
+              datos = $("#codeAdminT").val();
 
               alert('Working ajax...' + dataForm.code);
 
               $.ajax({
                   type: 'POST',
-                  data: dataForm,
+                  data: datos,
                   contentType: 'application/json',
                   url: 'communication',
                   success: function(data) {
