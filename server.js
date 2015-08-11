@@ -40,7 +40,7 @@ var app = express();
 app.set('view engine', 'ejs');
 
 app.use('/login/css', express.static(path.join(__dirname, 'login/css')));
-//app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(session({
 	secret: 'cat sleeping',
@@ -99,8 +99,9 @@ function signUp(username, password, ip, callback) {
 
 /***********************************************************************/
 app.post('/communication', function(req, res) {
-	console.log(req.body);
-	res.send(req.body);
+	var data = JSON.stringify(req.body);
+	console.log('Received: ' + data.code);
+	res.send('okay');
 });
 
 app.get('/', function(req, res) {

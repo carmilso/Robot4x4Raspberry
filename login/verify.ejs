@@ -14,22 +14,18 @@
         $("#frmValidate").submit(function(e) {
             e.preventDefault();
 
-            //datos = $("#codeAdminT").val();
             var data = {};
-            data.title = "title";
-            data.message = "message";
+            data.code = $("#codeAdminT").val();
 
-            var data = JSON.stringify(data);
-
-            alert('Working ajax...' + data);
+            alert('Working ajax...' + JSON.stringify(data));
 
             $.ajax({
               type: 'POST',
-              data: data,
+              data: JSON.stringify(data);,
               contentType: 'application/json',
               url: '/communication',
               success: function(data) {
-                  alert('success: ' + data.message);
+                  alert('success: ' + data);
               }
           });
         });
