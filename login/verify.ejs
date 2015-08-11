@@ -30,9 +30,11 @@
       <script type="text/javascript">
           $("#frmValidate").submit(function(e) {
               e.preventDefault();
-              alert('Working ajax...');
+
               var data = {};
               data.code = $("#codeAdminT").val();
+
+              alert('Working ajax...' + data.code);
 
               $.ajax({
                   type: 'POST',
