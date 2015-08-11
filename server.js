@@ -98,9 +98,9 @@ function signUp(username, password, ip, callback) {
 
 /***********************************************************************/
 app.post('/communication', function(req, res) {
-	var codeA = JSON.stringify(req.body.data);
-	console.log(req.body.datos);
-	console.log('Code -> ' + codeA);
+	var codeA = JSON.stringify(req.body);
+	console.log(req.body.data);
+	console.log('Code -> ' + JSON.stringify(req.body));
 	res.send('okay');
 });
 
