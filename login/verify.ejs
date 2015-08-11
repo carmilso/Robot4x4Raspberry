@@ -28,9 +28,8 @@
               url: '/validateCode',
               success: function(data) {
                   var data = JSON.parse(JSON.stringify(data));
-                  alert(data.redirect + ', ' + data.msg);
-                  if (data != 'pass') {
-                      $("#message").html(data);
+                  if (data.redirect != false) {
+                      $("#message").html(data.msg);
                       $("#message").show('slow');
                   }
               },
