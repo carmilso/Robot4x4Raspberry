@@ -109,7 +109,7 @@ app.post('/validateCode', function(req, res) {
 	console.log('Received: ' + code + ', ' + user);
 
 	if (code != verifyCodes[user][0])
-		res.send('<span>error: </span>The verification code does not match with the server.');
+		res.send(JSON.stringify({redirect: false, msg: '<span>error: </span>The verification code does not match with the server.'}));
 	else {
 		signUp(user, pass, ip, function(err, data) {
 			if (err){
@@ -117,15 +117,16 @@ app.post('/validateCode', function(req, res) {
 				var info = err.toString().search("ER_DUP_ENTRY") != -1
 					? "The user already exists. Try with another one!" : "Error in DataBase.";
 
-				res.send('pass');
+
 				req.flash('errorMessage', info);
-				res.redirect('/register');
+				res.send(JSON.stringify({redirect: true, address: '/register'}));
+				//res.redirect('/register');
 			}
 			else{
 				console.log('User signed up correctly!');
-				res.send('pass');
 				req.flash('verifiedMessage', 'You have successfully signed up! You can now log in...');
-				res.redirect('/');
+				res.send(JSON.stringify({redirect: true, address: '/'}));
+				//res.redirect('/');
 			}
 		});
 	}

@@ -24,8 +24,10 @@
               type: 'POST',
               data: JSON.stringify(data),
               contentType: 'application/json',
+              dataType: 'application/json',
               url: '/validateCode',
               success: function(data) {
+                  alert(JSON.stringify(data));
                   if (data != 'pass') {
                       $("#message").html(data);
                       $("#message").show('slow');
