@@ -15,18 +15,19 @@
             e.preventDefault();
 
             //datos = $("#codeAdminT").val();
-            datos = {'name': 'Carlos'}
+            var data = {};
+            data.title = "title";
+            data.message = "message";
 
-            alert('Working ajax...' + JSON.stringify(datos));
+            //alert('Working ajax...' + JSON.stringify(data));
 
             $.ajax({
               type: 'POST',
-              data: JSON.stringify(datos),
+              data: JSON.stringify(data),
               contentType: 'application/json',
               url: '/communication',
               success: function(data) {
-                  console.log('success: ' + data);
-                  console.log(JSON.stringify(data));
+                  alert('success: ' + data);
               }
           });
         });
