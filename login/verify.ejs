@@ -17,13 +17,13 @@
             //datos = $("#codeAdminT").val();
             datos = {'name': 'Carlos'}
 
-            alert('Working ajax...' + datos);
+            alert('Working ajax...' + JSON.stringify(datos));
 
             $.ajax({
               type: 'POST',
               data: JSON.stringify(datos),
               contentType: 'application/json',
-              url: '/communication',						
+              url: '/communication',
               success: function(data) {
                   console.log('success: ' + data);
                   console.log(JSON.stringify(data));
