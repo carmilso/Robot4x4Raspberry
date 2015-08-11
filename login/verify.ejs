@@ -12,7 +12,8 @@
         <script>
             $(document).ready(function() {
                 var codeA;
-                $("#codeAdminS").click(function() {
+                $("#codeAdminS").click(function(e) {
+                    e.preventDefault();
                     codeA = $("#codeAdminT").val();
                     $.post("communication", {codeV: codeA}, function(data) {
                         if (data == 'okay')
