@@ -10,7 +10,7 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
         <script type="javascript">
-            $("#frmValidate").submit(function(e) {
+            $("#codeAdminS").click(function(e) {
                 e.preventDefault();
                 alert('Working ajax...');
                 var data = {};
@@ -38,9 +38,9 @@
 
     <div class="grid__container">
 
-      <form id="frmValidate" method="get" action="/validate" class="form form--login">
+      <form method="get" action="/validate" class="form form--login">
           <p><input type="text" name="codeAdmin" id="codeAdminT" placeholder="Code verification" required></p>
-          <p><input type="submit" value="Verify!" id="codeAdminS"></p>
+          <p><input type="button" value="Verify!" id="codeAdminS"></p>
           <input type="hidden" value="<%= userR %>" name="userR"/>
       </form>
 
