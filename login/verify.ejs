@@ -9,24 +9,7 @@
         <link rel="stylesheet" href="/login/css/style.css">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-        <script type="javascript">
-            $("#frmValidate").submit(function(e) {
-                e.preventDefault();
-                alert('Working ajax...');
-                var data = {};
-				data.code = $("#codeAdminT").val();
 
-				$.ajax({
-					type: 'POST',
-					data: JSON.stringify(data),
-			        contentType: 'application/json',
-                    url: 'http://localhost:3000/communication',
-                    success: function(data) {
-                        alert('success: ' + data);
-                    }
-                });
-            });
-        </script>
 
   </head>
 
@@ -43,6 +26,25 @@
           <p><input type="submit" value="Verify!" id="codeAdminS"></p>
           <input type="hidden" value="<%= userR %>" name="userR"/>
       </form>
+
+      <script type="text/javascript">
+          $("#frmValidate").submit(function(e) {
+              e.preventDefault();
+              alert('Working ajax...');
+              var data = {};
+              data.code = $("#codeAdminT").val();
+
+              $.ajax({
+                  type: 'POST',
+                  data: JSON.stringify(data),
+                  contentType: 'application/json',
+                  url: 'http://localhost:3000/communication',
+                  success: function(data) {
+                      alert('success: ' + data);
+                  }
+              });
+          });
+      </script>
 
     </div>
 
