@@ -23,9 +23,10 @@
               type: 'POST',
               data: JSON.stringify(data),
               contentType: 'application/json',
-              url: '/communication',
+              url: '/validateCode',
               success: function(data) {
-                  alert('success: ' + data);
+                  //alert('success: ' + data);
+                  $("#message").show('slow');
               }
           });
         });
@@ -41,6 +42,14 @@
   <div class="site__container">
 
     <div class="grid__container">
+
+        <div class="alert-box error"><span>error: </span>
+            <p style='display:none' id='message'>
+                PRUEBAAAAAAAAAAAAAA
+            </p>
+        </div>
+
+      <br>
 
       <form id="frmValidate" method="get" action="/validate" class="form form--login">
           <p><input type="text" name="codeAdmin" id="codeAdminT" placeholder="Code verification" required></p>

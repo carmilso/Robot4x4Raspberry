@@ -98,9 +98,8 @@ function signUp(username, password, ip, callback) {
 
 
 /***********************************************************************/
-app.post('/communication', function(req, res) {
+app.post('/validateCode', function(req, res) {
 	var data = JSON.parse(JSON.stringify(req.body));
-	console.log(data);
 	console.log('Received: ' + data.code);
 	res.send('okay');
 });
