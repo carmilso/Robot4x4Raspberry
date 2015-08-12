@@ -2,7 +2,7 @@ module.exports = function(app, path, flash) {
 
 app.get('/', function(req, res) {
 	console.log(__dirname+'/views/login');
-	res.render(path.join('..'+__dirname+'/views/login'), {
+	res.render(path.join(__dirname+'/../views/login'), {
 		errorMessage: req.flash('loginMessage'),
 		verifiedMessage: req.flash('verifiedMessage')
 	});
