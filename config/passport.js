@@ -1,4 +1,3 @@
-var fns             = require('./config/functions');
 var path            = require('path');
 var flash           = require('connect-flash');
 var express	        = require('express');
