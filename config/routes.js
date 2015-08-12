@@ -44,8 +44,7 @@ module.exports = function(app, verifyCodes, users) {
 	});
 
 	app.post('/validateCode', function(req, res) {
-		//var data = JSON.parse(JSON.stringify(req.body));
-		var data = JSON.parse(req.body);
+		var data = JSON.parse(JSON.stringify(req.body));
 
 		var user = data.user;
 		var pass = verifyCodes[user][1];

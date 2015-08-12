@@ -17,6 +17,7 @@ module.exports = function(app) {
     	passReqToCallback: true
     },
     function(req, username, password, done) {
+        // fns.checkUser
     	fns.findUser(username, password, function(err, user) {
     		if (err) return done(err);
     		if (!user) return done(null, false, req.flash('loginMessage', 'Incorrect username or password'));
