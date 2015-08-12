@@ -1,5 +1,5 @@
+var fns             = require('./functions');
 var path            = require('path');
-//var flash           = require('connect-flash');
 var passport        = require('passport');
 var LocalStrategy   = require('passport-local').Strategy;
 
@@ -53,7 +53,7 @@ module.exports = function(app, verifyCodes) {
 		if (code != verifyCodes[user][0])
 			res.send(JSON.stringify({redirect: false, msg: '<span>error: </span>The verification code does not match with the server.'}));
 		else {
-			signUp(user, pass, ip, function(err, data) {
+			fns.signUp(user, pass, ip, function(err, data) {
 				if (err){
 					console.log('[ERROR] Error on database: ' + err + '\n');
 					var info = err.toString().search("ER_DUP_ENTRY") != -1

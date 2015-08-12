@@ -1,3 +1,4 @@
+var fns             = require('./config/functions');
 var path            = require('path');
 var flash           = require('connect-flash');
 var mysql           = require('mysql');
@@ -18,7 +19,7 @@ passport.use(new LocalStrategy ({
 	passReqToCallback: true
 },
 function(req, username, password, done) {
-	findUser(username, password, function(err, user) {
+	fns.findUser(username, password, function(err, user) {
 		if (err) return done(err);
 		if (!user) return done(null, false, req.flash('loginMessage', 'Incorrect username or password'));
 		if (user){
@@ -64,39 +65,6 @@ var db = mysql.createConnection({
 	database: dataBaseInfo.database
 });
 
-function loadUsers(callback){
-
-}
-
-function findUser(username, password, callback) {
-	db.query(
-		'SELECT * FROM users WHERE Username LIKE ? AND Password LIKE ?',
-		[username, password],
-		function(err, result) {
-			if (err) callback(err, null);
-			else if (result.length == 0) callback(null, 0);
-			else{
-				res = JSON.parse(JSON.stringify(result[0]));
-				callback(null, res.Username);
-			}
-		}
-	)
-}
-
-function checkUser(username, callback) {
-
-}
-
-function signUp(username, password, ip, callback) {
-	db.query(
-        'INSERT INTO users (Username, Password, IP) VALUES (?, ?, ?)',
-        [username, password, ip],
-        function(err, result) {
-			if (err) callback(err, null);
-			else callback(null, result);
-        }
-    );
-}
 
 
 /***********************************************************************/
