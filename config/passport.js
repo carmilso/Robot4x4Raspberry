@@ -1,3 +1,4 @@
+var fns             = require('./functions');
 var path            = require('path');
 var flash           = require('connect-flash');
 var express	        = require('express');
