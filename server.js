@@ -60,7 +60,7 @@ var verifyCodes = {};
 
 
 /***********************************************************************/
-require('./config/passport');
+require('./config/passport')(app);
 require('./config/routes')(app, verifyCodes);
 
 
