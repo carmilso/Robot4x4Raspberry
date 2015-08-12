@@ -40,7 +40,7 @@ var app = express();
 
 app.set('view engine', 'ejs');
 
-//app.use('style', express.static(path.join(__dirname, 'views/css')));
+//app.use('/views', express.static(path.join(__dirname, 'views/css')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(session({
