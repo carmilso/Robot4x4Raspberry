@@ -36,7 +36,7 @@ passport.deserializeUser(function(user, done) {
 
 app.set('view engine', 'ejs');
 
-app.use('/styles', express.static(path.join(__dirname, '/views/css')));
+app.use('/styles', express.static(path.join(__dirname, '/../views/css')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(session({
