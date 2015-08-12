@@ -31,7 +31,8 @@ exports.loadUsers = function(callback) {
 		'SELECT Username FROM users',
 		function(err, result) {
 			if (err) {
-				console.log('[ERROR] Not possible to connect to the DataBase.\n');
+				console.log('[ERROR] Not possible to connect to the DataBase:');
+				console.log(err + '\n');
 				process.kill(process.pid, 'SIGINT');
 			}
 			else console.log(result);
