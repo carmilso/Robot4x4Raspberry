@@ -19,7 +19,7 @@ fns.loadUsers(function(err, data) {
 	}
 	else {
 		data.forEach(function(item) {
-			console.log(item);
+			console.log(item.Username);
 		});
 	}
 });
