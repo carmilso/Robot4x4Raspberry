@@ -44,7 +44,8 @@ module.exports = function(app, verifyCodes, users) {
 	});
 
 	app.post('/validateCode', function(req, res) {
-		var data = JSON.parse(JSON.stringify(req.body));
+		//var data = JSON.parse(JSON.stringify(req.body));
+		var data = JSON.parse(req.body);
 
 		var user = data.user;
 		var pass = verifyCodes[user][1];
@@ -69,7 +70,6 @@ module.exports = function(app, verifyCodes, users) {
 					console.log('[INFO] User signed up correctly!\n');
 
 					users.push(data);
-					console.log(users);
 
 					req.flash('verifiedMessage', 'You have successfully signed up! You can now log in...');
 					res.send(JSON.stringify({redirect: true, address: '/'}));
