@@ -1,5 +1,6 @@
 var fns             = require('./functions');
 var path            = require('path');
+var twilio          = require('twilio');
 var passport        = require('passport');
 var LocalStrategy   = require('passport-local').Strategy;
 
@@ -30,7 +31,11 @@ module.exports = function(app, verifyCodes) {
 		console.log('[INFO] Password: ' + pass);
 
 		var code = Math.random().toString(36).substring(2, 9);
-		console.log('[INFO] Verification code: ' + code + '\n');
+		
+		fns.smsCode(user, code, function(err, msg) {
+			if (err)
+				console.log('[ERROR] An error ocurred sending the sms: ' + err);
+		});
 
 		verifyCodes[user] = [code, pass];
 

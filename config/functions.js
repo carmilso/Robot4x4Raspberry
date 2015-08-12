@@ -1,4 +1,5 @@
 var mysql           = require('mysql');
+var twilioCodes     = require('../private/twilioCodes')
 var dataBaseInfo    = require('../private/database');
 
 
@@ -9,6 +10,18 @@ var db = mysql.createConnection({
 	database: dataBaseInfo.database
 });
 
+var clientTwilio = new twilio.RestClient(twilioCodes.account_sid, twilioCodes.auth_token);
+
+
+exports.smsCode = function(username, code, callback) {
+	clientTwilio.sms.messages.create({
+		to: twilioCodes.to,
+		from: twilioCodes.from,
+		body: 'Verification code for <' +username + '>: ' + code
+	}, function(err, msg) {
+		callback(err, msg);
+	});
+}
 
 exports.loadUsers = function(callback) {
 
