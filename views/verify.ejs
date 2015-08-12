@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html >
+
+  <head>
+
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#frmValidate").submit(function(e) {
+            e.preventDefault();
+
+            var data = {};
+            data.code = $("#codeAdminT").val();
+            data.user = $("#userR").val();
+
+            $.ajax({
+              type: 'POST',
+              data: JSON.stringify(data),
+              contentType: 'application/json',
+              dataType: 'json',
+              url: '/validateCode',
+              success: function(data) {
+                  var data = JSON.parse(JSON.stringify(data));
+
+                  if (!data.redirect) {
+                      $("#message").html(data.msg);
+                      $("#message").show('slow');
+                  }
+                  else {
+                      window.location = data.address;
+                  }
+              },
+              error: function() {
+                  alert('Error in the server. Contact with the admin.');
+              }
+          });
+        });
+    });
+    </script>
+
+  </head>
+
+  <body>
+
+    <body class="align">
+
+  <div class="site__container">
+
+    <div class="grid__container">
+
+      <p style='display:none' class='alert-box error' id='message'>
+      </p>
+
+      <form id="frmValidate" method="get" action="#" class="form form--login">
+          <p><input type="text" name="codeAdmin" id="codeAdminT" placeholder="Code verification" required></p>
+          <p><input type="submit" value="Verify!" id="codeAdminS"></p>
+          <input type="hidden" value="<%= userR %>" name="userR" id="userR"/>
+      </form>
+
+    </div>
+
+  </div>
+
+</body>
+
+  </body>
+</html>

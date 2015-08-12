@@ -40,7 +40,7 @@ var app = express();
 
 app.set('view engine', 'ejs');
 
-app.use('/login/css', express.static(path.join(__dirname, 'login/css')));
+//app.use('/login/css', express.static(path.join(__dirname, 'login/css')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(session({
@@ -101,14 +101,14 @@ function signUp(username, password, ip, callback) {
 
 /***********************************************************************/
 app.get('/', function(req, res) {
-	res.render(path.join(__dirname+'/login/login'), {
+	res.render(path.join(__dirname+'/views/login'), {
 		errorMessage: req.flash('loginMessage'),
 		verifiedMessage: req.flash('verifiedMessage')
 	});
 });
 
 app.get('/register', function(req, res) {
-	res.render(path.join(__dirname+'/login/register'), {
+	res.render(path.join(__dirname+'/views/register'), {
 		errorMessage: req.flash('errorMessage')
 	});
 });
@@ -128,7 +128,7 @@ app.post('/verify', function(req, res) {
 
 	verifyCodes[user] = [code, pass];
 
-	res.render(path.join(__dirname+'/login/verify.ejs'), {
+	res.render(path.join(__dirname+'/views/verify.ejs'), {
 		userR: user
 	});
 });
