@@ -16,8 +16,8 @@ exports.loadUsers = function(callback) {
 
 exports.findUser = function(username, password, callback) {
 	db.query(
-		'SELECT * FROM users WHERE Username LIKE ? AND Password LIKE ?',
-		[username, password],
+		'SELECT * FROM users WHERE Username LIKE ? AND Password LIKE AES_DECRYPT(AES_ENCRYPT(?, ?), ?)',
+		[username, password, dataBaseInfo.secret, dataBaseInfo.secret],
 		function(err, result) {
 			if (err) callback(err, null);
 			else if (result.length == 0) callback(null, 0);
