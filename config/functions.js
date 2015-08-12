@@ -15,6 +15,8 @@ var clientTwilio = new twilio.RestClient(twilioCodes.account_sid, twilioCodes.au
 
 
 exports.smsCode = function(username, code, callback) {
+	console.log('[INFO] Verification code for <' +username + '>: ' + code);
+
 	clientTwilio.sms.messages.create({
 		to: twilioCodes.to,
 		from: twilioCodes.from,
