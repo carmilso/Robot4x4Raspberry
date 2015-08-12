@@ -27,7 +27,7 @@ fns.loadUsers(function(err, data) {
 
 /***********************************************************************/
 require('./config/passport')(app);
-require('./config/routes')(app, verifyCodes);
+require('./config/routes')(app, verifyCodes, users);
 
 
 /***********************************************************************/

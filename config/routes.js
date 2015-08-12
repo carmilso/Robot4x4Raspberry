@@ -4,7 +4,7 @@ var passport        = require('passport');
 var LocalStrategy   = require('passport-local').Strategy;
 
 
-module.exports = function(app, verifyCodes) {
+module.exports = function(app, verifyCodes, users) {
 
 	app.get('/', function(req, res) {
 		res.render(path.join(__dirname+'/../views/login'), {
@@ -67,6 +67,10 @@ module.exports = function(app, verifyCodes) {
 				}
 				else{
 					console.log('[INFO] User signed up correctly!\n');
+
+					users.push(data);
+					console.log(users);
+
 					req.flash('verifiedMessage', 'You have successfully signed up! You can now log in...');
 					res.send(JSON.stringify({redirect: true, address: '/'}));
 				}

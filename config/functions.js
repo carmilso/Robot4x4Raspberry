@@ -35,7 +35,7 @@ exports.loadUsers = function(callback) {
 	);
 }
 
-exports.findUser = function(username, password, callback) {
+/*exports.findUser = function(username, password, callback) {
 	db.query(
 		'SELECT * FROM users WHERE Username LIKE ? AND Password LIKE AES_ENCRYPT(?, ?)',
 		[username, password, dataBaseInfo.secret],
@@ -48,6 +48,13 @@ exports.findUser = function(username, password, callback) {
 			}
 		}
 	);
+}*/
+
+exports.findUser = function(username, users, callback) {
+	if (users.indexOf(username) != -1)
+		callback(true);
+	else
+		callback(false);
 }
 
 exports.checkUser = function(username, callback) {
@@ -58,9 +65,11 @@ exports.signUp = function(username, password, ip, callback) {
 	db.query(
         'INSERT INTO users (Username, Password, IP) VALUES (?, AES_ENCRYPT(?, ?), ?)',
         [username, password, dataBaseInfo.secret, ip],
-        function(err, result) {
-			if (err) callback(err, null);
-			else callback(null, result);
+        function(err) {
+			if (err)
+				callback(err, null);
+			else
+				callback(null, username);
         }
     );
 }
