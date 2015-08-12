@@ -37,6 +37,7 @@ passport.deserializeUser(function(user, done) {
 });
 
 var app = express();
+module.exports = app;
 
 app.set('view engine', 'ejs');
 
