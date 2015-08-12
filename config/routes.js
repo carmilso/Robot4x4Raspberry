@@ -77,9 +77,9 @@ module.exports = function(app, verifyCodes) {
 
 	app.post('/login',
 		passport.authenticate('local', { successRedirect: '/',
-										 failureRedirect: '/',
-										 failureFlash: true,
-										 successFlash: true
+                                         failureRedirect: '/',
+                                         failureFlash: true,
+                                         successFlash: true
 		})
 	);
 
