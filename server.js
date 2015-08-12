@@ -1,3 +1,7 @@
+console.log('[INFO] Initializing Server...');
+
+
+/***********************************************************************/
 var fns             = require('./config/functions');
 var path            = require('path');
 var flash           = require('connect-flash');
@@ -7,8 +11,6 @@ var passport        = require('passport');
 var bodyParser      = require('body-parser');
 var LocalStrategy   = require('passport-local').Strategy;
 
-
-console.log('[INFO] Initializing Server...');
 
 /***********************************************************************/
 passport.use(new LocalStrategy ({
@@ -68,7 +70,7 @@ var server = app.listen(3000, function() {
 
 process.on('SIGINT', function() {
 	server.close();
-	db.end();
+	fns.endDB();
 	console.log('[INFO] Server disconnected.');
 	process.exit(0);
 });

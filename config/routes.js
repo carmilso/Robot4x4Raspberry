@@ -7,7 +7,6 @@ var LocalStrategy   = require('passport-local').Strategy;
 module.exports = function(app, verifyCodes) {
 
 	app.get('/', function(req, res) {
-		console.log(__dirname+'/views/login');
 		res.render(path.join(__dirname+'/../views/login'), {
 			errorMessage: req.flash('loginMessage'),
 			verifiedMessage: req.flash('verifiedMessage')

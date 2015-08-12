@@ -26,7 +26,7 @@ exports.findUser = function(username, password, callback) {
 				callback(null, res.Username);
 			}
 		}
-	)
+	);
 }
 
 exports.checkUser = function(username, callback) {
@@ -42,4 +42,8 @@ exports.signUp = function(username, password, ip, callback) {
 			else callback(null, result);
         }
     );
+}
+
+exports.endDB = function() {
+	db.end();
 }
