@@ -65,12 +65,4 @@ app.post('/validateCode', function(req, res) {
 
 });
 
-app.post('/login',
-	passport.authenticate('local', { successRedirect: '/',
-									 failureRedirect: '/',
-									 failureFlash: true,
-									 successFlash: true
-	})
-);
-
 }

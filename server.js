@@ -102,6 +102,14 @@ function signUp(username, password, ip, callback) {
 /***********************************************************************/
 require('./config/routes')(app);
 
+app.post('/login',
+	passport.authenticate('local', { successRedirect: '/',
+									 failureRedirect: '/',
+									 failureFlash: true,
+									 successFlash: true
+	})
+);
+
 
 /***********************************************************************/
 var server = app.listen(3000, function() {
