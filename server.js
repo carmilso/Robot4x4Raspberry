@@ -4,10 +4,6 @@ console.log('[INFO] Initializing Server...');
 /***********************************************************************/
 var fns             = require('./config/functions');
 var express	        = require('express');
-//var session         = require('express-session');
-//var passport        = require('passport');
-//var bodyParser      = require('body-parser');
-//var LocalStrategy   = require('passport-local').Strategy;
 
 
 /***********************************************************************/
