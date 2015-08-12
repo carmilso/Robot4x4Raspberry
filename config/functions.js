@@ -35,7 +35,7 @@ exports.loadUsers = function(callback) {
 				console.log(err + '\n');
 				process.kill(process.pid, 'SIGINT');
 			}
-			else console.log(result);
+			else console.log(result[0]);
 		}
 	);
 }
