@@ -1,3 +1,13 @@
+var dataBaseInfo    = require('../private/database');
+
+var db = mysql.createConnection({
+	host: dataBaseInfo.host,
+	user: dataBaseInfo.user,
+	password: dataBaseInfo.password,
+	database: dataBaseInfo.database
+});
+
+
 exports.loadUsers = function(callback) {
 
 }

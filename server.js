@@ -6,7 +6,6 @@ var express	        = require('express');
 var session         = require('express-session');
 var passport        = require('passport');
 var bodyParser      = require('body-parser');
-var dataBaseInfo    = require('./private/database');
 var LocalStrategy   = require('passport-local').Strategy;
 
 
@@ -57,14 +56,6 @@ app.use(flash());
 
 /***********************************************************************/
 var verifyCodes = {};
-
-var db = mysql.createConnection({
-	host: dataBaseInfo.host,
-	user: dataBaseInfo.user,
-	password: dataBaseInfo.password,
-	database: dataBaseInfo.database
-});
-
 
 
 /***********************************************************************/
