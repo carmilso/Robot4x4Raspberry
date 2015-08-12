@@ -35,8 +35,8 @@ exports.checkUser = function(username, callback) {
 
 exports.signUp = function(username, password, ip, callback) {
 	db.query(
-        'INSERT INTO users (Username, Password, IP) VALUES (?, ?, ?)',
-        [username, password, ip],
+        'INSERT INTO users (Username, Password, IP) VALUES (?, AES_ENCRYPT(?, ?), ?)',
+        [username, password, dataBaseInfo.secret, ip],
         function(err, result) {
 			if (err) callback(err, null);
 			else callback(null, result);
