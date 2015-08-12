@@ -1,4 +1,6 @@
+var mysql           = require('mysql');
 var dataBaseInfo    = require('../private/database');
+
 
 var db = mysql.createConnection({
 	host: dataBaseInfo.host,

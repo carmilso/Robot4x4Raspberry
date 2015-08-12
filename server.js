@@ -1,7 +1,6 @@
 var fns             = require('./config/functions');
 var path            = require('path');
 var flash           = require('connect-flash');
-var mysql           = require('mysql');
 var express	        = require('express');
 var session         = require('express-session');
 var passport        = require('passport');
