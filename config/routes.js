@@ -1,4 +1,4 @@
-module.exports = function(app, path, flash) {
+module.exports = function(app, path, flash, verifyCodes) {
 
 app.get('/', function(req, res) {
 	console.log(__dirname+'/views/login');

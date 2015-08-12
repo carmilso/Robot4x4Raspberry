@@ -100,7 +100,7 @@ function signUp(username, password, ip, callback) {
 
 
 /***********************************************************************/
-require('./config/routes')(app, path, flash);
+require('./config/routes')(app, path, flash, verifyCodes);
 
 app.post('/login',
 	passport.authenticate('local', { successRedirect: '/',
