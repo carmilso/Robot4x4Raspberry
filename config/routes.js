@@ -9,7 +9,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/register', function(req, res) {
-	res.render(path.join(__dirname+'/views/register'), {
+	res.render(path.join(__dirname+'/../views/register'), {
 		errorMessage: req.flash('errorMessage')
 	});
 });
@@ -29,7 +29,7 @@ app.post('/verify', function(req, res) {
 
 	verifyCodes[user] = [code, pass];
 
-	res.render(path.join(__dirname+'/views/verify.ejs'), {
+	res.render(path.join(__dirname+'/../views/verify.ejs'), {
 		userR: user
 	});
 });
