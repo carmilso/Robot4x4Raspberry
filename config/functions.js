@@ -27,7 +27,16 @@ exports.smsCode = function(username, code, callback) {
 }
 
 exports.loadUsers = function(callback) {
-
+	db.query(
+		'SELECT Username FROM users',
+		function(err, result) {
+			if (err) {
+				console.log('[ERROR] Not possible to connect to the DataBase.\n');
+				process.kill(process.pid, 'SIGINT');
+			}
+			else console.log(result);
+		}
+	);
 }
 
 exports.findUser = function(username, password, callback) {
