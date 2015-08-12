@@ -1,5 +1,5 @@
 var path            = require('path');
-//var flash           = require('connect-flash');
+var flash           = require('connect-flash');
 var mysql           = require('mysql');
 var express	        = require('express');
 var session         = require('express-session');
