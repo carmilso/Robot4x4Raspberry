@@ -1,4 +1,4 @@
-module.exports = function(app) {
+module.exports = function(app, path, flash) {
 
 app.get('/', function(req, res) {
 	res.render(path.join(__dirname+'/views/login'), {

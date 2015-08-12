@@ -37,7 +37,6 @@ passport.deserializeUser(function(user, done) {
 });
 
 var app = express();
-module.exports = app;
 
 app.set('view engine', 'ejs');
 
@@ -101,7 +100,7 @@ function signUp(username, password, ip, callback) {
 
 
 /***********************************************************************/
-require('./config/routes')(app);
+require('./config/routes')(app, path, flash);
 
 app.post('/login',
 	passport.authenticate('local', { successRedirect: '/',
