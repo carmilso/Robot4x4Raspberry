@@ -9,7 +9,20 @@ var express	        = require('express');
 /***********************************************************************/
 var app = express();
 var verifyCodes = {};
-fns.loadUsers();
+var users = [];
+
+fns.loadUsers(function(err, data) {
+	if (err) {
+		console.log('[ERROR] Not possible to connect to the DataBase:');
+		console.log(err + '\n');
+		process.kill(process.pid, 'SIGINT');
+	}
+	else {
+		data.forEach(function(item) {
+			console.log(item);
+		});
+	}
+});
 
 
 /***********************************************************************/
