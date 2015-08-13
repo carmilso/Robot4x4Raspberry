@@ -13,7 +13,7 @@
         <script>
           $(document).ready(function() {
             $("#formRegister").submit(function(e) {
-                e.preventDefault();
+                //e.preventDefault();
 
                 var data = {};
                 data.username = $('#register__username').val();
@@ -28,6 +28,7 @@
                       var data = JSON.parse(JSON.stringify(data));
 
                       if (!data.accepted) {
+                          e.preventDefault();
                           $("#message").html(data.msg);
                           $("#message").show('slow');
                       }
