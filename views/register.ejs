@@ -32,8 +32,7 @@
                           $("#message").show('slow');
                       }
                       else {
-                          alert('Submit!');
-                          $("#formRegister").submit();
+                          window.location = $("#formRegister").attr('action');
                       }
                   },
                   error: function() {
