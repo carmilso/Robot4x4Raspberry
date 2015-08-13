@@ -35,7 +35,7 @@ module.exports = function(app, users) {
 
     app.set('view engine', 'ejs');
 
-    app.use('/styles', express.static(path.join(__dirname, '/../views/css')));
+    app.use('/public', express.static(path.join(__dirname, '/../public/')));
 
     app.use(bodyParser.urlencoded({ extended: false }));
 
