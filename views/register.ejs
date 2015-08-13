@@ -28,10 +28,9 @@
                       var data = JSON.parse(JSON.stringify(data));
 
                       if (!data.accepted) {
-                          e.preventDefault();
                           $("#message").html(data.msg);
                           $("#message").show('slow');
-                          return false;
+                          e.preventDefault();
                       }
                       else {
                           return true;
