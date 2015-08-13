@@ -18,7 +18,7 @@
                 var data = {};
                 data.username = $('#register__username').val();
 
-                var validate = true;
+                var validate;
 
                 $.ajax({
                   type: 'POST',
@@ -37,6 +37,7 @@
                           //e.preventDefault();
                       }
                       else {
+                          validate = true;
                           //this.submit();
                       }
                   },
