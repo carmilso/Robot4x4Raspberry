@@ -4,11 +4,7 @@
 
 import dataBaseConfig as dbc
 import driversL298N as drivers
-
-IP = '192.168.1.9'
-USER = 'robot'
-PASSWORD = '487092'
-DB = 'robotDB'
+from config import dataBaseConfig as dbc
 
 
 def main():
@@ -16,7 +12,7 @@ def main():
 
     robot = drivers.Robot(17, 27, 10, 9, 1)
 
-    robot.initDB(IP, USER, base64.b64encode(PASSWORD), DB)
+    robot.initDB(dbc.IP, dbc.USER, base64.b64encode(dbc.PASSWORD), dbc.DB)
 
     robot.fordwardRobot(7)
     robot.rightRobot(5)
