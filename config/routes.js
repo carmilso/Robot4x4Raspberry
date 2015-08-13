@@ -45,6 +45,11 @@ module.exports = function(app, verifyCodes, users) {
 		});
 	});
 
+	app.post('/validateUsername', function(req, res) {
+		var data = req.body;
+		console.log(data);
+	});
+
 	app.post('/validateCode', function(req, res) {
 		var data = JSON.parse(JSON.stringify(req.body));
 
