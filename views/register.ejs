@@ -32,26 +32,15 @@
                       if (!data.accepted) {
                           $("#message").html(data.msg);
                           $("#message").show('slow');
-
-                          validate = false;
-                          //e.preventDefault();
                       }
                       else {
-                          validate = true;
-                          //this.submit();
+                          $(this).unbing('submit').submit();
                       }
                   },
                   error: function() {
                       alert('Error in the server. Contact with the admin.');
                   },
-                  async: true
               });
-
-              alert(validate);
-
-              if (!validate)
-                e.preventDefault();
-
             });
         });
         </script>
