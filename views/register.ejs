@@ -13,7 +13,7 @@
         <script>
           $(document).ready(function() {
             $("#formRegister").submit(function(e) {
-                //e.preventDefault();
+                e.preventDefault();
 
                 var data = {};
                 data.username = $('#register__username').val();
@@ -34,7 +34,7 @@
                           $("#message").show('slow');
                       }
                       else {
-                          $(this).unbing('submit').submit();
+                          $(this).unbind('submit').submit();
                       }
                   },
                   error: function() {
