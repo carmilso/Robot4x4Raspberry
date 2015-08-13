@@ -38,21 +38,6 @@ exports.loadUsers = function(callback) {
 	);
 }
 
-/*exports.findUser = function(username, password, callback) {
-	db.query(
-		'SELECT * FROM users WHERE Username LIKE ? AND Password LIKE AES_ENCRYPT(?, ?)',
-		[username, password, dataBaseInfo.secret],
-		function(err, result) {
-			if (err) callback(err, null);
-			else if (result.length == 0) callback(null, 0);
-			else{
-				res = JSON.parse(JSON.stringify(result[0]));
-				callback(null, res.Username);
-			}
-		}
-	);
-}*/
-
 /* Searchs an specific user in main memory (variable users) */
 exports.findUser = function(username, users, callback) {
 	var res = false;

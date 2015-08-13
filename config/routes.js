@@ -21,12 +21,10 @@ module.exports = function(app, verifyCodes, users) {
 		});
 	});
 
+	/* Generates a random verification code and redirects the user to the verification page */
 	app.post('/verify', function(req, res) {
 		user = req.body.userR;
 		pass = req.body.passwordR;
-
-		// Check if user exists in database
-
 
 		console.log('[INFO] User: ' + user);
 		console.log('[INFO] Password: ' + pass);
@@ -45,6 +43,7 @@ module.exports = function(app, verifyCodes, users) {
 		});
 	});
 
+	/* Check if the username tried to sign up exists in the DataBase */
 	app.post('/validateUsername', function(req, res) {
 		var data = JSON.parse(JSON.stringify(req.body));
 
@@ -58,6 +57,7 @@ module.exports = function(app, verifyCodes, users) {
 		});
 	});
 
+	/* If the verification code matches with the server, the user is signed up */
 	app.post('/validateCode', function(req, res) {
 		var data = JSON.parse(JSON.stringify(req.body));
 
@@ -93,6 +93,7 @@ module.exports = function(app, verifyCodes, users) {
 
 	});
 
+	/* Loggin configuration */
 	app.post('/login',
         passport.authenticate('local', { successRedirect: '/',
                                          failureRedirect: '/',
