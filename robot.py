@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-import base64
+import dataBaseConfig as dbc
 import driversL298N as drivers
 
 IP = '192.168.1.9'
