@@ -80,9 +80,9 @@ module.exports = function(app, verifyCodes, users) {
 
 	app.post('/login',
 		passport.authenticate('local', { successRedirect: '/',
-                                         failureRedirect: '/',
-                                         failureFlash: true,
-                                         successFlash: true
+                                                 failureRedirect: '/',
+                                                 failureFlash: true,
+                                                 successFlash: true
 		})
 	);
 

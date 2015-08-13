@@ -52,13 +52,14 @@ exports.loadUsers = function(callback) {
 }*/
 
 exports.findUser = function(username, users, callback) {
+	var res = false;
 	users.forEach(function(item) {
 		if (item.Username == username){
-			return callback(item);
+			res = item;
 		}
 	});
 
-	callback(false);
+	callback(res);
 }
 
 exports.signUp = function(username, password, ip, callback) {
@@ -67,9 +68,9 @@ exports.signUp = function(username, password, ip, callback) {
         [username, password, dataBaseInfo.secret, ip],
         function(err) {
 			if (err)
-				return callback(err, null);
+				callback(err, null);
 			else
-				return callback(null, username);
+				callback(null, {Username: username, Password: password});
         }
     );
 }
