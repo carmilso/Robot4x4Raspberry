@@ -1,7 +1,7 @@
 var fns             = require('./functions');
 var path            = require('path');
 var flash           = require('connect-flash');
-var express	    = require('express');
+var express	        = require('express');
 var session         = require('express-session');
 var passport        = require('passport');
 var bodyParser      = require('body-parser');
@@ -20,7 +20,7 @@ module.exports = function(app, users) {
     	fns.findUser(username, users, function(user) {
     		if (!user) return done(null, false, req.flash('loginMessage', 'This Username does not exist'));
     		if (user.Password != password) return done(null, false, req.flash('loginMessage', 'The password is not correct'));
-		return done(null, user.Username);
+		    return done(null, user.Username);
     	});
     }
     ));

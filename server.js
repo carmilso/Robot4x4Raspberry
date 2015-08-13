@@ -2,8 +2,8 @@ console.log('[INFO] Initializing Server...');
 
 
 /***********************************************************************/
-var fns                 = require('./config/functions');
-var express	        = require('express');
+var fns         = require('./config/functions');
+var express     = require('express');
 
 
 /***********************************************************************/

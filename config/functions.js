@@ -14,6 +14,7 @@ var db = mysql.createConnection({
 var clientTwilio = new twilio.RestClient(twilioCodes.account_sid, twilioCodes.auth_token);
 
 
+/* Sends a sms to the admin with the verification code needed to sign up */
 exports.smsCode = function(username, code, callback) {
 	console.log('[INFO] Verification code for <' +username + '>: ' + code + '\n');
 
@@ -26,6 +27,7 @@ exports.smsCode = function(username, code, callback) {
 	});
 }
 
+/* Loads the users with their passwords from the DataBase */
 exports.loadUsers = function(callback) {
 	db.query(
 		'SELECT Username, AES_DECRYPT(Password, ?) AS Password FROM users',
@@ -51,8 +53,10 @@ exports.loadUsers = function(callback) {
 	);
 }*/
 
+/* Searchs an specific user in main memory (variable users) */
 exports.findUser = function(username, users, callback) {
 	var res = false;
+
 	users.forEach(function(item) {
 		if (item.Username == username){
 			res = item;
@@ -62,6 +66,7 @@ exports.findUser = function(username, users, callback) {
 	callback(res);
 }
 
+/* Signs up a new user in the DataBase */
 exports.signUp = function(username, password, ip, callback) {
 	db.query(
         'INSERT INTO users (Username, Password, IP) VALUES (?, AES_ENCRYPT(?, ?), ?)',
@@ -75,6 +80,7 @@ exports.signUp = function(username, password, ip, callback) {
     );
 }
 
+/* Ends the connection with the DataBase in a safe way */
 exports.endDB = function() {
 	db.end();
 }

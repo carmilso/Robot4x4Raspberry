@@ -6,6 +6,7 @@ var LocalStrategy   = require('passport-local').Strategy;
 
 module.exports = function(app, verifyCodes, users) {
 
+	/* Main page where users can sign in or sign up */
 	app.get('/', function(req, res) {
 		res.render(path.join(__dirname+'/../views/login'), {
 			errorMessage: req.flash('loginMessage'),
@@ -13,6 +14,7 @@ module.exports = function(app, verifyCodes, users) {
 		});
 	});
 
+	/* Page where users can sign up */
 	app.get('/register', function(req, res) {
 		res.render(path.join(__dirname+'/../views/register'), {
 			errorMessage: req.flash('errorMessage')
@@ -79,10 +81,10 @@ module.exports = function(app, verifyCodes, users) {
 	});
 
 	app.post('/login',
-		passport.authenticate('local', { successRedirect: '/',
-                                                 failureRedirect: '/',
-                                                 failureFlash: true,
-                                                 successFlash: true
+        passport.authenticate('local', { successRedirect: '/',
+                                         failureRedirect: '/',
+                                         failureFlash: true,
+                                         successFlash: true
 		})
 	);
 
