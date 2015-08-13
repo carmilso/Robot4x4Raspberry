@@ -12,15 +12,13 @@
 
         <script>
           $(document).ready(function() {
-              var validate;
-
             $("#formRegister").submit(function(e) {
                 //e.preventDefault();
 
                 var data = {};
                 data.username = $('#register__username').val();
 
-                //var validate;
+                var validate;
 
                 $.ajax({
                   type: 'POST',
@@ -45,7 +43,8 @@
                   },
                   error: function() {
                       alert('Error in the server. Contact with the admin.');
-                  }
+                  },
+                  async: true
               });
 
               alert(validate);
