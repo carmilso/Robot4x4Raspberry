@@ -32,7 +32,7 @@
                           $("#message").show('slow');
                       }
                       else {
-                          $(this).submit();
+                          $("#formRegister").submit();
                       }
                   },
                   error: function() {
@@ -55,6 +55,8 @@
 
         <p style='display:none' class='alert-box error' id='message'>
         </p>
+
+        <br>
 
         <form id="formRegister" action="#" method="post" class="form form--login">
           <p><label> New User </label></p>
