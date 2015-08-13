@@ -31,6 +31,7 @@
                           e.preventDefault();
                           $("#message").html(data.msg);
                           $("#message").show('slow');
+                          return false;
                       }
                       else {
                           return true;
