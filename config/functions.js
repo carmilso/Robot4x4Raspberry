@@ -22,15 +22,16 @@ exports.smsCode = function(username, code, callback) {
 		from: twilioCodes.from,
 		body: 'Verification code for <' +username + '>: ' + code
 	}, function(err, msg) {
-		callback(err, msg);
+		return callback(err, msg);
 	});
 }
 
 exports.loadUsers = function(callback) {
 	db.query(
-		'SELECT Username FROM users',
+		'SELECT Username, AES_DECRYPT(Password, ?) AS Password FROM users',
+		[dataBaseInfo.secret],
 		function(err, result) {
-			callback(err, result);
+			return callback(err, result);
 		}
 	);
 }
@@ -51,14 +52,13 @@ exports.loadUsers = function(callback) {
 }*/
 
 exports.findUser = function(username, users, callback) {
-	if (users.indexOf(username) != -1)
-		callback(true);
-	else
-		callback(false);
-}
+	users.forEach(function(item) {
+		if (item.Username == username){
+			return callback(item);
+		}
+	});
 
-exports.checkUser = function(username, callback) {
-
+	callback(false);
 }
 
 exports.signUp = function(username, password, ip, callback) {
@@ -67,9 +67,9 @@ exports.signUp = function(username, password, ip, callback) {
         [username, password, dataBaseInfo.secret, ip],
         function(err) {
 			if (err)
-				callback(err, null);
+				return callback(err, null);
 			else
-				callback(null, username);
+				return callback(null, username);
         }
     );
 }

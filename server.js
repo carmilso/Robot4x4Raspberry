@@ -2,7 +2,7 @@ console.log('[INFO] Initializing Server...');
 
 
 /***********************************************************************/
-var fns             = require('./config/functions');
+var fns                 = require('./config/functions');
 var express	        = require('express');
 
 
@@ -19,14 +19,14 @@ fns.loadUsers(function(err, data) {
 	}
 	else {
 		data.forEach(function(item) {
-			users.push(item.Username);
+			users.push(item);
 		});
 	}
 });
 
 
 /***********************************************************************/
-require('./config/passport')(app);
+require('./config/configuration')(app, users);
 require('./config/routes')(app, verifyCodes, users);
 
 

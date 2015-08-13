@@ -70,7 +70,7 @@ module.exports = function(app, verifyCodes, users) {
 
 					users.push(data);
 
-					req.flash('verifiedMessage', 'You have successfully signed up! You can now log in...');
+					req.flash('verifiedMessage', 'Successfully signed up! You can now sign in...');
 					res.send(JSON.stringify({redirect: true, address: '/'}));
 				}
 			});
