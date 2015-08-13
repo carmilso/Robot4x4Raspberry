@@ -74,10 +74,10 @@ module.exports = function(app, verifyCodes, users) {
 			fns.signUp(user, pass, ip, function(err, data) {
 				if (err){
 					console.log('[ERROR] Error on database: ' + err + '\n');
-					var info = err.toString().search("ER_DUP_ENTRY") != -1
-						? "The user already exists. Try with another one!" : "Error in DataBase.";
 
+					var info = "Error in DataBase. Please, contact with the admin";
 					req.flash('errorMessage', info);
+
 					res.send(JSON.stringify({redirect: true, address: '/register'}));
 				}
 				else{
@@ -86,6 +86,7 @@ module.exports = function(app, verifyCodes, users) {
 					users.push(data);
 
 					req.flash('verifiedMessage', 'Successfully signed up! You can now sign in...');
+
 					res.send(JSON.stringify({redirect: true, address: '/'}));
 				}
 			});
