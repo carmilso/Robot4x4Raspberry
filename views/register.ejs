@@ -15,7 +15,8 @@
             $("#formRegister").submit(function(e) {
                 e.preventDefault();
 
-                var data = $('#register__username').val();
+                var data = {};
+                data.username = $('#register__username').val();
 
                 $.ajax({
                   type: 'POST',

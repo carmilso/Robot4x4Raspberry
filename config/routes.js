@@ -46,8 +46,16 @@ module.exports = function(app, verifyCodes, users) {
 	});
 
 	app.post('/validateUsername', function(req, res) {
-		var data = req.body;
-		console.log(data);
+		var data = JSON.parse(JSON.stringify(req.body));
+
+		var username = data.username;
+
+		fns.findUser(username, users, function(data) {
+			if (data)
+				res.send(JSON.stringify({accepted: false, msg: '<span>error: </span>This username already exists. Please, try another one.'}));
+			else
+				res.send(JSON.stringify({accepted: true, msg: ''}));
+		});
 	});
 
 	app.post('/validateCode', function(req, res) {
