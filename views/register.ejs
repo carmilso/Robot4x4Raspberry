@@ -13,10 +13,12 @@
         <script>
           $(document).ready(function() {
             $("#formRegister").submit(function(e) {
-                e.preventDefault();
+                //e.preventDefault();
 
                 var data = {};
                 data.username = $('#register__username').val();
+
+                var validate = true;
 
                 $.ajax({
                   type: 'POST',
@@ -30,16 +32,22 @@
                       if (!data.accepted) {
                           $("#message").html(data.msg);
                           $("#message").show('slow');
+
+                          validate = false;
                           //e.preventDefault();
                       }
                       else {
-                          this.submit();
+                          //this.submit();
                       }
                   },
                   error: function() {
                       alert('Error in the server. Contact with the admin.');
                   }
               });
+
+              if (!validate)
+                e.preventDefault();
+
             });
         });
         </script>
