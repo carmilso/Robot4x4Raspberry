@@ -3,8 +3,8 @@
 
 
 import base64
-import driversL298N as drivers
-from config import dataBaseConfig as dbc
+from private import dataBaseConfig as dbc
+from config import driversL298N as drivers
 
 
 def main():
