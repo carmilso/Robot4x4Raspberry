@@ -1,0 +1,30 @@
+{
+  "name": "Robot4x4Raspberry",
+  "version": "1.0.0",
+  "description": "Robot with Raspberry Pi controlled by a Node JS server with a login and sign up method",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://carmilso@github.com/carmilso/Robot4x4Raspberry.git"
+  },
+  "author": "Carlos Millán Soler",
+  "license": "Copyleft",
+  "bugs": {
+    "url": "https://github.com/carmilso/Robot4x4Raspberry/issues"
+  },
+  "homepage": "https://github.com/carmilso/Robot4x4Raspberry",
+  "dependencies": {
+    "connect-flash": "~0.1.1",
+    "express": "~4.13.1",
+    "express-session": "~1.11.3",
+    "passport": "~0.2.2",
+    "body-parser": "~1.13.2",
+    "passport-local": "~1.0.0",
+    "mysql": "~2.8.0",
+    "twilio": "~2.3.0"
+  }
+}
