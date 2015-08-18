@@ -78,8 +78,10 @@ module.exports = function(app, verifyCodes, users, usersToRegister) {
 					console.log('[ERROR] Error on database: ' + err + '\n');
 
 					if (err.toString().indexOf('ECONNREFUSED') != -1) {
+						console.log('[ERROR] The user <' + user + '> will be signed up later...');
+
 						usersToRegister.push({Username: user, Password: pass, IP: ip});
-						req.flash('infoMessage', 'You will be signed up later in the DataBase. You can now log in...');
+						req.flash('infoMessage', 'You will be signed up in the DataBase later. You can now log in...');
 						
 						users.push({Username: user, Password: pass, IP: ip});
 						res.send(JSON.stringify({redirect: true, address: '/'}));
@@ -117,9 +119,7 @@ module.exports = function(app, verifyCodes, users, usersToRegister) {
 	function usersInterval (){
                 if (usersToRegister.length > 0) {
                         usersToRegister.forEach(function(item, index) {
-                                console.log('[INFO] Trying to register user: ' + item.Username);
-                                
-				fns.registerUser(item.Username, item.Password, item.IP, function(err) {
+                    		fns.registerUser(item.Username, item.Password, item.IP, function(err) {
                                         if (!err) {
                                                 usersToRegister.splice(index, 1);
                                                 users.push(item);
