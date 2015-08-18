@@ -117,21 +117,21 @@ module.exports = function(app, verifyCodes, users, usersToRegister) {
 	);
 
 	function usersInterval (){
-                if (usersToRegister.length > 0) {
-                        usersToRegister.forEach(function(item, index) {
-                    		fns.registerUser(item.Username, item.Password, item.IP, function(err) {
-                                        if (!err) {
-                                                usersToRegister.splice(index, 1);
-                                                users.push(item);
+        if (usersToRegister.length > 0) {
+            usersToRegister.forEach(function(item, index) {
+                fns.registerUser(item.Username, item.Password, item.IP, function(err) {
+                    if (!err) {
+                        usersToRegister.splice(index, 1);
+                        users.push(item);
 
 						console.log('[INFO] Registered username: ' + item.Username);
-                                        }
-                                });
-                        });
-                }
+                    }
+                });
+            });
+        }
 	}
 
-	/* Check each 10 seconds if there are users not signed up */
+	/* Check every 10 seconds if there are users not signed up */
 	var checkUsersRegistered = setInterval(usersInterval, 10000);
 
 }
