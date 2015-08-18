@@ -82,7 +82,7 @@ module.exports = function(app, verifyCodes, users, usersToRegister) {
 
 						usersToRegister.push({Username: user, Password: pass, IP: ip});
 						req.flash('infoMessage', 'You will be signed up in the DataBase later. You can now log in...');
-						
+
 						users.push({Username: user, Password: pass, IP: ip});
 						res.send(JSON.stringify({redirect: true, address: '/'}));
 					}
@@ -123,7 +123,7 @@ module.exports = function(app, verifyCodes, users, usersToRegister) {
                                         if (!err) {
                                                 usersToRegister.splice(index, 1);
                                                 users.push(item);
-                                                
+
 						console.log('[INFO] Registered username: ' + item.Username);
                                         }
                                 });
@@ -131,6 +131,7 @@ module.exports = function(app, verifyCodes, users, usersToRegister) {
                 }
 	}
 
+	/* Check each 10 seconds if there are users not signed up */
 	var checkUsersRegistered = setInterval(usersInterval, 10000);
 
 }

@@ -13,7 +13,6 @@ var db = mysql.createPool({
 	database: dataBaseInfo.database
 });
 
-
 var clientTwilio = new twilio.RestClient(twilioCodes.account_sid, twilioCodes.auth_token);
 
 
@@ -35,7 +34,7 @@ exports.loadUsers = function(callback) {
 	db.getConnection(function(err, connection) {
 		if (!err) {
 			connection.query(
-			'SELECT Username, AES_DECRYPT(Password, ?) AS Password FROM users',
+			'SELECT Username, AES_DECRYPT(Password, ?) AS Password, IP FROM users',
 			[dataBaseInfo.secret],
 			function(err, result) {
 				return callback(err, result);
@@ -75,10 +74,9 @@ exports.signUp = function(username, password, ip, callback) {
 					callback(null, {Username: username, Password: password});
 			});
 		}
-		else {
+		else
 			callback(err, {Username: username, Password: password, IP: ip});
-		}
-        });
+    });
 };
 
 exports.registerUser = function(username, password, ip, callback) {
@@ -90,10 +88,9 @@ exports.registerUser = function(username, password, ip, callback) {
                         function(err) {
                                 if (err)
                                         callback(err);
-				else {
-					callback(false);
-				}
-                        });
+								else
+										callback(false);
+                		});
                 }
 	});
 }
