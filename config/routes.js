@@ -119,7 +119,7 @@ module.exports = function(app, verifyCodes, users, usersToRegister) {
                                 
 				fns.registerUser(item.Username, item.Password, item.IP, function(err) {
                                         if (!err) {
-                                                usersToRegister.splice(item, 1);
+                                                usersToRegister.splice(index, 1);
                                                 users.push(item);
                                                 
 						console.log('[INFO] Registered username: ' + item.Username);
