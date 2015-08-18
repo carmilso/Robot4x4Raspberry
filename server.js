@@ -10,6 +10,7 @@ var express     = require('express');
 var app = express();
 var verifyCodes = {};
 var users = [];
+var usersToRegister = [];
 
 /* Loads the users and their passwords in main memory from the DataBase */
 fns.loadUsers(function(err, data) {
@@ -28,7 +29,7 @@ fns.loadUsers(function(err, data) {
 
 /***********************************************************************/
 require('./config/configuration')(app, users);
-require('./config/routes')(app, verifyCodes, users);
+require('./config/routes')(app, verifyCodes, users, usersToRegister);
 
 
 /***********************************************************************/

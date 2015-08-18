@@ -4,12 +4,15 @@ var twilioCodes     = require('../private/twilioCodes')
 var dataBaseInfo    = require('../private/database');
 
 
-var db = mysql.createConnection({
+var usersToRegister = [];
+
+var db = mysql.createPool({
 	host: dataBaseInfo.host,
 	user: dataBaseInfo.user,
 	password: dataBaseInfo.password,
 	database: dataBaseInfo.database
 });
+
 
 var clientTwilio = new twilio.RestClient(twilioCodes.account_sid, twilioCodes.auth_token);
 
@@ -29,13 +32,20 @@ exports.smsCode = function(username, code, callback) {
 
 /* Loads the users with their passwords from the DataBase */
 exports.loadUsers = function(callback) {
-	db.query(
-		'SELECT Username, AES_DECRYPT(Password, ?) AS Password FROM users',
-		[dataBaseInfo.secret],
-		function(err, result) {
-			return callback(err, result);
+	db.getConnection(function(err, connection) {
+		if (!err) {
+			connection.query(
+			'SELECT Username, AES_DECRYPT(Password, ?) AS Password FROM users',
+			[dataBaseInfo.secret],
+			function(err, result) {
+				return callback(err, result);
+			});
 		}
-	);
+		else {
+			console.log('[ERROR] Loading users: ' + err);
+			return callback(err, null);
+		}
+	});
 }
 
 /* Searchs an specific user in main memory (variable users) */
@@ -53,16 +63,39 @@ exports.findUser = function(username, users, callback) {
 
 /* Signs up a new user in the DataBase */
 exports.signUp = function(username, password, ip, callback) {
-	db.query(
-        'INSERT INTO users (Username, Password, IP) VALUES (?, AES_ENCRYPT(?, ?), ?)',
-        [username, password, dataBaseInfo.secret, ip],
-        function(err) {
-			if (err)
-				callback(err, null);
-			else
-				callback(null, {Username: username, Password: password});
-        }
-    );
+	db.getConnection(function(err, connection) {
+		if (!err) {
+			connection.query(
+        		'INSERT INTO users (Username, Password, IP) VALUES (?, AES_ENCRYPT(?, ?), ?)',
+        		[username, password, dataBaseInfo.secret, ip],
+        		function(err) {
+				if (err)
+					callback(err, null);
+				else
+					callback(null, {Username: username, Password: password});
+			});
+		}
+		else {
+			callback(err, {Username: username, Password: password, IP: ip});
+		}
+        });
+};
+
+exports.registerUser = function(username, password, ip, callback) {
+        db.getConnection(function(err, connection) {
+                if (!err) {
+                        connection.query(
+                        'INSERT INTO users (Username, Password, IP) VALUES (?, AES_ENCRYPT(?, ?), ?)',
+                        [username, password, dataBaseInfo.secret, ip],
+                        function(err) {
+                                if (err)
+                                        callback(err);
+				else {
+					callback(false);
+				}
+                        });
+                }
+	});
 }
 
 /* Ends the connection with the DataBase in a safe way */

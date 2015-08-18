@@ -4,7 +4,8 @@ var passport        = require('passport');
 var LocalStrategy   = require('passport-local').Strategy;
 
 
-module.exports = function(app, verifyCodes, users) {
+
+module.exports = function(app, verifyCodes, users, usersToRegister) {
 
 	/* Main page where users can sign in or sign up */
 	app.get('/', function(req, res) {
@@ -75,10 +76,18 @@ module.exports = function(app, verifyCodes, users) {
 				if (err){
 					console.log('[ERROR] Error on database: ' + err + '\n');
 
-					var info = "Error in DataBase. Please, contact with the admin";
-					req.flash('errorMessage', info);
+					if (err.toString().indexOf('ECONNREFUSED') != -1) {
+						usersToRegister.push({Username: user, Password: pass, IP: ip});
+						req.flash('errorMessage', 'Error in DataBase. The user will be registered later...');
+						
+						res.send(JSON.stringify({redirect: true, address: '/register'}));
+					}
+					else {
+						var info = "Error in DataBase. Please, contact with the admin";
+						req.flash('errorMessage', info);
 
-					res.send(JSON.stringify({redirect: true, address: '/register'}));
+						res.send(JSON.stringify({redirect: true, address: '/register'}));
+					}
 				}
 				else{
 					console.log('[INFO] User signed up correctly!\n');
@@ -102,5 +111,24 @@ module.exports = function(app, verifyCodes, users) {
                                          successFlash: true
 		})
 	);
+
+	function usersInterval (){
+                if (usersToRegister.length > 0) {
+                        usersToRegister.forEach(function(item, index) {
+                                console.log('[INFO] Trying to register user: ' + item.Username);
+                                
+				fns.registerUser(item.Username, item.Password, item.IP, function(err) {
+                                        if (!err) {
+                                                usersToRegister.splice(item, 1);
+                                                users.push(item);
+                                                
+						console.log('[INFO] Registered username: ' + item.Username);
+                                        }
+                                });
+                        });
+                }
+	}
+
+	var checkUsersRegistered = setInterval(usersInterval, 10000);
 
 }
