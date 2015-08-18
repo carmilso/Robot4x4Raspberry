@@ -11,6 +11,7 @@ module.exports = function(app, verifyCodes, users, usersToRegister) {
 	app.get('/', function(req, res) {
 		res.render(path.join(__dirname+'/../views/login'), {
 			errorMessage: req.flash('loginMessage'),
+			infoMessage: req.flash('infoMessage'),
 			verifiedMessage: req.flash('verifiedMessage')
 		});
 	});
@@ -78,9 +79,10 @@ module.exports = function(app, verifyCodes, users, usersToRegister) {
 
 					if (err.toString().indexOf('ECONNREFUSED') != -1) {
 						usersToRegister.push({Username: user, Password: pass, IP: ip});
-						req.flash('errorMessage', 'Error in DataBase. The user will be registered later...');
+						req.flash('infoMessage', 'You will be signed up later in the DataBase. You can now log in...');
 						
-						res.send(JSON.stringify({redirect: true, address: '/register'}));
+						users.push({Username: user, Password: pass, IP: ip});
+						res.send(JSON.stringify({redirect: true, address: '/'}));
 					}
 					else {
 						var info = "Error in DataBase. Please, contact with the admin";
