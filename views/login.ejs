@@ -30,6 +30,12 @@
             </div>
         <% } %>
 
+	<% if (infoMessage.length > 0) { %>
+            <div class="alert-box warning"><span>info: </span>
+                    <%= infoMessage %>
+            </div>
+        <% } %>
+
     <br>
 
       <form id="frmLogin" action="/login" method="post" class="form form--login">

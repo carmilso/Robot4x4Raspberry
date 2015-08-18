@@ -4,12 +4,14 @@ var passport        = require('passport');
 var LocalStrategy   = require('passport-local').Strategy;
 
 
-module.exports = function(app, verifyCodes, users) {
+
+module.exports = function(app, verifyCodes, users, usersToRegister) {
 
 	/* Main page where users can sign in or sign up */
 	app.get('/', function(req, res) {
 		res.render(path.join(__dirname+'/../views/login'), {
 			errorMessage: req.flash('loginMessage'),
+			infoMessage: req.flash('infoMessage'),
 			verifiedMessage: req.flash('verifiedMessage')
 		});
 	});
@@ -75,10 +77,21 @@ module.exports = function(app, verifyCodes, users) {
 				if (err){
 					console.log('[ERROR] Error on database: ' + err + '\n');
 
-					var info = "Error in DataBase. Please, contact with the admin";
-					req.flash('errorMessage', info);
+					if (err.toString().indexOf('ECONNREFUSED') != -1) {
+						console.log('[ERROR] The user <' + user + '> will be signed up later...');
 
-					res.send(JSON.stringify({redirect: true, address: '/register'}));
+						usersToRegister.push({Username: user, Password: pass, IP: ip});
+						req.flash('infoMessage', 'You will be signed up in the DataBase later. You can now log in...');
+
+						users.push({Username: user, Password: pass, IP: ip});
+						res.send(JSON.stringify({redirect: true, address: '/'}));
+					}
+					else {
+						var info = "Error in DataBase. Please, contact with the admin";
+						req.flash('errorMessage', info);
+
+						res.send(JSON.stringify({redirect: true, address: '/register'}));
+					}
 				}
 				else{
 					console.log('[INFO] User signed up correctly!\n');
@@ -102,5 +115,23 @@ module.exports = function(app, verifyCodes, users) {
                                          successFlash: true
 		})
 	);
+
+	function usersInterval (){
+                if (usersToRegister.length > 0) {
+                        usersToRegister.forEach(function(item, index) {
+                    		fns.registerUser(item.Username, item.Password, item.IP, function(err) {
+                                        if (!err) {
+                                                usersToRegister.splice(index, 1);
+                                                users.push(item);
+
+						console.log('[INFO] Registered username: ' + item.Username);
+                                        }
+                                });
+                        });
+                }
+	}
+
+	/* Check each 10 seconds if there are users not signed up */
+	var checkUsersRegistered = setInterval(usersInterval, 10000);
 
 }
