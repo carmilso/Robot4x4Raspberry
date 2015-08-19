@@ -109,7 +109,7 @@ module.exports = function(app, verifyCodes, users, usersToRegister) {
 
 	app.get('/user', function(req, res) {
 		if (req.isAuthenticated()) {
-			res.sendFile(path.join(__dirname+'/../views/user.html');
+			res.sendFile(path.join(__dirname+'/../views/user.html'));
 		}
 	});
 
