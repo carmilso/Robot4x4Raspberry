@@ -111,6 +111,9 @@ module.exports = function(app, verifyCodes, users, usersToRegister) {
 		if (req.isAuthenticated()) {
 			res.sendFile(path.join(__dirname+'/../views/user.html'));
 		}
+		else {
+			res.status(401).send('Unauthorized access!');
+		}
 	});
 
 	/* Loggin configuration */
