@@ -107,9 +107,15 @@ module.exports = function(app, verifyCodes, users, usersToRegister) {
 
 	});
 
+	app.get('/user', function(req, res) {
+		if (req.isAuthenticated()) {
+			res.sendFile(path.join(__dirname+'/../views/user.html');
+		}
+	});
+
 	/* Loggin configuration */
 	app.post('/login',
-        passport.authenticate('local', { successRedirect: '/',
+        passport.authenticate('local', { successRedirect: '/user',
                                          failureRedirect: '/',
                                          failureFlash: true,
                                          successFlash: true
