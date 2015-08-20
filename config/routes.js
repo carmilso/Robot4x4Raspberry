@@ -109,7 +109,7 @@ module.exports = function(app, verifyCodes, users, usersToRegister) {
 
 	app.get('/user', function(req, res) {
 		if (req.isAuthenticated()) {
-			res.render(path.join(__dirname+'/../views/user.html')), {
+			res.render(path.join(__dirname+'/../views/user')), {
 				user: req.user
 			}
 		}
