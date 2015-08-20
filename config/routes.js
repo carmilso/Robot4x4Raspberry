@@ -109,7 +109,9 @@ module.exports = function(app, verifyCodes, users, usersToRegister) {
 
 	app.get('/user', function(req, res) {
 		if (req.isAuthenticated()) {
-			res.sendFile(path.join(__dirname+'/../views/user.html'));
+			res.render(path.join(__dirname+'/../views/user.html')), {
+				user: req.user
+			}
 		}
 		else {
 			res.status(401).send('Unauthorized access!');
