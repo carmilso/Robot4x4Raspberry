@@ -118,6 +118,11 @@ module.exports = function(app, verifyCodes, users, usersToRegister) {
 		}
 	});
 
+	app.get('/logout', function(req, res) {
+		req.logout();
+		res.redirect('/');
+	});
+
 	/* Loggin configuration */
 	app.post('/login',
         passport.authenticate('local', { successRedirect: '/user',
