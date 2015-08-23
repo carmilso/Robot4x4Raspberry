@@ -20,7 +20,8 @@ module.exports = function(app, users) {
     	fns.findUser(username, users, function(user) {
     		if (!user) return done(null, false, req.flash('loginMessage', 'This username does not exist'));
     		if (user.Password != password) return done(null, false, req.flash('loginMessage', 'The password is not correct'));
-		    return done(null, user.Username);
+		
+		return done(null, user.Username);
     	});
     }
     ));
@@ -30,6 +31,7 @@ module.exports = function(app, users) {
     });
 
     passport.deserializeUser(function(user, done) {
+	
     	done(null, user);
     });
 
