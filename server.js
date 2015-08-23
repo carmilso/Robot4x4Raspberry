@@ -41,10 +41,12 @@ var server = app.listen(3000, function() {
 
 var socket = io.listen(server);
 
-socket.on('connection', function(client) {
-	console.log('[INFO] Socket connected: ' + client);
-});
 
+/***********************************************************************/
+require('./config/socket')(socket);
+
+
+/***********************************************************************/
 process.on('SIGINT', function() {
 	server.close();
 	fns.endDB();
