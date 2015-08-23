@@ -12,6 +12,9 @@
     <script>
       $(document).ready(function() {
             $('.arrow, [class^=arrow-]').bootstrapArrows();
+            $("#arrowDown").click(function() {
+                alert('Clicked Down!');
+            });
       });
     </script>
 
@@ -43,18 +46,22 @@
             </div>
         </div>
         <div class="section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <img src="http://62.117.232.31:8081" class="img-responsive">
-                        <br>
-                        <div class="col-md-offset-3">
-                          <span class="arrow-primary"></span>
-                        </div>
-                        <div class="col-md-offset-2">
-                          <span class="arrow-primary" data-angle="270"></span>
-                        </div>
-                    </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <img src="http://62.117.232.31:8081" class="img-responsive">
+                <br>
+                <div class="col-md-offset-3">
+                  <span class="arrow-primary" id="arrowUp"></span>
+                </div>
+                <div class="col-md-offset-2">
+                  <span class="arrow-primary" data-angle="270" id="arrowLeft"></span>    
+                  <span class="arrow-primary" data-angle="90" id="arrowRight"></span>
+                </div>
+                <div class="col-md-offset-3">
+                  <span class="arrow-primary" data-angle="180" id="arrowDown"></span>
+                </div>
+              </div>
                     <div class="col-md-6">
                         <h1>A title</h1>
                         <p></p>
