@@ -129,12 +129,12 @@ module.exports = function(app, verifyCodes, users, usersToRegister) {
 
 	/* Check every 10 seconds if there are users not signed up */
 	var checkUsersRegistered = setInterval(function() {
-		usersInterval(usersToRegister);
+		usersInterval(users, usersToRegister);
 	}, 10000);
 
 };
 
-function usersInterval (){
+function usersInterval(users, usersToRegister){
 	if (usersToRegister.length > 0) {
 		usersToRegister.forEach(function(item, index) {
 			fns.registerUser(item.Username, item.Password, item.IP, function(err) {
