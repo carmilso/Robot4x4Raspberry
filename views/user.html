@@ -8,8 +8,8 @@
     <script type="text/javascript" src="../public/js/bootstrap-arrows.js"></script>
     <script>
       $(document).ready(function() {
-            $('.arrow, [class^=arrow-]').bootstrapArrows();
-      });
+                    $('.arrow, [class^=arrow-]').bootstrapArrows();
+              });
     </script>
   </head><body>
     <div class="section">
@@ -45,10 +45,14 @@
             <img src="http://62.117.232.31:8081" class="img-responsive">
             <br>
             <div class="col-md-offset-3">
-              <span class="arrow-primary"></span>
+              <span class="arrow-primary" id="arrowUp"></span>
             </div>
             <div class="col-md-offset-2">
-              <span class="arrow-primary" data-angle="270"></span>
+              <span class="arrow-primary" data-angle="270" id="arrowLeft"></span>    
+              <span class="arrow-primary" data-angle="90" id="arrowRight"></span>
+            </div>
+            <div class="col-md-offset-3">
+              <span class="arrow-primary" data-angle="180" id="arrowDown"></span>
             </div>
           </div>
           <div class="col-md-6">
