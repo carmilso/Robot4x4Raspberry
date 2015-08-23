@@ -1,15 +1,16 @@
 <html><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link href="../public/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="../public/css/user.css" rel="stylesheet" type="text/css">
     <link href="../public/css/bootstrap-arrows.css" rel="stylesheet" type="text/css">
-
     <script type="text/javascript" src="../public/js/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="../public/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../public/js/bootstrap-arrows.js"></script>
-
+    <script>
+      $(document).ready(function() {
+            $('.arrow, [class^=arrow-]').bootstrapArrows();
+      });
+    </script>
   </head><body>
     <div class="section">
       <div class="container">
@@ -42,12 +43,13 @@
         <div class="row">
           <div class="col-md-6">
             <img src="http://62.117.232.31:8081" class="img-responsive">
-            <h1>A title</h1>
-            <p></p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
-              <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-              <br>Ut enim ad minim veniam, quis nostrud</p>
-            <p></p>
+            <br>
+            <div class="col-md-offset-3">
+              <span class="arrow-primary"></span>
+            </div>
+            <div class="col-md-offset-2">
+              <span class="arrow-primary" data-angle="270"></span>
+            </div>
           </div>
           <div class="col-md-6">
             <h1>A title</h1>
@@ -63,9 +65,7 @@
     <div class="section">
       <div class="container">
         <div class="row">
-          <div class="col-md-12">
-            <span class="arrow-primary"></span>
-          </div>
+          <div class="col-md-offset-1 col-md-1"></div>
         </div>
       </div>
     </div>
