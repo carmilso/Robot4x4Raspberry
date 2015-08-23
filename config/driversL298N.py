@@ -64,6 +64,7 @@ class Robot:
 	def stopRobot(self):
 		if self.DEBUG: print 'Robot stopped'
 		self.stopMotor(self.MOTORS)
+		time.sleep(0.25)
 
 	def fordwardRobot(self, seconds):
 		if self.DEBUG: print 'Robot fordwarding (%ss)' % seconds

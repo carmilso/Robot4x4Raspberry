@@ -11,6 +11,7 @@ var app = express();
 var verifyCodes = {};
 var users = [];
 var usersToRegister = [];
+usersLogged = [];
 
 /* Loads the users and their passwords in main memory from the DataBase */
 fns.loadUsers(function(err, data) {

@@ -12,7 +12,7 @@ def main():
 
     robot = drivers.Robot(17, 27, 10, 9, 1)
 
-    robot.initDB(dbc.IP, dbc.USER, base64.b64encode(dbc.PASSWORD), dbc.DB)
+#   robot.initDB(dbc.IP, dbc.USER, base64.b64encode(dbc.PASSWORD), dbc.DB)
 
     robot.fordwardRobot(7)
     robot.rightRobot(5)
