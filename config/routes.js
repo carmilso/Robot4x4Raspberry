@@ -142,7 +142,7 @@ function usersInterval(users, usersToRegister){
 					usersToRegister.splice(index, 1);
 					users.push(item);
 
-					console.log('[INFO] Registered username: ' + item.Username);
+					console.log('[INFO] Registered <' + item.Username + '>\n');
 				}
 			});
 		});
