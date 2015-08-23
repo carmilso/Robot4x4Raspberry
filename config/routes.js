@@ -128,24 +128,13 @@ module.exports = function(app, verifyCodes, users, usersToRegister) {
 	);
 
 	/* Check every 10 seconds if there are users not signed up */
-	var checkUsersRegistered = setInterval(function(usersToRegister) {
-		if (usersToRegister.length > 0) {
-			usersToRegister.forEach(function(item, index) {
-				fns.registerUser(item.Username, item.Password, item.IP, function(err) {
-					if (!err) {
-						usersToRegister.splice(index, 1);
-						users.push(item);
-
-						console.log('[INFO] Registered username: ' + item.Username);
-					}
-				});
-			});
-		}
+	var checkUsersRegistered = setInterval(function() {
+		usersInterval(usersToRegister);
 	}, 10000);
 
 };
 
-/*function usersInterval (){
+function usersInterval (){
 	if (usersToRegister.length > 0) {
 		usersToRegister.forEach(function(item, index) {
 			fns.registerUser(item.Username, item.Password, item.IP, function(err) {
@@ -158,7 +147,7 @@ module.exports = function(app, verifyCodes, users, usersToRegister) {
 			});
 		});
 	}
-}*/
+}
 
 function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated())
