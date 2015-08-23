@@ -107,15 +107,10 @@ module.exports = function(app, verifyCodes, users, usersToRegister) {
 
 	});
 
-	app.get('/user', function(req, res) {
-		if (req.isAuthenticated()) {
-			res.render(path.join(__dirname+'/../views/user'), {
-				user: req.user
-			});
-		}
-		else {
-			res.status(401).send('Unauthorized access!');
-		}
+	app.get('/user', isLoggedIn, function(req, res) {
+		res.render(path.join(__dirname+'/../views/user'), {
+			user: req.user
+		});
 	});
 
 	app.get('/logout', function(req, res) {
@@ -132,22 +127,29 @@ module.exports = function(app, verifyCodes, users, usersToRegister) {
 		})
 	);
 
-	function usersInterval (){
-        if (usersToRegister.length > 0) {
-            usersToRegister.forEach(function(item, index) {
-                fns.registerUser(item.Username, item.Password, item.IP, function(err) {
-                    if (!err) {
-                        usersToRegister.splice(index, 1);
-                        users.push(item);
-
-						console.log('[INFO] Registered username: ' + item.Username);
-                    }
-                });
-            });
-        }
-	}
-
 	/* Check every 10 seconds if there are users not signed up */
 	var checkUsersRegistered = setInterval(usersInterval, 10000);
 
+};
+
+function usersInterval (){
+	if (usersToRegister.length > 0) {
+		usersToRegister.forEach(function(item, index) {
+			fns.registerUser(item.Username, item.Password, item.IP, function(err) {
+				if (!err) {
+					usersToRegister.splice(index, 1);
+					users.push(item);
+
+					console.log('[INFO] Registered username: ' + item.Username);
+				}
+			});
+		});
+	}
+}
+
+function isLoggedIn(req, res, next) {
+	if (req.isAuthenticated())
+		return next();
+	else
+		res.status(401).send('Unauthorized access!');
 }
