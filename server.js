@@ -2,6 +2,7 @@ console.log('[INFO] Initializing Server...');
 
 
 /***********************************************************************/
+var io          = require('socket.io');
 var fns         = require('./config/functions');
 var express     = require('express');
 
@@ -36,6 +37,12 @@ require('./config/routes')(app, verifyCodes, users, usersToRegister);
 /***********************************************************************/
 var server = app.listen(3000, function() {
 	console.log('[INFO] Server started!\n');
+});
+
+var socket = io.listen(server);
+
+socket.on('connection', function(client) {
+	console.log('[INFO] Socket connected: ' + client);
 });
 
 process.on('SIGINT', function() {

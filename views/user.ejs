@@ -12,6 +12,9 @@
     <script>
       $(document).ready(function() {
             $('.arrow, [class^=arrow-]').bootstrapArrows();
+
+            var socket = io();
+
             $("#arrowDown").click(function() {
                 alert('Clicked Down!');
             });
