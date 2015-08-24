@@ -12,7 +12,7 @@ module.exports = function(socket) {
 
 		var state = actualState(robotState);
 
-		user.emit('actualState', {html: state});
+		user.emit('actualState', state);
 
 		user.on('disconnect', function() {
 			console.log('[SOCKET] User disconnected');
