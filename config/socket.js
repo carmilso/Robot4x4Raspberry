@@ -43,5 +43,5 @@ function actualState(robotState) {
 	else if (robotState == 'right')
 		angle = 90;
 
-	return '<span class="arrow-success-large" data-angle="' + angle + '" id="arrowState"></span>'
+	return '<span class="arrow-success" data-angle="' + angle + '"></span>'
 }
