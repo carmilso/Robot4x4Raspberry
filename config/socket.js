@@ -14,6 +14,7 @@ module.exports = function(socket) {
 		user.emit('actualState', state);
 
 		user.on('arrow', function(state) {
+			console.log('Received: ' + state);
 			var aState = actualState(state);
 			socket.emit('actualState', aState);
 		});
