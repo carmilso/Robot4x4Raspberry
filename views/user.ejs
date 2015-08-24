@@ -25,6 +25,8 @@
                     $("#arrowStateS").show();
                 }
                 else {
+                    $('.arrow, [class^=arrow-]').bootstrapArrows();
+                    
                     $("#arrowState")
                         .attr({
                             "data-angle" : data
