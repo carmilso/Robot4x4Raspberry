@@ -19,7 +19,7 @@
             socket.on('actualState', function(data) {
                 if (data.indexOf('Stopped') != -1) {
                     $("#arrowState").hide();
-                    $("#actualState").html(data);
+                    $("#arrowStateS").show();
                 }
                 else {
                     $("#arrowState")
@@ -27,6 +27,7 @@
                             "data-angle" : data
                         })
                         .show();
+                    $("#arrowStateS").hide();
                 }
             });
 
@@ -126,6 +127,7 @@
                 <br>
                 <div class="col-md-offset-3" id="actualState">
                     <span class="arrow-success-large" data-angle="" id="arrowState"></span>
+                    <h3 id="arrowStateS">Stopped</h3>
                 </div>
                 <p></p>
                 <p></p>

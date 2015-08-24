@@ -32,7 +32,7 @@ module.exports = function(socket) {
 
 function actualState(robotState) {
 	if (robotState == 'stop')
-		return '<h3>Stopped</h3>'
+		return 'stop'
 
 	var angle = '';
 
