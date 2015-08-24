@@ -21,7 +21,7 @@
             });
 
             socket.on('usersConnected', function(data) {
-                $("#usersConnected").text(data).show('slow');
+                $("#usersConnected").html(data);
             });
 
             $("#arrowDown").click(function() {
