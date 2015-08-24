@@ -27,21 +27,33 @@
             $("#arrowUp")
                 .mousedown(function() {
                     socket.emit('arrow', 'up');
+                })
+                .mouseup(function() {
+                    socket.emit('arrow', 'stop');
                 });
 
             $("#arrowDown")
                 .mousedown(function() {
                     socket.emit('arrow', 'down');
+                })
+                .mouseup(function() {
+                    socket.emit('arrow', 'stop');
                 });
 
             $("#arrowLeft")
                 .mousedown(function() {
                     socket.emit('arrow', 'left');
+                })
+                .mouseup(function() {
+                    socket.emit('arrow', 'stop');
                 });
 
             $("#arrowRight")
                 .mousedown(function() {
                     socket.emit('arrow', 'right');
+                })
+                .mouseup(function() {
+                    socket.emit('arrow', 'stop');
                 });
 
             $("arrow-primary")

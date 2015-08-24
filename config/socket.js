@@ -16,6 +16,7 @@ module.exports = function(socket) {
 		user.on('arrow', function(state) {
 			console.log('Received: ' + state);
 			var aState = actualState(state);
+			console.log('aState: ' + aState);
 			socket.emit('actualState', aState);
 		});
 
@@ -41,8 +42,6 @@ function actualState(robotState) {
 		angle = 270;
 	else if (robotState == 'right')
 		angle = 90;
-
-	console.log('angle: ' + angle);
 
 	return '<span class="arrow-success-large" data-angle="' + angle + '" id="arrowState"></span>'
 }
