@@ -16,6 +16,10 @@
 
             var socket = io();
 
+            socket.on('actualState', function(data) {
+                alert(data);
+            });
+
             $("#arrowDown").click(function() {
                 alert('Clicked Down!');
             });
@@ -66,16 +70,34 @@
                   <span class="arrow-primary" data-angle="180" id="arrowDown"></span>
                 </div>
               </div>
-                    <div class="col-md-6">
-                        <h1>A title</h1>
-                        <p></p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisici elit,
-                            <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-                            <br>Ut enim ad minim veniam, quis nostrud</p>
-                        <p></p>
-                    </div>
+              <div class="col-md-6">
+                <h1 id="usersConnected"></h1>
+                <p></p>
+                <p>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                </p>
+                <h3 class="text-muted">
+                  <b>Actual state of the Robot:</b>
+                </h3>
+                <br>
+                <div class="col-md-offset-3" id="actualState">
+                  <!-- <span class="arrow-success-large" data-angle="180" id="arrowState"></span> -->
                 </div>
+                <p></p>
+                <p></p>
+              </div>
             </div>
+          </div>
+        </div>
+        <div class="section">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-offset-1 col-md-1"></div>
+            </div>
+          </div>
         </div>
 
 </body></html>
