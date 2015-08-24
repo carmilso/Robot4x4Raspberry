@@ -20,7 +20,7 @@
             $("#arrowStateS").show();
 
             socket.on('actualState', function(data) {
-                if (data.indexOf('Stopped') != -1) {
+                if (data == 'stop') {
                     $("#arrowState").hide();
                     $("#arrowStateS").show();
                 }
