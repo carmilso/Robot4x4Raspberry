@@ -20,6 +20,10 @@
                 $("#actualState").html(data);
             });
 
+            socket.on('usersConnected', function(data) {
+                $("#usersConnected").text(data);
+            });
+
             $("#arrowDown").click(function() {
                 alert('Clicked Down!');
             });
