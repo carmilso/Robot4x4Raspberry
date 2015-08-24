@@ -8,7 +8,7 @@ module.exports = function(socket) {
         console.log('[SOCKET] User connected\n');
 		usersConnected++;
 
-		socket.emit('usersConnected', usersConnected + ' users online');
+		socket.emit('usersConnected', usersConnected + ' user/s online');
 
 		var state = actualState(robotState);
 		user.emit('actualState', state);
@@ -43,5 +43,6 @@ function actualState(robotState) {
 	else if (robotState == 'right')
 		angle = 90;
 
-	return '<span class="arrow-success-large" data-angle="' + angle + '"></span>'
+	return angle;
+	//return '<span class="arrow-success-large" data-angle="' + angle + '"></span>'
 }
