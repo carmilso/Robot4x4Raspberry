@@ -21,7 +21,7 @@
             });
 
             socket.on('usersConnected', function(data) {
-                $("#usersConnected").html(data);
+                $("#usersConnected").text(data).show('slow');
             });
 
             $("#arrowDown").click(function() {
@@ -74,7 +74,8 @@
                   <span class="arrow-primary" data-angle="180" id="arrowDown"></span>
                 </div>
               </div>
-              <div class="col-md-6" id="usersConnected">
+              <div class="col-md-6">
+                <h3><p id="usersConnected" class="text-info"></p></h3>
                 <p></p>
                 <p>
                   <br>
