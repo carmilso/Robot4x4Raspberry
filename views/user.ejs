@@ -12,7 +12,7 @@
 
     <script>
       $(document).ready(function() {
-            $('.arrow, [class^=arrow-]').bootstrapArrows();
+            //$('.arrow, [class^=arrow-]').bootstrapArrows();
 
             var socket = io();
 
@@ -128,7 +128,7 @@
                 </h3>
                 <br>
                 <div class="col-md-offset-3" id="actualState">
-                    <span class="arrow-primary" data-angle="90" id="arrowState"></span>
+                    <span class="arrow-success-large" data-angle="90" id="arrowState"></span>
                     <h3 id="arrowStateS">Stopped</h3>
                 </div>
                 <p></p>
@@ -144,5 +144,7 @@
             </div>
           </div>
         </div>
+
+        <script>$('.arrow, [class^=arrow-]').bootstrapArrows();</script>
 
 </body></html>
