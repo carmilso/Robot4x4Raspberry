@@ -12,64 +12,63 @@
 
     <script>
       $(document).ready(function() {
-            $('.arrow, [class^=arrow-]').bootstrapArrows();
+        $('.arrow, [class^=arrow-]').bootstrapArrows();
 
-            alert('Testing...');
-            var socket = io();
-            alert(socket);
+        alert('Testing...');
+        var socket = io();
 
-            $("#arrowState").hide();
+        $("#arrowState").hide();
 
-            socket.on('actualState', function(data) {
-                if (data == 'stop') {
-                    $("#arrowState").hide();
-                    $("#arrowStateS").show();
-                }
-                else {
-                    $("#arrowState")
-                        .attr({
-                            "data-angle" : data
-                        });
-                        .show();
-                    $("#arrowStateS").hide();
-                }
+        socket.on('actualState', function(data) {
+            if (data == 'stop') {
+                $("#arrowState").hide();
+                $("#arrowStateS").show();
+            }
+            else {
+                $("#arrowState")
+                    .attr({
+                        "data-angle" : data
+                    })
+                    .show();
+                $("#arrowStateS").hide();
+            }
+        });
+
+        socket.on('usersConnected', function(data) {
+            $("#usersConnected").text(data).show('slow');
+        });
+
+        $("#arrowUp")
+            .mousedown(function() {
+                socket.emit('arrow', 'up');
+            })
+            .mouseup(function() {
+                socket.emit('arrow', 'stop');
             });
 
-            socket.on('usersConnected', function(data) {
-                $("#usersConnected").text(data).show('slow');
+        $("#arrowDown")
+            .mousedown(function() {
+                socket.emit('arrow', 'down');
+            })
+            .mouseup(function() {
+                socket.emit('arrow', 'stop');
             });
 
-            $("#arrowUp")
-                .mousedown(function() {
-                    socket.emit('arrow', 'up');
-                })
-                .mouseup(function() {
-                    socket.emit('arrow', 'stop');
-                });
+        $("#arrowLeft")
+            .mousedown(function() {
+                socket.emit('arrow', 'left');
+            })
+            .mouseup(function() {
+                socket.emit('arrow', 'stop');
+            });
 
-            $("#arrowDown")
-                .mousedown(function() {
-                    socket.emit('arrow', 'down');
-                })
-                .mouseup(function() {
-                    socket.emit('arrow', 'stop');
-                });
-
-            $("#arrowLeft")
-                .mousedown(function() {
-                    socket.emit('arrow', 'left');
-                })
-                .mouseup(function() {
-                    socket.emit('arrow', 'stop');
-                });
-
-            $("#arrowRight")
-                .mousedown(function() {
-                    socket.emit('arrow', 'right');
-                })
-                .mouseup(function() {
-                    socket.emit('arrow', 'stop');
-                });
+        $("#arrowRight")
+            .mousedown(function() {
+                socket.emit('arrow', 'right');
+            })
+            .mouseup(function() {
+                socket.emit('arrow', 'stop');
+            });
 
       });
     </script>
@@ -92,7 +91,7 @@
                             <li>
                                 <a href="#">Users</a>
                             </li>
-                            <li>
+                            <li id="logout">
                                 <a href="/logout">Log Out</a>
                             </li>
                         </ul>
@@ -130,7 +129,7 @@
                 </h3>
                 <br>
                 <div class="col-md-offset-3" id="actualState">
-                    <!--<span class="arrow-success-large" data-angle="90" id="arrowState"></span>-->
+                    <span class="arrow-success-large" data-angle="" id="arrowState"></span>
                     <h3 id="arrowStateS">Stopped</h3>
                 </div>
                 <p></p>

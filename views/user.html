@@ -20,32 +20,32 @@
                     });
               });
     </script>
-  </head><body>
+</head><body>
     <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="page-header">
-              <!-- <h1>Welcome <%= user %>! -->
-              <h1>Welcome user!
-                <small>Robot Controller</small>
-              </h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header">
+                        <!-- <h1>Welcome user! -->
+                        <h1>Welcome <%= user %>!
+                            <small>Robot Controller</small>
+                        </h1>
+                    </div>
+                    <ul class="nav nav-pills nav-justified">
+                        <li class="active">
+                            <a href="#">Home</a>
+                        </li>
+                        <li>
+                            <a href="#">Users</a>
+                        </li>
+                        <li id="logout">
+                            <a href="/logout">Log Out</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <ul class="nav nav-pills nav-justified">
-              <li class="active">
-                <a href="#">Home</a>
-              </li>
-              <li>
-                <a href="#">Users</a>
-              </li>
-              <li id="logout">
-                <a href="/logout">Log Out</a>
-              </li>
-            </ul>
-          </div>
+            <br>
         </div>
-        <br>
-      </div>
     </div>
     <div class="section">
       <div class="container">
@@ -65,11 +65,9 @@
             </div>
           </div>
           <div class="col-md-6">
-            <h1 id="usersConnected"></h1>
+            <h2><b><p id="usersConnected" class="text-info"></p></b></h2>
             <p></p>
             <p>
-              <br>
-              <br>
               <br>
               <br>
             </p>
@@ -78,7 +76,8 @@
             </h3>
             <br>
             <div class="col-md-offset-3" id="actualState">
-              <!-- <span class="arrow-success-large" data-angle="180" id="arrowState"></span> -->
+                <span class="arrow-success-large" data-angle="" id="arrowState"></span>
+                <h3 id="arrowStateS">Stopped</h3>
             </div>
             <p></p>
             <p></p>
