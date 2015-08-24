@@ -25,10 +25,11 @@
                     $("#actualState").html(data);
                 }
                 else {
-                    $("#arrowState").attr({
-                        "style" : "display:inline",
-                        "data-angle" : data
-                    });
+                    $("#arrowState")
+                        .attr({
+                            "data-angle" : data
+                        })
+                        .show();
                 }
             });
 
