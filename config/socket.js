@@ -8,7 +8,7 @@ module.exports = function(socket) {
         console.log('[SOCKET] User connected');
 		usersConnected++;
 
-		socket.emit('usersConnected', usersConnected);
+		socket.emit('usersConnected', '<p class="text-info">'+usersConnected+' users online</p>');
 
 		var state = actualState(robotState);
 
