@@ -12,16 +12,16 @@
 
     <script>
       $(document).ready(function() {
-            $('.arrow, [class^=arrow-]').bootstrapArrows();
+            //$('.arrow, [class^=arrow-]').bootstrapArrows();
 
             var socket = io();
 
-            //$("#arrowState").hide();
+            $("#arrowState").hide();
             $("#arrowStateS").show();
 
             socket.on('actualState', function(data) {
                 if (data == 'stop') {
-                    //$("#arrowState").hide();
+                    $("#arrowState").hide();
                     $("#arrowStateS").show();
                 }
                 else {
@@ -29,7 +29,7 @@
                         .attr({
                             "data-angle" : data
                         });
-                        //.show();
+                        .show();
                     $("#arrowStateS").hide();
                 }
             });
@@ -70,6 +70,7 @@
                     socket.emit('arrow', 'stop');
                 });
 
+            $('.arrow, [class^=arrow-]').bootstrapArrows();
       });
     </script>
 
@@ -114,7 +115,7 @@
                   <span class="arrow-primary" data-angle="90" id="arrowRight"></span>
                 </div>
                 <div class="col-md-offset-3">
-                  <span class="arrow-primary-large" data-angle="180" id="arrowDown"></span>
+                  <span class="arrow-primary" data-angle="180" id="arrowDown"></span>
                 </div>
               </div>
               <div class="col-md-6">
@@ -129,7 +130,7 @@
                 </h3>
                 <br>
                 <div class="col-md-offset-3" id="actualState">
-                    <span class="arrow-success-large" data-angle="" id="arrowState"></span>
+                    <span class="arrow-success-large" data-angle="90" id="arrowState"></span>
                     <h3 id="arrowStateS">Stopped</h3>
                 </div>
                 <p></p>
