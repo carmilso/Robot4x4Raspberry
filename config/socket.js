@@ -29,14 +29,12 @@ function actualState(robotState) {
 
 	var angle = '';
 
-	else {
-		if (robotState == 'down')
-			angle = 180;
-		else if (robotState == 'left')
-			angle = 270;
-		else if (robotState == 'right')
-			angle = 90;
-	}
+	if (robotState == 'down')
+		angle = 180;
+	else if (robotState == 'left')
+		angle = 270;
+	else if (robotState == 'right')
+		angle = 90;
 
 	return '<span class="arrow-success-large" data-angle="' + angle + '" id="arrowState"></span>'
 }
