@@ -16,7 +16,7 @@
 
             var socket = io();
 
-            $("#arrowState").hide();
+            $("#arrowState").bootstrapArrows().hide();
             $("#arrowStateS").show();
 
             socket.on('actualState', function(data) {
@@ -24,9 +24,7 @@
                     $("#arrowState").hide();
                     $("#arrowStateS").show();
                 }
-                else {
-                    $('.arrow, [class^=arrow-]').bootstrapArrows();
-                    
+                else {                    
                     $("#arrowState")
                         .attr({
                             "data-angle" : data
