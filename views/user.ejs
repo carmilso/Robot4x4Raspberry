@@ -17,7 +17,6 @@
             var socket = io();
 
             $("#arrowState").hide();
-            $("#arrowStateS").show();
 
             socket.on('actualState', function(data) {
                 if (data == 'stop') {
