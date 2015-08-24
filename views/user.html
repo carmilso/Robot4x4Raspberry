@@ -9,10 +9,12 @@
     <script type="text/javascript" src="../public/js/bootstrap-arrows.js"></script>
     <script>
       $(document).ready(function() {
-                    $('.arrow, [class^=arrow-]').bootstrapArrows();
-        
+          $('.arrow, [class^=arrow-]').bootstrapArrows();
+
+                    alert('holaaa');
+
                     var socket = io();
-        
+
                     $("#arrowDown").click(function() {
                         alert('Clicked Down!');
                     });
@@ -84,13 +86,7 @@
         </div>
       </div>
     </div>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-offset-1 col-md-1"></div>
-        </div>
-      </div>
-    </div>
-  
+
+
 
 </body></html>
