@@ -8,7 +8,7 @@ module.exports = function(socket) {
         console.log('[SOCKET] User connected');
 		usersConnected++;
 
-		socket.emit('usersConnected', {int: usersConnected});
+		socket.emit('usersConnected', usersConnected);
 
 		var state = actualState(robotState);
 
@@ -17,7 +17,7 @@ module.exports = function(socket) {
 		user.on('disconnect', function() {
 			console.log('[SOCKET] User disconnected');
 			usersConnected--;
-			socket.emit('usersConnected', {int: usersConnected});
+			socket.emit('usersConnected', usersConnected);
 		});
 
 	});

@@ -17,7 +17,7 @@
             var socket = io();
 
             socket.on('actualState', function(data) {
-                alert(data);
+                $("#actualState").html(data);
             });
 
             $("#arrowDown").click(function() {
