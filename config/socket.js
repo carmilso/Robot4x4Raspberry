@@ -39,7 +39,7 @@ module.exports = function(socket) {
 
 	process.on('SIGINT', function() {
 		robot.send('close');
-		robot.close();
+		robot.end(0);
 	});
 };
 
