@@ -47,7 +47,7 @@ module.exports = function(socket) {
 var pythonOptions = {
   mode: 'text',
   pythonPath: '/usr/bin/python',
-  scriptPath: '../'
+  scriptPath: '/home/pi/Robot4x4Raspberry/'
 };
 
 function iniController(){
