@@ -14,6 +14,7 @@ def main():
 
     while True:
         order = raw_input()
+        print order
 
         if order == 'close': break
 

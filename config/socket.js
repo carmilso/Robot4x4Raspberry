@@ -53,8 +53,12 @@ var pythonOptions = {
 function iniController(){
   var pyshell = new PythonShell('robot.py', pythonOptions);
 
+  pyshell.on('message', function(message) {
+	console.log('[ROBOT] Message: ' + message);
+  });
+
   pyshell.on('error', function(err){
-    console.log("[ERROR] Not possible to communicate with the Robot.\n" + err);
+    console.log("[ROBOT] Not possible to communicate with the Robot.\n" + err);
   });
 
   return pyshell;
