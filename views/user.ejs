@@ -26,8 +26,7 @@
         		return this;
         	}
 
-            var socket = io();
-	    socket.emit('user', <%= user >);
+            var socket = io({user: <%= user %>});
 
             $("#arrowState").hide();
 
@@ -42,7 +41,7 @@
                             "data-angle" : data
                         })
                         .show()
-    		            .dynamicArrow();
+                        .dynamicArrow();
                     $("#arrowStateS").hide();
                 }
             });
@@ -132,14 +131,13 @@
               </div>
               <div class="col-md-6">
                 <div class="panel panel-success">
-		    <div class="panel-heading">
-			<h2><p id="usersConnected" class="text-info"></p></h2>
-		    </div>
+		            <div class="panel-heading">
+			            <h2><p id="usersConnected" class="text-info"></p></h2>
+		            </div>
                     <div class="panel-body">
-			<p id="usernames" class="bg-primary"></p>
-		    </div>
+			            <p id="usernames" class="bg-primary"></p>
+		            </div>
                 </div>
-                prueba
                 <p></p>
                 <p>
                   <br>
