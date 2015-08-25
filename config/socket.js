@@ -22,7 +22,7 @@ module.exports = function(socket) {
 
 		user.on('arrow', function(state) {
 			var aState = getAngle(state);
-			robot.send(state);
+			robot.send(state+'\n');
 			socket.emit('actualState', aState);
 		});
 

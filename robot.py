@@ -14,11 +14,16 @@ def main():
 
     while True:
         order = raw_input()
-        print order
+        print order, len(order)
 
         if order == 'close': break
+        elif order == 'up': robot.fordwardRobot()
+        elif order == 'down': robot.backwardRobot()
+        elif order == 'left': robot.leftRobot()
+        elif order == 'right': robot.rightRobot()
+        elif order == 'stop': robot.stopRobot()
 
-        operations[order]
+        #operations[order]
         sleep(0.25)
 
 
