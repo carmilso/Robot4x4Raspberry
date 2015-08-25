@@ -1,91 +1,97 @@
 <html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="../public/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="../public/css/user.css" rel="stylesheet" type="text/css">
-    <link href="../public/css/bootstrap-arrows.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="../public/js/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="../public/js/socket.io-1.3.5.js"></script>
-    <script type="text/javascript" src="../public/js/bootstrap-arrows.js"></script>
-    <script>
-      $(document).ready(function() {
-          $('.arrow, [class^=arrow-]').bootstrapArrows();
-
-                    alert('holaaa');
-
-                    var socket = io();
-
-                    $("#arrowDown").click(function() {
-                        alert('Clicked Down!');
-                    });
-              });
-    </script>
-</head><body>
-    <div class="section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="page-header">
-                        <!-- <h1>Welcome user! -->
-                        <h1>Welcome <%= user %>!
-                            <small>Robot Controller</small>
-                        </h1>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="../public/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="../public/css/user.css" rel="stylesheet" type="text/css">
+        <link href="../public/css/bootstrap-arrows.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="../public/js/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="../public/js/socket.io-1.3.5.js"></script>
+        <script type="text/javascript" src="../public/js/bootstrap-arrows.js"></script>
+        <script>
+            $(document).ready(function() {
+                  $('.arrow, [class^=arrow-]').bootstrapArrows();
+        
+                            alert('holaaa');
+        
+                            var socket = io();
+        
+                            $("#arrowDown").click(function() {
+                                alert('Clicked Down!');
+                            });
+                      });
+        </script>
+    </head><body>
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="page-header">
+                            <!-- <h1>Welcome user! -->
+                            <h1>Welcome
+                                &lt;%=u ser %&gt;!
+                                    <small>Robot Controller</small>
+                            </h1>
+                        </div>
+                        <ul class="nav nav-pills nav-justified">
+                            <li class="active">
+                                <a href="#">Home</a>
+                            </li>
+                            <li>
+                                <a href="#">Users</a>
+                            </li>
+                            <li id="logout">
+                                <a href="/logout">Log Out</a>
+                            </li>
+                        </ul>
                     </div>
-                    <ul class="nav nav-pills nav-justified">
-                        <li class="active">
-                            <a href="#">Home</a>
-                        </li>
-                        <li>
-                            <a href="#">Users</a>
-                        </li>
-                        <li id="logout">
-                            <a href="/logout">Log Out</a>
-                        </li>
-                    </ul>
+                </div>
+                <br>
+            </div>
+        </div>
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="http://62.117.232.31:8081" class="img-responsive">
+                        <br>
+                        <div class="col-md-offset-3">
+                            <span class="arrow-primary" id="arrowUp"></span>
+                        </div>
+                        <div class="col-md-offset-2">
+                            <span class="arrow-primary" data-angle="270" id="arrowLeft"></span>    
+                            <span class="arrow-primary" data-angle="90" id="arrowRight"></span>
+                        </div>
+                        <div class="col-md-offset-3">
+                            <span class="arrow-primary" data-angle="180" id="arrowDown"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-warning">
+                            <h2>
+                                <b>
+                                    <p id="usersConnected" class="text-info"></p>
+                                </b>
+                            </h2>
+                        </div>prueba
+                        <p></p>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <h3 class="text-muted">
+                            <b>Actual state of the Robot:</b>
+                        </h3>
+                        <br>
+                        <div class="col-md-offset-3" id="actualState">
+                            <span class="arrow-success-large" data-angle="" id="arrowState"></span>
+                            <h3 id="arrowStateS">Stopped</h3>
+                        </div>
+                        <p></p>
+                        <p></p>
+                    </div>
                 </div>
             </div>
-            <br>
         </div>
-    </div>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <img src="http://62.117.232.31:8081" class="img-responsive">
-            <br>
-            <div class="col-md-offset-3">
-              <span class="arrow-primary" id="arrowUp"></span>
-            </div>
-            <div class="col-md-offset-2">
-              <span class="arrow-primary" data-angle="270" id="arrowLeft"></span>    
-              <span class="arrow-primary" data-angle="90" id="arrowRight"></span>
-            </div>
-            <div class="col-md-offset-3">
-              <span class="arrow-primary" data-angle="180" id="arrowDown"></span>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <h2><b><p id="usersConnected" class="text-info"></p></b></h2>
-            <p></p>
-            <p>
-              <br>
-              <br>
-            </p>
-            <h3 class="text-muted">
-              <b>Actual state of the Robot:</b>
-            </h3>
-            <br>
-            <div class="col-md-offset-3" id="actualState">
-                <span class="arrow-success-large" data-angle="" id="arrowState"></span>
-                <h3 id="arrowStateS">Stopped</h3>
-            </div>
-            <p></p>
-            <p></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
+    
 
 </body></html>
