@@ -36,7 +36,7 @@ function actualState(robotState) {
 	if (robotState == 'stop')
 		return 'stop'
 
-	var angle = '';
+	var angle = '0';
 
 	if (robotState == 'down')
 		angle = 180;
