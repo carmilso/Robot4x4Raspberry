@@ -1,13 +1,10 @@
 module.exports = function(socket) {
 
 	var usersConnected = 0;
-	var usernames = [];
 	var robotState = 'stop';
 
 	socket.on('connection', function(user) {
-        console.log('[SOCKET] User connected\n');
-
-		console.log("query... " + socket.manager.handshaken[socket.id].query.user);
+	        console.log('[SOCKET] User connected\n');
 
 		usersConnected++;
 
