@@ -2,22 +2,23 @@
 # -*- coding: utf-8 -*-
 
 
-import base64
-from private import dataBaseConfig as dbc
+from time import sleep
 from config import driversL298N as drivers
 
 
+
 def main():
-    print 'Testing Robot...\n'
+    robot = drivers.Robot(17, 27, 10, 9, 0)
 
-    robot = drivers.Robot(17, 27, 10, 9, 1)
+    operations = {'up': robot.fordwardRobot(), 'down': robot.backwardRobot(), 'right': robot.rightRobot(), 'left': robot.leftRobot(), 'stop': robot.stopRobot()}
 
-#   robot.initDB(dbc.IP, dbc.USER, base64.b64encode(dbc.PASSWORD), dbc.DB)
+    while True:
+        order = raw_input()
 
-    robot.fordwardRobot(7)
-    robot.rightRobot(5)
-    robot.leftRobot(5)
-    robot.backwardRobot(7)
+        if order == 'close': break
+
+        operations[order]
+        sleep(0.25)
 
 
 if __name__ == '__main__':

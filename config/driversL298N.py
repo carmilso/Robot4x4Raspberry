@@ -64,30 +64,30 @@ class Robot:
 	def stopRobot(self):
 		if self.DEBUG: print 'Robot stopped'
 		self.stopMotor(self.MOTORS)
-		time.sleep(0.25)
+		#time.sleep(0.25)
 
 	def fordwardRobot(self, seconds):
 		if self.DEBUG: print 'Robot fordwarding (%ss)' % seconds
 		self.fordwardMotor(self.MOTORS)
-		time.sleep(seconds)
-		self.stopRobot()
+		#time.sleep(seconds)
+		#self.stopRobot()
 
 	def backwardRobot(self, seconds):
 		if self.DEBUG: print 'Robot backwarding (%ss)' % seconds
 		self.backwardMotor(self.MOTORS)
-		time.sleep(seconds)
-		self.stopRobot()
+		#time.sleep(seconds)
+		#self.stopRobot()
 
 	def rightRobot(self, seconds):
 		if self.DEBUG: print 'Robot turning right (%ss)' % seconds
 		self.backwardMotor(self.MOTOR_R)
 		self.fordwardMotor(self.MOTOR_L)
-		time.sleep(seconds)
-		self.stopRobot()
+		#time.sleep(seconds)
+		#self.stopRobot()
 
 	def leftRobot(self, seconds):
 		if self.DEBUG: print 'Robot turning left (%ss)' % seconds
 		self.backwardMotor(self.MOTOR_L)
 		self.fordwardMotor(self.MOTOR_R)
-		time.sleep(seconds)
-		self.stopRobot()
+		#time.sleep(seconds)
+		#self.stopRobot()

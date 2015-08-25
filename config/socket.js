@@ -1,10 +1,15 @@
+var PythonShell = require('python-shell');
+
+
 module.exports = function(socket) {
 
 	var usersConnected = 0;
 	var robotState = 'stop';
 
+	var robot = iniController();
+
 	socket.on('connection', function(user) {
-	        console.log('[SOCKET] User connected\n');
+		console.log('[SOCKET] User connected\n');
 
 		usersConnected++;
 
@@ -12,11 +17,12 @@ module.exports = function(socket) {
 
 		socket.emit('usersConnected', usersConnected + info);
 
-		var state = actualState(robotState);
-		user.emit('actualState', state);
+		var angle = getAngle(robotState);
+		user.emit('actualState', angle);
 
 		user.on('arrow', function(state) {
-			var aState = actualState(state);
+			var aState = getAngle(state);
+			robot.send(state + '\n');
 			socket.emit('actualState', aState);
 		});
 
@@ -30,9 +36,31 @@ module.exports = function(socket) {
 		});
 
 	});
+
+	process.on('SIGINT', function() {
+		robot.send('close');
+		robot.close();
+	});
 };
 
-function actualState(robotState) {
+
+var pythonOptions = {
+  mode: 'text',
+  pythonPath: '/usr/bin/python',
+  scriptPath: '../'
+};
+
+function iniController(){
+  var pyshell = new PythonShell('robot.py', pythonOptions);
+
+  pyshell.on('error', function(err){
+    console.log("[ERROR] Not possible to communicate with the Robot.\n" + err);
+  });
+
+  return pyshell;
+}
+
+function getAngle(robotState) {
 	if (robotState == 'stop')
 		return 'stop'
 
