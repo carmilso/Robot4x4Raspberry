@@ -11,78 +11,78 @@
     <script type="text/javascript" src="../public/js/bootstrap-arrows.js"></script>
 
     <script>
-      $(document).ready(function() {
-        $('.arrow, [class^=arrow-]').bootstrapArrows();
-	
-	$.fn.dynamycArrow = function( ) {
-		var angle = this.attr('data-angle');		
+        $(document).ready(function() {
+            $('.arrow, [class^=arrow-]').bootstrapArrows();
 
-		this.css('-webkit-transform','rotate('+angle+'deg)');
-	        this.css('-moz-transform','rotate('+angle+'deg)');
-	        this.css('-o-transform','rotate('+angle+'deg)');
-	        this.css('-ms-transform','rotate('+angle+'deg)');
-	        this.css('transform','rotate('+angle+'deg)');
+            $.fn.dynamicArrow = function( ) {
+        		var angle = this.attr('data-angle');
 
-		return this;
-	}
+        		this.css('-webkit-transform','rotate('+angle+'deg)');
+        	        this.css('-moz-transform','rotate('+angle+'deg)');
+        	        this.css('-o-transform','rotate('+angle+'deg)');
+        	        this.css('-ms-transform','rotate('+angle+'deg)');
+        	        this.css('transform','rotate('+angle+'deg)');
 
-        var socket = io();
+        		return this;
+        	}
 
-        $("#arrowState").hide();
+            var socket = io();
 
-        socket.on('actualState', function(data) {
-            if (data == 'stop') {
-                $("#arrowState").hide();
-                $("#arrowStateS").show();
-            }
-            else {
-                $("#arrowState")
-                    .attr({
-                        "data-angle" : data
-                    })
-                    .show()
-		    .dynamycArrow();
-                $("#arrowStateS").hide();
-            }
+            $("#arrowState").hide();
+
+            socket.on('actualState', function(data) {
+                if (data == 'stop') {
+                    $("#arrowState").hide();
+                    $("#arrowStateS").show();
+                }
+                else {
+                    $("#arrowState")
+                        .attr({
+                            "data-angle" : data
+                        })
+                        .show()
+    		    .dynamycArrow();
+                    $("#arrowStateS").hide();
+                }
+            });
+
+            socket.on('usersConnected', function(data) {
+                $("#usersConnected").text(data).show('slow');
+            });
+
+            $("#arrowUp")
+                .mousedown(function() {
+                    socket.emit('arrow', 'up');
+                })
+                .mouseup(function() {
+                    socket.emit('arrow', 'stop');
+                });
+
+            $("#arrowDown")
+                .mousedown(function() {
+                    socket.emit('arrow', 'down');
+                })
+                .mouseup(function() {
+                    socket.emit('arrow', 'stop');
+                });
+
+            $("#arrowLeft")
+                .mousedown(function() {
+                    socket.emit('arrow', 'left');
+                })
+                .mouseup(function() {
+                    socket.emit('arrow', 'stop');
+                });
+
+            $("#arrowRight")
+                .mousedown(function() {
+                    socket.emit('arrow', 'right');
+                })
+                .mouseup(function() {
+                    socket.emit('arrow', 'stop');
+                });
+
         });
-
-        socket.on('usersConnected', function(data) {
-            $("#usersConnected").text(data).show('slow');
-        });
-
-        $("#arrowUp")
-            .mousedown(function() {
-                socket.emit('arrow', 'up');
-            })
-            .mouseup(function() {
-                socket.emit('arrow', 'stop');
-            });
-
-        $("#arrowDown")
-            .mousedown(function() {
-                socket.emit('arrow', 'down');
-            })
-            .mouseup(function() {
-                socket.emit('arrow', 'stop');
-            });
-
-        $("#arrowLeft")
-            .mousedown(function() {
-                socket.emit('arrow', 'left');
-            })
-            .mouseup(function() {
-                socket.emit('arrow', 'stop');
-            });
-
-        $("#arrowRight")
-            .mousedown(function() {
-                socket.emit('arrow', 'right');
-            })
-            .mouseup(function() {
-                socket.emit('arrow', 'stop');
-            });
-
-      });
     </script>
 
     </head><body>
@@ -103,7 +103,7 @@
                             <li>
                                 <a href="#">Users</a>
                             </li>
-                            <li id="logout">
+                            <li>
                                 <a href="/logout">Log Out</a>
                             </li>
                         </ul>
