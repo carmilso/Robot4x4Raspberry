@@ -27,6 +27,7 @@
         	}
 
             var socket = io();
+	    socket.emit('user', <%= user >);
 
             $("#arrowState").hide();
 
@@ -130,8 +131,13 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="panel panel-primary">
-                    <h2><b><p id="usersConnected" class="text-info"></p></b></h2>
+                <div class="panel panel-success">
+		    <div class="panel-heading">
+			<h2><p id="usersConnected" class="text-info"></p></h2>
+		    </div>
+                    <div class="panel-body">
+			<p id="usernames" class="bg-primary"></p>
+		    </div>
                 </div>
                 <p></p>
                 <p>
