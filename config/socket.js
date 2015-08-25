@@ -8,7 +8,9 @@ module.exports = function(socket) {
         console.log('[SOCKET] User connected\n');
 		usersConnected++;
 
-		socket.emit('usersConnected', usersConnected + ' users online');
+		var info = getInfo(usersConnected);
+
+		socket.emit('usersConnected', usersConnected + info);
 
 		var state = actualState(robotState);
 		user.emit('actualState', state);
@@ -22,7 +24,9 @@ module.exports = function(socket) {
 			console.log('[SOCKET] User disconnected\n');
 			usersConnected--;
 
-			socket.emit('usersConnected', usersConnected);
+			var info = getInfo(usersConnected);
+
+			socket.emit('usersConnected', usersConnected + info);
 		});
 
 	});
@@ -43,4 +47,9 @@ function actualState(robotState) {
 
 	return angle;
 	//return '<span class="arrow-success-large" data-angle="' + angle + '"></span>'
+}
+
+function getInfo(usersConnected) {
+	var info = usersConnected == 1 ? ' user online' : ' users online';
+	return info;
 }

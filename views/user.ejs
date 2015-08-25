@@ -12,7 +12,19 @@
 
     <script>
       $(document).ready(function() {
-        //$('.arrow, [class^=arrow-]').bootstrapArrows();
+        $('.arrow, [class^=arrow-]').bootstrapArrows();
+	
+	$.fn.dynamycArrow = function( ) {
+		var angle = this.attr('data-angle');		
+
+		this.css('-webkit-transform','rotate('+angle+'deg)');
+	        this.css('-moz-transform','rotate('+angle+'deg)');
+	        this.css('-o-transform','rotate('+angle+'deg)');
+	        this.css('-ms-transform','rotate('+angle+'deg)');
+	        this.css('transform','rotate('+angle+'deg)');
+
+		return this;
+	}
 
         var socket = io();
 
@@ -28,7 +40,8 @@
                     .attr({
                         "data-angle" : data
                     })
-                    .show();
+                    .show()
+		    .dynamycArrow();
                 $("#arrowStateS").hide();
             }
         });
@@ -137,7 +150,5 @@
             </div>
           </div>
         </div>
-
-        <script>$('.arrow, [class^=arrow-]').bootstrapArrows();</script>
 
 </body></html>
