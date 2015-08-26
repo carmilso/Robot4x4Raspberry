@@ -16,7 +16,7 @@ module.exports = function(socket) {
 
 			user.emit('actualState', res.angle);
 
-			socket.emit('usersConnected', {usersInt: usersConnected+res.info, usersVector: res.usernames});
+			socket.emit('usersConnected', {usersInt: res.usersConnected+res.info, usersVector: res.usernames});
 		});
 
 		user.on('arrow', function(state) {
@@ -76,7 +76,8 @@ function updateData(socket, data, usersConnected, usernames, robotState) {
 	return {
 		info: info,
 		angle: angle,
-		usernames: usernames
+		usernames: usernames,
+		usersConnected: usersConnected
 	}
 }
 
