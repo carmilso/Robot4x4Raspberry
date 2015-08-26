@@ -63,7 +63,7 @@ function iniController(){
 function newUser(user, data) {
 	usernames.push({ id: user.id, user: data });
 
-	console.log('[SOCKET] User connected: ' + data + ' ' + user.id '\n');
+	console.log('[SOCKET] User connected: ' + data + ' ' + user.id + '\n');
 
 	usersConnected++;
 
