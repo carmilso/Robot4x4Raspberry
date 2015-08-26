@@ -11,6 +11,7 @@ module.exports = function(socket) {
 
 	socket.on('connection', function(user) {
 		console.log(user.id);
+		console.log(user.request);
 
 		user.on('username', function(data) {
 			var res = updateData(socket, data, usersConnected, usernames, robotState);
