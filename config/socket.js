@@ -1,5 +1,11 @@
 var PythonShell = require('python-shell');
 
+var pythonOptions = {
+  mode: 'text',
+  pythonPath: '/usr/bin/python',
+  scriptPath: '/home/pi/Robot4x4Raspberry/'
+};
+
 var usersConnected = 0;
 var usernames = [];
 var robotState = 'stop';
@@ -25,8 +31,9 @@ module.exports = function(socket) {
 			socket.emit('actualState', aState);
 		});
 
-		user.on('disconnect', function() {
+		user.on('disconnect', function(user) {
 			console.log('[SOCKET] User disconnected\n');
+			console.log(user.id);
 			usersConnected--;
 
 			var info = getInfo(usersConnected);
@@ -42,12 +49,6 @@ module.exports = function(socket) {
 	});
 };
 
-
-var pythonOptions = {
-  mode: 'text',
-  pythonPath: '/usr/bin/python',
-  scriptPath: '/home/pi/Robot4x4Raspberry/'
-};
 
 function iniController(){
   var pyshell = new PythonShell('robot.py', pythonOptions);
