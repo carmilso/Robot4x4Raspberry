@@ -35,6 +35,8 @@ module.exports = function(socket) {
 			//console.log('[SOCKET] User disconnected\n');
 			usersConnected--;
 
+			console.log('[SOCKET] User disconnected: ' + getUsernameByID(user.id) + '\n');
+
 			usernames.slice(getUserPositionByID(user.id), 1);
 
 			var info = getInfo(usersConnected);
@@ -89,7 +91,7 @@ function updateData(user, data) {
 
 function getAngle(robotState) {
 	if (robotState == 'stop')
-		return 'stop'
+		return 'stop';
 
 	var angle = '0';
 
@@ -101,7 +103,6 @@ function getAngle(robotState) {
 		angle = 90;
 
 	return angle;
-	//return '<span class="arrow-success-large" data-angle="' + angle + '"></span>'
 }
 
 function getInfo(usersConnected) {
@@ -114,5 +115,13 @@ function getUserPositionByID(userID) {
 		if (item.id == userID) return index;
 	});
 
-	return -1
+	return -1;
+}
+
+function getUsernameByID(userID) {
+	usernames.forEach(function(item) {
+		if (item.id == userID) return item.user;
+	});
+
+	return -1;
 }
