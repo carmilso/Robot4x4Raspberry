@@ -10,11 +10,9 @@ module.exports = function(socket) {
 	var robot = iniController();
 
 	socket.on('connection', function(user) {
-		console.log(user.id);
-		console.log(user.request);
 
 		user.on('username', function(data) {
-			var res = updateData(socket, data, usersConnected, usernames, robotState);
+			var res = updateData(user, data, usersConnected, usernames, robotState);
 
 			user.emit('actualState', res.angle);
 
@@ -65,20 +63,25 @@ function iniController(){
   return pyshell;
 }
 
-function updateData(socket, data, usersConnected, usernames, robotState) {
-	usernames.push(data);
+function updateData(user, data, usersConnected, usernames, robotState) {
+	usernames.push({ id: user.id, user: data });
+
 	console.log('[SOCKET] User connected: ' + data + '\n');
 
 	usersConnected++;
 
 	var info = getInfo(usersConnected);
-
 	var angle = getAngle(robotState);
+
+	var usernamesOnline = [];
+	usernames.forEach(function(item) {
+		usernamesOnline.push(item.user);
+	});
 
 	return {
 		info: info,
 		angle: angle,
-		usernames: usernames,
+		usernames: usernamesOnline,
 		usersConnected: usersConnected
 	}
 }
