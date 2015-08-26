@@ -27,8 +27,11 @@
         	}
 
             var socket = io();
-
-            $("#arrowState").hide();
+	    
+	    socket.on('connect', function() {
+		socket.emit('username', '<%= user %>');
+		$("#arrowState").hide();
+	    });
 
             socket.on('actualState', function(data) {
                 if (data == 'stop') {

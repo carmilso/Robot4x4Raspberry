@@ -4,12 +4,16 @@ var PythonShell = require('python-shell');
 module.exports = function(socket) {
 
 	var usersConnected = 0;
+	var usernames = [];
 	var robotState = 'stop';
 
 	var robot = iniController();
 
 	socket.on('connection', function(user) {
-		console.log('[SOCKET] User connected\n');
+		user.on('username', function(data) {
+			usernames.push(user);
+			console.log('[SOCKET] User connected: ' + data + '\n');
+		});
 
 		usersConnected++;
 
