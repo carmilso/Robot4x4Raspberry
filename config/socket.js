@@ -61,11 +61,11 @@ function iniController(){
 }
 
 function newUser(user, data) {
+	usersConnected++;
+
 	usernames.push({ id: user.id, user: data });
 
 	console.log('[SOCKET] User connected: ' + data + '\n');
-
-	usersConnected++;
 
 	var info = getInfo(usersConnected);
 	var angle = getAngle(robotState);
@@ -87,12 +87,19 @@ function removeUser(user) {
 
 	console.log('[SOCKET] User disconnected: ' + getUsernameByID(user.id) + '\n');
 
+	console.log(getUserPositionByID(user.id));
+
 	usernames.slice(getUserPositionByID(user.id), 1);
+
+	usernames.forEach(function(item) {
+		console.log(item.id + ' ' + item.user);
+	});
 
 	var info = getInfo(usersConnected);
 
 	var usernamesOnline = [];
 	usernames.forEach(function(item) {
+		console.log(item.user);
 		usernamesOnline.push(item.user);
 	});
 
