@@ -1,22 +1,22 @@
 var PythonShell = require('python-shell');
 
+var usersConnected = 0;
+var usernames = [];
+var robotState = 'stop';
+
 
 module.exports = function(socket) {
-
-	var usersConnected = 0;
-	var usernames = [];
-	var robotState = 'stop';
 
 	var robot = iniController();
 
 	socket.on('connection', function(user) {
 
 		user.on('username', function(data) {
-			var res = updateData(user, data, usersConnected, usernames, robotState);
+			var res = updateData(user, data);
 
 			user.emit('actualState', res.angle);
 
-			socket.emit('usersConnected', {usersInt: res.usersConnected+res.info, usersVector: res.usernames});
+			socket.emit('usersConnected', {usersInt: usersConnected+res.info, usersVector: res.usernames});
 		});
 
 		user.on('arrow', function(state) {
@@ -81,8 +81,7 @@ function updateData(user, data, usersConnected, usernames, robotState) {
 	return {
 		info: info,
 		angle: angle,
-		usernames: usernamesOnline,
-		usersConnected: usersConnected
+		usernames: usernamesOnline
 	}
 }
 
