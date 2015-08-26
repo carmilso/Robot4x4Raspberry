@@ -51,8 +51,12 @@
 
             socket.on('usersConnected', function(data) {
                 var jsonData = JSON.parse(JSON.stringify(data));
-                $("#usersConnected").text(jsonData.usersInt).show('slow');
-                $("#usernames").text(jsonData.usersVector).show('slow');
+                $("#usersConnected").text(jsonData.usersInt).show('fast');
+                $("#usernames").text(jsonData.usersVector).show('fast');
+            });
+
+            socket.on('verifyConnection', function() {
+
             });
 
             $("#arrowUp")

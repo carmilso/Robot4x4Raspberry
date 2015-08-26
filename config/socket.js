@@ -10,6 +10,7 @@ module.exports = function(socket) {
 	var robot = iniController();
 
 	socket.on('connection', function(user) {
+		console.log(user.id);
 
 		user.on('username', function(data) {
 			var res = updateData(socket, data, usersConnected, usernames, robotState);
