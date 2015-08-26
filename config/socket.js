@@ -32,13 +32,14 @@ module.exports = function(socket) {
 		});
 
 		user.on('disconnect', function() {
-			console.log('[SOCKET] User disconnected\n');
-			console.log(user.id);
+			//console.log('[SOCKET] User disconnected\n');
 			usersConnected--;
+
+			usernames.slice(getUserPositionByID(user.id), 1);
 
 			var info = getInfo(usersConnected);
 
-			socket.emit('usersConnected', usersConnected + info);
+			socket.emit('usersConnected', {usersInt: usersConnected+res.info, usersVector: res.usernames});
 		});
 
 	});
@@ -106,4 +107,12 @@ function getAngle(robotState) {
 function getInfo(usersConnected) {
 	var info = usersConnected == 1 ? ' user online' : ' users online';
 	return info;
+}
+
+function getUserPositionByID(userID) {
+	usernames.forEach(function(index, item) {
+		if (item.id == userID) return index;
+	});
+
+	return -1
 }
