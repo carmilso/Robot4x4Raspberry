@@ -133,8 +133,7 @@ function getUserPositionByID(userID) {
 }
 
 function getUsernameByID(userID) {
-	usernames.forEach(function(item) {
-		console.log('Iterate: ' + item.id + ' ' + item.user);
+	usernames.some(function(item) {
 		if (item.id == userID) return item.user;
 	});
 
