@@ -87,19 +87,12 @@ function removeUser(user) {
 
 	console.log('[SOCKET] User disconnected: ' + getUsernameByID(user.id) + '\n');
 
-	console.log(getUserPositionByID(user.id));
-
 	usernames.splice(getUserPositionByID(user.id), 1);
-
-	usernames.forEach(function(item) {
-		console.log(item.id + ' ' + item.user);
-	});
 
 	var info = getInfo(usersConnected);
 
 	var usernamesOnline = [];
 	usernames.forEach(function(item) {
-		console.log(item.user);
 		usernamesOnline.push(item.user);
 	});
 
