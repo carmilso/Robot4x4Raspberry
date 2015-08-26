@@ -63,7 +63,7 @@ function iniController(){
   return pyshell;
 }
 
-function updateData(user, data, usersConnected, usernames, robotState) {
+function updateData(user, data) {
 	usernames.push({ id: user.id, user: data });
 
 	console.log('[SOCKET] User connected: ' + data + '\n');
