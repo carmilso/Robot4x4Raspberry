@@ -38,8 +38,8 @@ module.exports = function(socket) {
 			console.log('[SOCKET] User disconnected: ' + getUsernameByID(user.id) + '\n');
 
 			usernames.slice(getUserPositionByID(user.id), 1);
-
-			var info = getInfo(usersConnected);
+			
+			var res = updateData(user, data);
 
 			socket.emit('usersConnected', {usersInt: usersConnected+res.info, usersVector: res.usernames});
 		});
