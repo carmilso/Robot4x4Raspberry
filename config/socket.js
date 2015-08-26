@@ -133,7 +133,7 @@ function getInfo(usersConnected) {
 function getUserPositionByID(userID) {
 	var res = -1;
 
-	usernames.forEach(function(index, item) {
+	usernames.forEach(function(item, index) {
 		if (item.id == userID) res = index;
 	});
 
