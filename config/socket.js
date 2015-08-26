@@ -125,17 +125,21 @@ function getInfo(usersConnected) {
 }
 
 function getUserPositionByID(userID) {
+	var res = -1;
+
 	usernames.forEach(function(index, item) {
-		if (item.id == userID) return index;
+		if (item.id == userID) res = index;
 	});
 
-	return -1;
+	return res;
 }
 
 function getUsernameByID(userID) {
-	usernames.some(function(item) {
-		if (item.id == userID) return item.user;
+	var res = -1;
+
+	usernames.forEach(function(item) {
+		if (item.id == userID) res = item.user;
 	});
 
-	return -1;
+	return res;
 }
