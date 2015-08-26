@@ -12,7 +12,7 @@ module.exports = function(socket) {
 	socket.on('connection', function(user) {
 
 		user.on('username', function(data) {
-			var res = updateData(socket, data, usersConnected, usernames);
+			var res = updateData(socket, data, usersConnected, usernames, robotState);
 
 			user.emit('actualState', res.angle);
 
@@ -63,7 +63,7 @@ function iniController(){
   return pyshell;
 }
 
-function updateData(socket, data, usersConnected, usernames) {
+function updateData(socket, data, usersConnected, usernames, robotState) {
 	usernames.push(data);
 	console.log('[SOCKET] User connected: ' + data + '\n');
 
