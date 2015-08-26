@@ -31,7 +31,7 @@ module.exports = function(socket) {
 			socket.emit('actualState', aState);
 		});
 
-		user.on('disconnect', function(user) {
+		user.on('disconnect', function() {
 			console.log('[SOCKET] User disconnected\n');
 			console.log(user.id);
 			usersConnected--;
