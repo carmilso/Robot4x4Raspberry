@@ -63,7 +63,7 @@ function iniController(){
 function newUser(user, data) {
 	usernames.push({ id: user.id, user: data });
 
-	console.log('[SOCKET] User connected: ' + data + '\n');
+	console.log('[SOCKET] User connected: ' + data + ' ' + user.id '\n');
 
 	usersConnected++;
 
@@ -85,6 +85,7 @@ function newUser(user, data) {
 function removeUser(user) {
 	usersConnected--;
 
+	console.log('ID disconnected: ' + user.id);
 	console.log('[SOCKET] User disconnected: ' + getUsernameByID(user.id) + '\n');
 
 	usernames.slice(getUserPositionByID(user.id), 1);
