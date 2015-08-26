@@ -27,11 +27,11 @@
         	}
 
             var socket = io();
-	    
-	    socket.on('connect', function() {
-		socket.emit('username', '<%= user %>');
-		$("#arrowState").hide();
-	    });
+
+    	    socket.on('connect', function() {
+        		socket.emit('username', '<%= user %>');
+        		$("#arrowState").hide();
+    	    });
 
             socket.on('actualState', function(data) {
                 if (data == 'stop') {
@@ -50,7 +50,9 @@
             });
 
             socket.on('usersConnected', function(data) {
-                $("#usersConnected").text(data).show('slow');
+                var jsonData = JSON.parse(JSON.stringify(data));
+                $("#usersConnected").text(jsonData.usersInt).show('slow');
+                $("#usernames").text(jsonData.usersVector).show('slow');
             });
 
             $("#arrowUp")
@@ -134,9 +136,12 @@
               </div>
               <div class="col-md-6">
                 <div class="panel panel-success">
-		   <div class="panel-heading">
-		       <h2><p id="usersConnected" class="text-info"></p></h2>
-		   </div>
+		            <div class="panel-heading">
+		                <h2><p id="usersConnected" class="text-info"></p></h2>
+		            </div>
+                    <div class="panel-body">
+                        <p id="usernames" class="bg-info"></p>
+                    </div>
                 </div>
                 <p></p>
                 <p>
