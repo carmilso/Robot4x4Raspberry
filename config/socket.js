@@ -89,7 +89,7 @@ function removeUser(user) {
 
 	console.log(getUserPositionByID(user.id));
 
-	usernames.slice(getUserPositionByID(user.id), 1);
+	usernames.splice(getUserPositionByID(user.id), 1);
 
 	usernames.forEach(function(item) {
 		console.log(item.id + ' ' + item.user);
