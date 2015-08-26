@@ -18,7 +18,7 @@ module.exports = function(socket) {
 	socket.on('connection', function(user) {
 
 		user.on('username', function(data) {
-			var res = updateData(user, data);
+			var res = newUser(user, data);
 
 			user.emit('actualState', res.angle);
 
@@ -32,14 +32,7 @@ module.exports = function(socket) {
 		});
 
 		user.on('disconnect', function() {
-			//console.log('[SOCKET] User disconnected\n');
-			usersConnected--;
-
-			console.log('[SOCKET] User disconnected: ' + getUsernameByID(user.id) + '\n');
-
-			usernames.slice(getUserPositionByID(user.id), 1);
-			
-			var res = updateData(user, data);
+			var res = removeUser(user);
 
 			socket.emit('usersConnected', {usersInt: usersConnected+res.info, usersVector: res.usernames});
 		});
@@ -67,7 +60,7 @@ function iniController(){
   return pyshell;
 }
 
-function updateData(user, data) {
+function newUser(user, data) {
 	usernames.push({ id: user.id, user: data });
 
 	console.log('[SOCKET] User connected: ' + data + '\n');
@@ -85,6 +78,26 @@ function updateData(user, data) {
 	return {
 		info: info,
 		angle: angle,
+		usernames: usernamesOnline
+	}
+}
+
+function removeUser(user) {
+	usersConnected--;
+
+	console.log('[SOCKET] User disconnected: ' + getUsernameByID(user.id) + '\n');
+
+	usernames.slice(getUserPositionByID(user.id), 1);
+
+	var info = getInfo(usersConnected);
+
+	var usernamesOnline = [];
+	usernames.forEach(function(item) {
+		usernamesOnline.push(item.user);
+	});
+
+	return {
+		info: info,
 		usernames: usernamesOnline
 	}
 }
