@@ -17,12 +17,12 @@ module.exports = function(app, users) {
     	passReqToCallback: true
     },
     function(req, username, password, done) {
-    	fns.findUser(username, users, function(user) {
-    		if (!user) return done(null, false, req.flash('loginMessage', 'This username does not exist'));
-    		if (user.Password != password) return done(null, false, req.flash('loginMessage', 'The password is not correct'));
-		
-		return done(null, user.Username);
-    	});
+        fns.findUser(username, users, function(user) {
+            if (!user) return done(null, false, req.flash('loginMessage', 'This username does not exist'));
+            if (user.Password != password) return done(null, false, req.flash('loginMessage', 'The password is not correct'));
+
+            return done(null, user.Username);
+        });
     }
     ));
 
@@ -31,7 +31,7 @@ module.exports = function(app, users) {
     });
 
     passport.deserializeUser(function(user, done) {
-	
+
     	done(null, user);
     });
 
@@ -47,7 +47,8 @@ module.exports = function(app, users) {
     	secret: 'cat sleeping',
     	name: 'cookie_Raspberry',
     	resave: true,
-    	saveUninitialized: true
+    	saveUninitialized: true,
+        duration: 2 * 60 * 60 * 1000
     }));
 
     app.use(passport.initialize());

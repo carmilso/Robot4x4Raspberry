@@ -7,7 +7,7 @@ var pythonOptions = {
 };
 
 var usersConnected = 0;
-var usernames = [];
+var usernames = {};
 var robotState = 'stop';
 
 
@@ -63,17 +63,14 @@ function iniController(){
 function newUser(user, data) {
 	usersConnected++;
 
-	usernames.push({ id: user.id, user: data });
+    usernames[user.id] = data;
 
 	console.log('[SOCKET] User connected: ' + data + '\n');
 
 	var info = getInfo(usersConnected);
 	var angle = getAngle(robotState);
 
-	var usernamesOnline = [];
-	usernames.forEach(function(item) {
-		usernamesOnline.push(item.user);
-	});
+	var usernamesOnline = getUsernamesOnline();
 
 	return {
 		info: info,
@@ -87,14 +84,11 @@ function removeUser(user) {
 
 	console.log('[SOCKET] User disconnected: ' + getUsernameByID(user.id) + '\n');
 
-	usernames.splice(getUserPositionByID(user.id), 1);
+    delete usernames[user.id];
 
 	var info = getInfo(usersConnected);
 
-	var usernamesOnline = [];
-	usernames.forEach(function(item) {
-		usernamesOnline.push(item.user);
-	});
+    var usernamesOnline = getUsernamesOnline();
 
 	return {
 		info: info,
@@ -106,7 +100,7 @@ function getAngle(robotState) {
 	if (robotState == 'stop')
 		return 'stop';
 
-	var angle = '0';
+	var angle = 0;
 
 	if (robotState == 'down')
 		angle = 180;
@@ -123,22 +117,16 @@ function getInfo(usersConnected) {
 	return info;
 }
 
-function getUserPositionByID(userID) {
-	var res = -1;
-
-	usernames.forEach(function(item, index) {
-		if (item.id == userID) res = index;
-	});
-
-	return res;
+function getUsernameByID(userID) {
+	return usernames[userID];
 }
 
-function getUsernameByID(userID) {
-	var res = -1;
+function getUsernamesOnline() {
+    var usernamesOnline = [];
 
-	usernames.forEach(function(item) {
-		if (item.id == userID) res = item.user;
-	});
+    for (var key in usernames) {
+        usernamesOnline.push(usernames[key]);
+    }
 
-	return res;
+    return usernamesOnline;
 }
