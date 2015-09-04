@@ -7,7 +7,7 @@ var pythonOptions = {
 };
 
 var usersConnected = 0;
-var usernames = {};
+var usernames = [];
 var robotState = 'stop';
 
 
@@ -63,9 +63,9 @@ function iniController(){
 function newUser(user, data) {
 	usersConnected++;
 
-    usernames[user.id] = data;
-
-	console.log('[SOCKET] User connected: ' + data + '\n');
+    usernames.push(data);
+	user.username = data;
+	console.log('[SOCKET] User connected: ' + user.username + '\n');
 
 	var info = getInfo(usersConnected);
 	var angle = getAngle(robotState);
@@ -82,9 +82,9 @@ function newUser(user, data) {
 function removeUser(user) {
 	usersConnected--;
 
-	console.log('[SOCKET] User disconnected: ' + getUsernameByID(user.id) + '\n');
+	console.log('[SOCKET] User disconnected: ' + user.username + '\n');
 
-    delete usernames[user.id];
+    usernames.splice(usernames.indexOf(user.username), 1);
 
 	var info = getInfo(usersConnected);
 
