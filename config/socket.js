@@ -7,7 +7,7 @@ var pythonOptions = {
 };
 
 var usersConnected = 0;
-var usernames = {};
+var usernamesOnline = [];
 var robotState = 'stop';
 
 
@@ -18,7 +18,9 @@ module.exports = function(socket) {
 	socket.on('connection', function(user) {
 
 		user.on('username', function(data) {
-			var res = newUser(user, data);
+            user.username = data;
+
+			var res = newUser(user);
 
 			user.emit('actualState', res.angle);
 
@@ -63,14 +65,12 @@ function iniController(){
 function newUser(user, data) {
 	usersConnected++;
 
-    usernames[user.id] = data;
+    usernamesOnline.push(user.username);
 
-	console.log('[SOCKET] User connected: ' + data + '\n');
+	console.log('[SOCKET] User connected: ' + user.username + '\n');
 
 	var info = getInfo(usersConnected);
 	var angle = getAngle(robotState);
-
-	var usernamesOnline = getUsernamesOnline();
 
 	return {
 		info: info,
@@ -82,13 +82,11 @@ function newUser(user, data) {
 function removeUser(user) {
 	usersConnected--;
 
-	console.log('[SOCKET] User disconnected: ' + getUsernameByID(user.id) + '\n');
+    usernamesOnline.splice(usernamesOnline.indexOf(user.username), 1);
 
-    delete usernames[user.id];
+	console.log('[SOCKET] User disconnected: ' + user.username + '\n');
 
 	var info = getInfo(usersConnected);
-
-    var usernamesOnline = getUsernamesOnline();
 
 	return {
 		info: info,
@@ -115,18 +113,4 @@ function getAngle(robotState) {
 function getInfo(usersConnected) {
 	var info = usersConnected == 1 ? ' user online' : ' users online';
 	return info;
-}
-
-function getUsernameByID(userID) {
-	return usernames[userID];
-}
-
-function getUsernamesOnline() {
-    var usernamesOnline = [];
-
-    for (var key in usernames) {
-        usernamesOnline.push(usernames[key]);
-    }
-
-    return usernamesOnline;
 }
