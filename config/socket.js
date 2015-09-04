@@ -48,6 +48,7 @@ module.exports = function(socket) {
 };
 
 
+// Initialize the controller of the robot
 function iniController(){
   var pyshell = new PythonShell('robot.py', pythonOptions);
 
@@ -62,6 +63,7 @@ function iniController(){
   return pyshell;
 }
 
+// Adds a new user online
 function newUser(user, data) {
 	usersConnected++;
 
@@ -79,6 +81,7 @@ function newUser(user, data) {
 	}
 }
 
+// Remove a user online because of the disconnection of a socket
 function removeUser(user) {
 	usersConnected--;
 
@@ -94,6 +97,7 @@ function removeUser(user) {
 	}
 }
 
+// Gets the degree associated with the order
 function getAngle(robotState) {
 	if (robotState == 'stop')
 		return 'stop';
@@ -110,6 +114,7 @@ function getAngle(robotState) {
 	return angle;
 }
 
+// Creates the string to inform the quantity of users online
 function getInfo(usersConnected) {
 	var info = usersConnected == 1 ? ' user online' : ' users online';
 	return info;
