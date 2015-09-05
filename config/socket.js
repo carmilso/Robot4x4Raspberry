@@ -29,11 +29,14 @@ module.exports = function(socket) {
 
         user.on('arrow', function(state) {
             var aState = getAngle(state);
+
             robot.send(state+'\n');
             socket.emit('actualState', aState);
         });
 
         user.on('disconnect', function() {
+            if (!user.username) return ;
+
             var res = removeUser(user);
 
             socket.emit('usersConnected', {usersInt: usersConnected+res.info, usersVector: res.usernames});
