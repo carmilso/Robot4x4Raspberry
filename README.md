@@ -10,6 +10,10 @@ This project is an attempt to remotely control a robot using web technologies to
 
 You can see pictures of the ongoing project in the folder "pictures".
 
+## Video
+
+https://youtu.be/iYb6Pu9FASc
+
 ## Installation
 
 Dependencies in package.json
